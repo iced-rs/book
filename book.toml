@@ -1,0 +1,6 @@
+[book]
+authors = ["Héctor Ramón Jiménez"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Iced, a cross-platform GUI library for Rust"
