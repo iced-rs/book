@@ -4,3 +4,8 @@ language = "en"
 multilingual = false
 src = "src"
 title = "iced — A cross-platform GUI library for Rust"
+
+[output.html]
+mathjax-support = true
+git-repository-url = "https://github.com/iced-rs/book/tree/master"
+edit-url-template = "https://github.com/iced-rs/book/edit/master/{path}"
