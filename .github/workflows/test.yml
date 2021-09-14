@@ -1,7 +1,9 @@
 name: Test
 on:
-  - push
-  - pull_request
+  push:
+    branches-ignore:
+      - gh-pages
+  pull_request:
 jobs:
   book:
     runs-on: ubuntu-20.04
