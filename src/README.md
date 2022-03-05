@@ -4,7 +4,7 @@
 
 This book is largely incomplete. If you want to contribute, feel free to [join our Discord server](https://discord.gg/3xZJ65GAhd) and start a discussion there.
 
-While to book is being worked on, the best resources to get started with iced are:
+While the book is being worked on, the best resources to get started with iced are:
 
 - The [API Reference](https://docs.iced.rs/iced/)
 - The [official examples](https://github.com/iced-rs/iced/tree/master/examples)
