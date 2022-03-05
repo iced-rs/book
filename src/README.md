@@ -1,10 +1,18 @@
+----------------
+
+# 🚧 Work in progress 🚧
+
+This book is largely incomplete. If you want to contribute, feel free to [join our Discord server](https://discord.gg/3xZJ65GAhd) and start a discussion there.
+
+While to book is being worked on, the best resources to get started with iced are:
+
+- The [API Reference](https://docs.iced.rs/iced/)
+- The [official examples](https://github.com/iced-rs/iced/tree/master/examples)
+- The codebase of [many open-source iced projects](https://github.com/iced-rs/iced/issues/355)
+
+----------------
+
 # Introduction
-
-**Warning: This book, like [iced] itself, is not yet complete and is a work in progress.  In the mean time please refer to the [API Reference](https://docs.rs/iced/latest/iced/) and look at the included [examples](https://github.com/iced-rs/iced/tree/master/examples) to learn more about iced.**
-
-If you want to help contribute then [pull requests](https://github.com/iced-rs/book) for this book are welcome.
-
-## Overview
 
 [iced] is a cross-platform GUI library for [Rust]. It is inspired by [Elm], a delightful functional language for building web applications.
 
@@ -25,3 +33,4 @@ Before proceeding, you should have some basic familiarity with Rust. If you are 
 [Elm]: https://elm-lang.org
 [graphical user interfaces]: https://en.wikipedia.org/wiki/Graphical_user_interface
 [the official Rust book]: https://doc.rust-lang.org/book/
+
