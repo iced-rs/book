@@ -1,11 +1,7 @@
 # Summary
 
 - [Introduction](README.md)
-
-- [TODO: Architecture]()<!--(architecture/README.md)--> 
-  - [TODO: The Elm Architecture]()<!--(architecture/the_elm_architecture.md)-->
-  - [TODO: The update and render cycle]()<!--(architecture/the_update_and_render_cycle.md)-->
-  - [TODO: The iced ecosystem]()<!--(architecture/the_iced_ecosystem.md)-->
+- [Architecture](architecture/README.md)
 
 - [TODO: Layout]()<!--(layout/README.md)-->
   - [TODO: Centering widgets]()<!--(layout/centering_widgets.md)-->
