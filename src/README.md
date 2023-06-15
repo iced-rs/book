@@ -8,7 +8,7 @@ While the book is being worked on, the best resources to get started with iced a
 
 - The [API Reference](https://docs.iced.rs/iced/)
 - The [official examples](https://github.com/iced-rs/iced/tree/master/examples)
-- The codebase of [many open-source iced projects](https://github.com/iced-rs/iced/issues/355)
+- The [official list of awesome iced projects](https://github.com/iced-rs/awesome-iced)
 
 ----------------
 
