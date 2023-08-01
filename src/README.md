@@ -18,7 +18,7 @@ While the book is being worked on, the best resources to get started with iced a
 
 As a GUI library, iced helps you build *[graphical user interfaces]* for your Rust applications.
 
-iced is strongly focused on **simplicity** and **type-safety**. As a result, iced tries to provide simple building blocks than can be put together with strong typing to reduce the chance of **runtime errors**.
+iced is strongly focused on **simplicity** and **type-safety**. As a result, iced tries to provide simple building blocks that can be put together with strong typing to reduce the chance of **runtime errors**.
 
 This book will:
 
