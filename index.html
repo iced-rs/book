@@ -90,11 +90,33 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -165,7 +187,7 @@
 <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><a href="https://iced.rs">iced</a> is a cross-platform GUI library for <a href="https://rust-lang.org">Rust</a>. It is inspired by <a href="https://elm-lang.org">Elm</a>, a delightful functional language for building web applications.</p>
 <p>As a GUI library, iced helps you build <em><a href="https://en.wikipedia.org/wiki/Graphical_user_interface">graphical user interfaces</a></em> for your Rust applications.</p>
-<p>iced is strongly focused on <strong>simplicity</strong> and <strong>type-safety</strong>. As a result, iced tries to provide simple building blocks than can be put together with strong typing to reduce the chance of <strong>runtime errors</strong>.</p>
+<p>iced is strongly focused on <strong>simplicity</strong> and <strong>type-safety</strong>. As a result, iced tries to provide simple building blocks that can be put together with strong typing to reduce the chance of <strong>runtime errors</strong>.</p>
 <p>This book will:</p>
 <ul>
 <li>Introduce you to the fundamental ideas of iced.</li>
