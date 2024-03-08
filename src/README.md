@@ -1,7 +1,6 @@
 ----------------
 
 # 🚧 Work in progress 🚧
-
 This book is largely incomplete. If you want to contribute, feel free to [join our Discord server](https://discord.gg/3xZJ65GAhd) and start a discussion there.
 
 While the book is being worked on, the best resources to get started with iced are:
@@ -14,7 +13,6 @@ While the book is being worked on, the best resources to get started with iced a
 ----------------
 
 # Introduction
-
 [iced] is a cross-platform GUI library for [Rust]. It is inspired by [Elm], a delightful functional language for building web applications.
 
 As a GUI library, iced helps you build *[graphical user interfaces]* for your Rust applications.
