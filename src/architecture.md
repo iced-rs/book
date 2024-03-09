@@ -1,6 +1,6 @@
 # Architecture
 Let's start from the basics! You are probably very familiar with graphical user interfaces already.
-You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
+You can find them in your phone, computer, and most interactive electronic devices. In fact, you are
 most likely reading this book using one!
 
 At their essence, graphical user interfaces are applications that __display__ some information graphically
@@ -59,3 +59,69 @@ __widgets__ may then produce new __interactions__, which can change the __state_
 <div align="center">
   <img alt="The GUI trinity" src="resources/the-gui-trinity.svg">
 </div>
+
+These ideas and their connections make up the fundamental architecture of a user interface. Therefore, creating a user
+interface must inevitably consist in defining these __widgets__, __interactions__, and __state__; as well as the connections
+between them.
+
+## Different ideas, different nature
+The three foundational ideas of an interface differ quite a bit when it comes to reusability.
+
+The state and the interactions of an interface are very specific to the application and its purpose. If I tell you that
+I have an interface with a numeric value and increment and decrement interactions, you will very easily
+guess I am talking about a counter interface.
+
+However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
+of interface I am talking about! It could be anything!
+
+This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
+familiar widgets—like buttons and numbers. In fact, users expect familar widgets to always behave a certain way. If they
+don't behave properly, the interface will be unintuitive and have poor [user experience].
+
+While widgets are generally very reusable; the specific widget configuration dictated by the application state and its
+interactions is very application-specific. A button is generic; but a button that has a "+" label and causes a value
+increment when pressed is very specific.
+
+All of this means that, when we are creating a specific user interface, we don't want to focus on implementing every
+familiar widget and its behavior. Instead, we want to leverage widgets as reusable building blocks—independent of our
+application and provided by some library—while placing our focus on the application-specific parts of the fundamental
+architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.
+
+<div align="center">
+  <img alt="The application-specific parts of a GUI" src="resources/the-gui-trinity-focused.svg">
+</div>
+
+[user experience]: https://en.wikipedia.org/wiki/User_experience
+
+## The Elm Architecture
+It turns out that the four application-specific parts of the architecture of an interface are also the four foundational
+ideas of [The Elm Architecture].
+
+> The Elm Architecture is a pattern for architecting interactive programs that emerges naturally in [Elm], a delightful
+> purely functional programming language for reliable web applications.
+>
+> Patterns and ideas that emerge in purely functional programming languages tend to work very well in Rust
+> because they leverage immutability and [referential transparency]—both very desirable properties that not only
+> make code easy to reason about, but also play nicely with the borrow checker.
+
+The Elm Architecture uses a different—if not more precise—nomenclature for its fundamental parts:
+
+- __Model__ — the state of the application.
+- __Messages__ — the interactions of the application.
+- __Update logic__ — how the messages change the state.
+- __View logic__ — how the state dictates the widgets.
+
+These are different names, but they point to the same exact fundamental ideas we have already discovered and,
+therefore, can be used interchangeably.
+
+<div align="center">
+  <img alt="The Elm Architecture" src="resources/the-elm-architecture.svg">
+</div>
+
+
+> Note: In iced, the names __state__ and __messages__ are used more often than __model__ and
+  __interactions__, respectively.
+
+[The Elm Architecture]: https://guide.elm-lang.org/architecture/
+[Elm]: https://elm-lang.org/
+[referential transparency]: https://en.wikipedia.org/wiki/Referential_transparency
