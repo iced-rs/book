@@ -3,7 +3,7 @@ authors = ["Héctor Ramón Jiménez"]
 language = "en"
 multilingual = false
 src = "src"
-title = "iced — A cross-platform GUI library for Rust"
+title = "iced — A Cross-Platform GUI Library for Rust"
 
 [output.html]
 mathjax-support = true

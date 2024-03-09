@@ -19,7 +19,7 @@ is what causes the feeling of _interactivity_.
   __interfaces__. Technically, not all interfaces are graphical nor user-oriented; but, given the context of this
   book, we will use all of these terms interchangeably.
 
-## Dissecting an interface
+## Dissecting an Interface
 Since we are interested in creating user interfaces, let's take a closer look at them. We will start with a very
 simple one: the classical counter interface. What is it made of?
 
@@ -43,7 +43,7 @@ compared to pressing it twice.
   <img alt="A dissected counter interface" src="resources/counter-interface-annotated.svg">
 </div>
 
-## The GUI trinity
+## The GUI Trinity
 Our quick dissection has successfully identified three foundational ideas in a user interface:
 
 - __Widgets__ — the distinct visual elements of an interface.
@@ -64,7 +64,7 @@ These ideas and their connections make up the fundamental architecture of a user
 interface must inevitably consist in defining these __widgets__, __interactions__, and __state__; as well as the connections
 between them.
 
-## Different ideas, different nature
+## Different Ideas, Different Nature
 The three foundational ideas of an interface differ quite a bit when it comes to reusability.
 
 The state and the interactions of an interface are very specific to the application and its purpose. If I tell you that
@@ -112,7 +112,7 @@ The Elm Architecture uses a different—if not more precise—nomenclature for i
 - __View logic__ — how the state dictates the widgets.
 
 These are different names, but they point to the same exact fundamental ideas we have already discovered and,
-therefore, can be used interchangeably.
+therefore, can be used interchangeably[^naming].
 
 <div align="center">
   <img alt="The Elm Architecture" src="resources/the-elm-architecture.svg">

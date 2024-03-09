@@ -1,6 +1,6 @@
 ----------------
 
-# 🚧 Work in progress 🚧
+# 🚧 Work in Progress 🚧
 This book is largely incomplete. If you want to contribute, feel free to [join our Discord server](https://discord.gg/3xZJ65GAhd) and start a discussion there.
 
 While the book is being worked on, the best resources to get started with iced are:
