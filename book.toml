@@ -9,3 +9,6 @@ title = "iced — A Cross-Platform GUI Library for Rust"
 mathjax-support = true
 git-repository-url = "https://github.com/iced-rs/book/tree/master"
 edit-url-template = "https://github.com/iced-rs/book/edit/master/{path}"
+
+[output.html.playground]
+runnable = false

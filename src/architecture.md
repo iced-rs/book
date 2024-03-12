@@ -103,6 +103,9 @@ ideas of [The Elm Architecture].
 > Patterns and ideas that emerge in purely functional programming languages tend to work very well in Rust
 > because they leverage immutability and [referential transparency]—both very desirable properties that not only
 > make code easy to reason about, but also play nicely with the borrow checker.
+>
+> Furthermore, The Elm Architecture not only emerges naturally in Elm, but also when simply dissecting user
+> interfaces and formalizing their inner workings; like we just did in this chapter.
 
 The Elm Architecture uses a different—if not more precise—nomenclature for its fundamental parts:
 
@@ -112,7 +115,7 @@ The Elm Architecture uses a different—if not more precise—nomenclature for i
 - __View logic__ — how the state dictates the widgets.
 
 These are different names, but they point to the same exact fundamental ideas we have already discovered and,
-therefore, can be used interchangeably[^naming].
+therefore, can be used interchangeably.
 
 <div align="center">
   <img alt="The Elm Architecture" src="resources/the-elm-architecture.svg">
@@ -121,6 +124,7 @@ therefore, can be used interchangeably[^naming].
 
 > Note: In iced, the names __state__ and __messages__ are used more often than __model__ and
   __interactions__, respectively.
+
 
 [The Elm Architecture]: https://guide.elm-lang.org/architecture/
 [Elm]: https://elm-lang.org/
