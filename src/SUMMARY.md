@@ -1,19 +1,25 @@
 # Summary
 [Introduction](README.md)
 
-# The Basics
+# Learning the Basics
 - [Architecture](architecture.md)
 - [First Steps](first-steps.md)
 - [The Runtime](the-runtime.md)
+- [Concurrency](concurrency.md)
+- [Layout](layout.md)
+- [Styling](styling.md)
 
-# Concurrency
-- [Commands](commands.md)
-- [Subscriptions](subscriptions.md)
+# Building Applications
+- [Structure]()
+- [State]()
 
-# Scaling Applications
+# Extending the Runtime
+- [Widgets]()
+- [Subscriptions]()
+- [Themes]()
+- [Shells]()
+- [Renderers]()
 
-# Advanced Ideas
-- [Custom Widgets](custom-widgets.md)
-- [Custom Subscriptions](custom-subscriptions.md)
-
-[Acknowledgements](acknowledgements.md)
+# Appendix
+- [Additional Resources](additional-resources.md)
+- [Acknowledgements](acknowledgements.md)

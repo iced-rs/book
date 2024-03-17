@@ -33,8 +33,8 @@ struct Counter {
 }
 ```
 
-> Note: If a crazy user counted 1000 things every second, it would take them ~300 million years to run out of numbers.
-> Let's hope that's enough.
+If a crazy user counted 1000 things every second, it would take them ~300 million years to run out of numbers.
+Let's hope that's enough.
 
 [Make Impossible States Impossible]: https://www.youtube.com/watch?v=IcgmSRJHu_8
 
@@ -250,7 +250,7 @@ In The Elm Architecture, messages represent __events__ that have occurred—made
 to derive `Debug` and `Clone` for our `Message` type.
 
 
-[the `Button` type]: https://docs.iced.rs/iced/widget/struct.Button.html
+[the `Button` type]: https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html
 
 ### The View
 We are almost there! There is only one thing left to do: connecting our application __state__ to the view logic.
@@ -274,7 +274,7 @@ let interface = column![increment, counter, decrement];
 If we ran this view logic, we would now be able to press the buttons. However, nothing would happen as a result. The
 counter would be stuck—always showing the number `15`. Our interface is completely stateless!
 
-Of course, the issue here is that our `counter` variable contains a text widget with a hardcoded `15`. Instead, what
+Obviously, the issue here is that our `counter` variable contains a text widget with a hardcoded `15`. Instead, what
 we want is to actually display the `value` field of our `Counter` state. This way, when a button is pressed and
 our update logic is triggered, the text widget will display the new `value`.
 
@@ -337,6 +337,9 @@ You may also have noticed that this `Column` type has a generic type parameter. 
 of messages the widget may produce. In this case, it takes our `Message` because the `increment` and `decrement` buttons inside
 the column produce messages of this type.
 
+> iced has a strong focus on type safety—leveraging the type system and compile-time guarantees to minimize runtime errors
+  as much as possible.
+
 And well... That's it! Our view logic is done! But wait... It's a bit verbose right now. Since it's such a simple interface,
 let's just inline everything:
 
@@ -358,5 +361,8 @@ impl Counter {
 }
 ```
 
-That's much more concise! And believe it or not... We have just finished writing our counter interface! All that we have left to do
-now is to __run__ it.
+That's much more concise. It even resembles the actual interface! Since creating widgets just yields values with no
+side effects; we can move things around in our view logic without worrying about breaking other stuff. No spooky
+action at a distance!
+
+And that's all there is to our counter interface! I am sure you can't wait to __run__ it. Shall we?
