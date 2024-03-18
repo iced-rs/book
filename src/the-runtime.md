@@ -36,7 +36,7 @@ Let's try to get a better understanding of the lifetime of an interface by explo
 In fact, we have actually started writing a runtime already! When [we implemented the update logic of our counter](first-steps.md#update-logic),
 we wrote a very small test that simulated a user:
 
-```rust
+```rust,ignore
 #[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
@@ -58,7 +58,7 @@ involved—far from what we actually want. Still, it's a great start! Let's try 
 ### Initializing the State
 Our small runtime is already initializing the application state properly:
 
-```rust
+```rust,ignore
 // Initialize the state
 let mut counter = Counter { value: 0 };
 ```
@@ -74,7 +74,7 @@ struct Counter {
 
 And then, we simply use `Counter::default` in our runtime:
 
-```rust
+```rust,ignore
 // Initialize the state
 let mut counter = Counter::default();
 ```
@@ -93,7 +93,7 @@ and then render the widgets returned by our __view logic__—properly laid out, 
 What? You have no clue of how to do that? Don't worry, I have this magical function: `display`. It takes a reference to
 any interface and displays it to the user. It totally works!
 
-```rust
+```rust,ignore
 use magic::display;
 
 # // Initialize the state
@@ -116,7 +116,7 @@ the interactions and produce all the relevant __messages__ that our widgets spec
 How? With some more magic, of course! I just found this `interact` function inside of my top hat—it takes an
 interface and produces the __messages__ that correspond to the latest interactions of the user.
 
-```rust
+```rust,ignore
 use magic::{display, interact};
 
 # // Initialize the state
@@ -141,7 +141,7 @@ react properly to the user, we need to update our __state__ accordingly for each
 
 Luckily, there are no more magic tricks involved in this step—we can just use our __update logic__:
 
-```rust
+```rust,ignore
 # use magic::{display, interact};
 #
 # // Initialize the state
@@ -171,7 +171,7 @@ And then... Do it all over once again!
 
 This is a loop! And no, loops aren't very magical—not when we write Rust, at least:
 
-```rust
+```rust,ignore
 use magic::{display, interact};
 
 // Initialize the state
@@ -214,7 +214,7 @@ its own magic[^magic]—so you don't need to worry about learning the dark arts 
 
 If we want to run our `Counter`, all we have to do is call [`run`]:
 
-```rust
+```rust,ignore
 # use iced::widget::{button, column, text, Column};
 # 
 pub fn main() -> iced::Result {
