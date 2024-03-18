@@ -72,7 +72,7 @@ I have an interface with a numeric value and increment and decrement interaction
 guess I am talking about a counter interface.
 
 However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
-of interface I am talking about! It could be anything!
+of interface I am talking about. It could be anything!
 
 This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
 familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they

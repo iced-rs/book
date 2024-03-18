@@ -49,7 +49,7 @@ fn it_counts_properly() {
 }
 ```
 
-This is technically a very bare-bones runtime! It initializes the __state__, produces some __interactions__,
+This is technically a very bare-bones runtime. It initializes the __state__, produces some __interactions__,
 and executes the __update logic__.
 
 Of course, the interactions are made up, it is very short-lived, and there is no __view logic__
@@ -110,7 +110,7 @@ See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graph
 to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!
 
 ### Gathering the Interactions
-The user is seeing our interface and is now interacting with it! We need to pay very good attention to all
+The user is seeing our interface and is now interacting with it. We need to pay very good attention to all
 the interactions and produce all the relevant __messages__ that our widgets specify.
 
 How? With some more magic, of course! I just found this `interact` function inside of my top hat—it takes an

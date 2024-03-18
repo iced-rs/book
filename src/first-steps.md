@@ -187,7 +187,7 @@ simply hardcode `15` for now.
 Alright! We have our two buttons in `increment` and `decrement`, and our counter value in `counter`. That should be everything, right?
 
 Not so fast! The widgets in our counter interface are displayed in a specific __order__. Given our three widgets, there is a total of
-__six__ different ways to order them! However, the order we want is: `increment`, `counter`, and `decrement`.
+__six__ different ways to order them. However, the order we want is: `increment`, `counter`, and `decrement`.
 
 A very simple way of describing this order is to create a list with our widgets:
 
@@ -201,7 +201,7 @@ The widgets are positioned on top of each other, but they could very well be pos
 in our description so far that talks about the __layout__ of our widgets.
 
 In iced, layout is described using... well, more widgets! That's right. Not all widgets produce visual results directly; some may simply
-manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely!
+manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely.
 
 The kind of vertical layout that we need for our counter can be achieved with the `column` widget:
 
@@ -211,7 +211,7 @@ use iced::widget::column;
 let interface = column![increment, counter, decrement];
 ```
 
-This is very similar to our previous snippet! iced provides a `column!` macro for creating a `column` out of some widgets in a particular
+This is very similar to our previous snippet. iced provides a `column!` macro for creating a `column` out of some widgets in a particular
 __order__—analogous to `vec!`.
 
 ### The Interactions
@@ -233,7 +233,7 @@ let increment = button("+").on_press(Message::Increment);
 let decrement = button("-").on_press(Message::Decrement);
 ```
 
-Awesome! Our interactions are wired up! But there is still a small detail left. A button can be pressed multiple times. Therefore,
+Awesome! Our interactions are wired up. But there is still a small detail left. A button can be pressed multiple times. Therefore,
 the same button may need to produce multiple instances of the same `Message`. As a result, we need our `Message` type to be cloneable.
 
 We can easily _derive_ the `Clone` trait—as well as `Debug` and `Copy` for good measure:
@@ -365,4 +365,4 @@ That's much more concise. It even resembles the actual interface! Since creating
 side effects; we can move things around in our view logic without worrying about breaking other stuff. No spooky
 action at a distance!
 
-And that's all there is to our counter interface! I am sure you can't wait to __run__ it. Shall we?
+And that's all there is to our counter interface. I am sure you can't wait to __run__ it. Shall we?
