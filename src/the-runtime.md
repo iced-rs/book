@@ -288,8 +288,11 @@ And that should be it! Have fun counting things for 300 million years—at least
 >   - Concurrency
 >   - Scaling Applications
 >   - Extending the Runtime
+>   - And More!
 >
-> And more! Until I get to write them, check out the [Additional Resources](additional-resources.md)
+> Until I get to write them, check out the [Additional Resources](additional-resources.md)
 > chapter if you want to explore and learn further.
 >
 > I hope that you enjoyed the read so far. Stay tuned!
+>
+> — Héctor

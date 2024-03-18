@@ -5,6 +5,10 @@
 - [Architecture](architecture.md)
 - [First Steps](first-steps.md)
 - [The Runtime](the-runtime.md)
+
+- [More to come!]()
+
+<!--
 - [Layout]()
 - [Styling]()
 - [Concurrency]()
@@ -20,7 +24,7 @@
 - [Themes]()
 - [Shells]()
 - [Renderers]()
+-->
 
 # Appendix
 - [Additional Resources](additional-resources.md)
-- [Acknowledgements](acknowledgements.md)
