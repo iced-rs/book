@@ -207,7 +207,7 @@ to fill in these parts—and then the engine can run!</p>
 <p>Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
 <p>In fact, we have actually started writing a runtime already! When <a href="first-steps.html#update-logic">we implemented the update logic of our counter</a>,
 we wrote a very small test that simulated a user:</p>
-<pre><code class="language-rust">#[test]
+<pre><code class="language-rust ignore">#[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
 
@@ -223,7 +223,7 @@ and executes the <strong>update logic</strong>.</p>
 involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
 <h3 id="initializing-the-state"><a class="header" href="#initializing-the-state">Initializing the State</a></h3>
 <p>Our small runtime is already initializing the application state properly:</p>
-<pre><code class="language-rust">// Initialize the state
+<pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter { value: 0 };</code></pre>
 <p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let's just derive it:</p>
 <pre><code class="language-rust">#[derive(Default)]
@@ -231,7 +231,7 @@ struct Counter {
     value: i64
 }</code></pre>
 <p>And then, we simply use <code>Counter::default</code> in our runtime:</p>
-<pre><code class="language-rust">// Initialize the state
+<pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter::default();</code></pre>
 <p>The difference may be subtle, but we are separating concerns—we keep the initial state of our application close to
 the state definition and separated from the runtime. This way, we may eventually be able to make our runtime work with
@@ -243,7 +243,7 @@ need to <strong>display</strong> it to them.</p>
 and then render the widgets returned by our <strong>view logic</strong>—properly laid out, of course!</p>
 <p>What? You have no clue of how to do that? Don't worry, I have this magical function: <code>display</code>. It takes a reference to
 any interface and displays it to the user. It totally works!</p>
-<pre><code class="language-rust">use magic::display;
+<pre><code class="language-rust ignore">use magic::display;
 
 <span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -260,7 +260,7 @@ to get a better understanding of how a runtime works. A little bit of magic does
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
 <p>How? With some more magic, of course! I just found this <code>interact</code> function inside of my top hat—it takes an
 interface and produces the <strong>messages</strong> that correspond to the latest interactions of the user.</p>
-<pre><code class="language-rust">use magic::{display, interact};
+<pre><code class="language-rust ignore">use magic::{display, interact};
 
 <span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -278,7 +278,7 @@ let messages = interact(&amp;interface);</code></pre>
 <p>At this point, we have gathered the user interactions and we have turned them into a bunch of <strong>messages</strong>. In order to
 react properly to the user, we need to update our <strong>state</strong> accordingly for each message.</p>
 <p>Luckily, there are no more magic tricks involved in this step—we can just use our <strong>update logic</strong>:</p>
-<pre><code class="language-rust"><span class="boring">use magic::{display, interact};
+<pre><code class="language-rust ignore"><span class="boring">use magic::{display, interact};
 </span><span class="boring">
 </span><span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -302,7 +302,7 @@ for message in messages {
 to the user. And after that, we must process any further interactions... And then, update our state once more.
 And then... Do it all over once again!</p>
 <p>This is a loop! And no, loops aren't very magical—not when we write Rust, at least:</p>
-<pre><code class="language-rust">use magic::{display, interact};
+<pre><code class="language-rust ignore">use magic::{display, interact};
 
 // Initialize the state
 let mut counter = Counter::default();
@@ -337,7 +337,7 @@ I have things to count!"</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
 its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don't need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
     iced::run("A cool counter", Counter::update, Counter::view)

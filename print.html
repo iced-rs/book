@@ -337,7 +337,7 @@ value of a possible set of values. It turns out that Rust has the perfect data t
 and most idiomatic way to express this logic in Rust is by defining a method named <code>update</code> in our application state.</p>
 <p>For our counter interface, we only need to properly increment or decrement the <code>value</code> of our <code>Counter</code> struct based on the <code>Message</code>
 we just defined:</p>
-<pre><code class="language-rust">impl Counter {
+<pre><code class="language-rust ignore">impl Counter {
     fn update(&amp;mut self, message: Message) {
         match message {
             Message::Increment =&gt; {
@@ -350,16 +350,16 @@ we just defined:</p>
     }
 }</code></pre>
 <p>Great! Now we are ready to process user interactions. For instance, imagine we initialized our counter like this:</p>
-<pre><code class="language-rust">let mut counter = Counter { value: 0 };</code></pre>
+<pre><code class="language-rust ignore">let mut counter = Counter { value: 0 };</code></pre>
 <p>And let's say we wanted to simulate a user playing with our interface for a bit—pressing the increment button twice
 and then the decrement button once. We could easily compute the final state of our counter with our <strong>update logic</strong>:</p>
-<pre><code class="language-rust">counter.update(Message::Increment);
+<pre><code class="language-rust ignore">counter.update(Message::Increment);
 counter.update(Message::Increment);
 counter.update(Message::Decrement);</code></pre>
 <p>This would cause our <code>Counter</code> to end up with a <code>value</code> of <code>1</code>:</p>
-<pre><code class="language-rust">assert_eq!(counter.value, 1);</code></pre>
+<pre><code class="language-rust ignore">assert_eq!(counter.value, 1);</code></pre>
 <p>In fact, we have just written a simple test for our application logic:</p>
-<pre><code class="language-rust">#[test]
+<pre><code class="language-rust ignore">#[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
 
@@ -393,7 +393,7 @@ ready-to-use widgets; buttons and numbers included. Exactly what we need for our
 <p>In iced, widgets are independent values. The same way you can have an integer in a variable, you can have a widget as well.
 These values are normally created using a <em>helper function</em> from the <code>widget</code> module.</p>
 <p>For our buttons, we can use the <code>button</code> helper:</p>
-<pre><code class="language-rust">use iced::widget::button;
+<pre><code class="language-rust ignore">use iced::widget::button;
 
 let increment = button("+");
 let decrement = button("-");</code></pre>
@@ -405,7 +405,7 @@ In this case, the <code>button</code> function takes a single argument used to d
 for our counter value?</p>
 <p>While iced does not really have a <code>number</code> widget, it does have a more generic <code>text</code> widget that can be used
 to display any kind of text—numbers included:</p>
-<pre><code class="language-rust">use iced::widget::text;
+<pre><code class="language-rust ignore">use iced::widget::text;
 
 let counter = text(15);</code></pre>
 <p>Sweet! Like <code>button</code>, <code>text</code> also takes an argument used to describe its contents. Since we are just getting started, let's
@@ -415,14 +415,14 @@ simply hardcode <code>15</code> for now.</p>
 <p>Not so fast! The widgets in our counter interface are displayed in a specific <strong>order</strong>. Given our three widgets, there is a total of
 <strong>six</strong> different ways to order them! However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
 <p>A very simple way of describing this order is to create a list with our widgets:</p>
-<pre><code class="language-rust">let interface = vec![increment, counter, decrement];</code></pre>
+<pre><code class="language-rust ignore">let interface = vec![increment, counter, decrement];</code></pre>
 <p>But we are still missing something! It's not only the order that is specific, our interface also has a specific visual <strong>layout</strong>.</p>
 <p>The widgets are positioned on top of each other, but they could very well be positioned from left to right instead. There is nothing
 in our description so far that talks about the <strong>layout</strong> of our widgets.</p>
 <p>In iced, layout is described using... well, more widgets! That's right. Not all widgets produce visual results directly; some may simply
 manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely!</p>
 <p>The kind of vertical layout that we need for our counter can be achieved with the <code>column</code> widget:</p>
-<pre><code class="language-rust">use iced::widget::column;
+<pre><code class="language-rust ignore">use iced::widget::column;
 
 let interface = column![increment, counter, decrement];</code></pre>
 <p>This is very similar to our previous snippet! iced provides a <code>column!</code> macro for creating a <code>column</code> out of some widgets in a particular
@@ -436,7 +436,7 @@ them? Let's do that now.</p>
 <p>In iced, every widget has a specific type that enables further configuration using simple builder methods. The <code>button</code>
 helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
 <strong>produce</strong> when a user presses the button:</p>
-<pre><code class="language-rust">use iced::widget::button;
+<pre><code class="language-rust ignore">use iced::widget::button;
 
 let increment = button("+").on_press(Message::Increment);
 let decrement = button("-").on_press(Message::Decrement);</code></pre>
@@ -453,7 +453,7 @@ to derive <code>Debug</code> and <code>Clone</code> for our <code>Message</code>
 <h3 id="the-view"><a class="header" href="#the-view">The View</a></h3>
 <p>We are almost there! There is only one thing left to do: connecting our application <strong>state</strong> to the view logic.</p>
 <p>Let's bring together all the view logic we have written so far:</p>
-<pre><code class="language-rust">use iced::widget::{button, column, text};
+<pre><code class="language-rust ignore">use iced::widget::{button, column, text};
 
 // The buttons
 let increment = button("+").on_press(Message::Increment);
@@ -470,7 +470,7 @@ counter would be stuck—always showing the number <code>15</code>. Our interfac
 we want is to actually display the <code>value</code> field of our <code>Counter</code> state. This way, when a button is pressed and
 our update logic is triggered, the text widget will display the new <code>value</code>.</p>
 <p>We can easily do this by running our view logic in a method of our <code>Counter</code>—just like we did with our update logic:</p>
-<pre><code class="language-rust">use iced::widget::{button, column, text};
+<pre><code class="language-rust ignore">use iced::widget::{button, column, text};
 
 impl Counter {
     fn view(&amp;self) {
@@ -495,7 +495,7 @@ worry about in your view code.</p>
 <p>Instead of throwing the <code>interface</code> away, we need to return it. Remember, the purpose of our <strong>view logic</strong> is
 to dictate the widgets of our user interface; and the content of the <code>interface</code> variable is precisely the
 description of the interface we want:</p>
-<pre><code class="language-rust">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore">use iced::widget::{button, column, text, Column};
 
 impl Counter {
     fn view(&amp;self) -&gt; Column&lt;Message&gt; {
@@ -526,7 +526,7 @@ let's just inline everything:</p>
 <div align="center" class="right">
   <img alt="A classical counter interface" src="resources/counter-interface.svg" width="50%">
 </div>
-<pre><code class="language-rust">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore">use iced::widget::{button, column, text, Column};
 
 impl Counter {
     fn view(&amp;self) -&gt; Column&lt;Message&gt; {
@@ -570,7 +570,7 @@ to fill in these parts—and then the engine can run!</p>
 <p>Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
 <p>In fact, we have actually started writing a runtime already! When <a href="first-steps.html#update-logic">we implemented the update logic of our counter</a>,
 we wrote a very small test that simulated a user:</p>
-<pre><code class="language-rust">#[test]
+<pre><code class="language-rust ignore">#[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
 
@@ -586,7 +586,7 @@ and executes the <strong>update logic</strong>.</p>
 involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
 <h3 id="initializing-the-state"><a class="header" href="#initializing-the-state">Initializing the State</a></h3>
 <p>Our small runtime is already initializing the application state properly:</p>
-<pre><code class="language-rust">// Initialize the state
+<pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter { value: 0 };</code></pre>
 <p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let's just derive it:</p>
 <pre><code class="language-rust">#[derive(Default)]
@@ -594,7 +594,7 @@ struct Counter {
     value: i64
 }</code></pre>
 <p>And then, we simply use <code>Counter::default</code> in our runtime:</p>
-<pre><code class="language-rust">// Initialize the state
+<pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter::default();</code></pre>
 <p>The difference may be subtle, but we are separating concerns—we keep the initial state of our application close to
 the state definition and separated from the runtime. This way, we may eventually be able to make our runtime work with
@@ -606,7 +606,7 @@ need to <strong>display</strong> it to them.</p>
 and then render the widgets returned by our <strong>view logic</strong>—properly laid out, of course!</p>
 <p>What? You have no clue of how to do that? Don't worry, I have this magical function: <code>display</code>. It takes a reference to
 any interface and displays it to the user. It totally works!</p>
-<pre><code class="language-rust">use magic::display;
+<pre><code class="language-rust ignore">use magic::display;
 
 <span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -623,7 +623,7 @@ to get a better understanding of how a runtime works. A little bit of magic does
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
 <p>How? With some more magic, of course! I just found this <code>interact</code> function inside of my top hat—it takes an
 interface and produces the <strong>messages</strong> that correspond to the latest interactions of the user.</p>
-<pre><code class="language-rust">use magic::{display, interact};
+<pre><code class="language-rust ignore">use magic::{display, interact};
 
 <span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -641,7 +641,7 @@ let messages = interact(&amp;interface);</code></pre>
 <p>At this point, we have gathered the user interactions and we have turned them into a bunch of <strong>messages</strong>. In order to
 react properly to the user, we need to update our <strong>state</strong> accordingly for each message.</p>
 <p>Luckily, there are no more magic tricks involved in this step—we can just use our <strong>update logic</strong>:</p>
-<pre><code class="language-rust"><span class="boring">use magic::{display, interact};
+<pre><code class="language-rust ignore"><span class="boring">use magic::{display, interact};
 </span><span class="boring">
 </span><span class="boring">// Initialize the state
 </span><span class="boring">let mut counter = Counter::default();
@@ -665,7 +665,7 @@ for message in messages {
 to the user. And after that, we must process any further interactions... And then, update our state once more.
 And then... Do it all over once again!</p>
 <p>This is a loop! And no, loops aren't very magical—not when we write Rust, at least:</p>
-<pre><code class="language-rust">use magic::{display, interact};
+<pre><code class="language-rust ignore">use magic::{display, interact};
 
 // Initialize the state
 let mut counter = Counter::default();
@@ -700,7 +700,7 @@ I have things to count!"</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
 its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don't need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
     iced::run("A cool counter", Counter::update, Counter::view)
