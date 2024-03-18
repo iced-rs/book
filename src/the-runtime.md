@@ -49,7 +49,7 @@ fn it_counts_properly() {
 }
 ```
 
-This is technically a very barebones runtime! It initializes the __state__, produces some __interactions__,
+This is technically a very bare-bones runtime! It initializes the __state__, produces some __interactions__,
 and executes the __update logic__.
 
 Of course, the interactions are made up, it is very short-lived, and there is no __view logic__

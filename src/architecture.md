@@ -75,7 +75,7 @@ However, if I tell you I have an interface with two buttons and a number... It's
 of interface I am talking about! It could be anything!
 
 This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
-familiar widgets—like buttons and numbers. In fact, users expect familar widgets to always behave a certain way. If they
+familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they
 don't behave properly, the interface will be unintuitive and have poor [user experience].
 
 While widgets are generally very reusable; the specific widget configuration dictated by the application state and its
