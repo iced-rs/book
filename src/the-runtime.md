@@ -206,9 +206,10 @@ Specifically,
 
 
 ## The Ice Wizard
-"That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote!"
+"That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
+I have things to count!"
 
-Fair enough! iced implements a runtime very similar to the one we just built. It comes bundled with
+Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
 its own magic[^magic]—so you don't need to worry about learning the dark arts yourself.
 
 If we want to run our `Counter`, all we have to do is call [`run`]:
