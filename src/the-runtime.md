@@ -14,7 +14,7 @@ In the previous chapter we built the classical counter interface using iced and 
 fundamental part—one at a time: __state__, __messages__, __update logic__, and __view logic__.
 
 But now what? Yes, we have all the fundamental parts of a user interface—as we learned during
-[our first steps](first-steps.md)—but it is unclear how we are supposed to bring it to life.
+[our dissection](architecture.md)—but it is unclear how we are supposed to bring it to life.
 
 It seems we are missing _something_ that can put all the parts together and _run_ them in unison. _Something_ that
 creates and runs the fundamental loop of a user interface—displaying widgets to a user and reacting to any interactions.
