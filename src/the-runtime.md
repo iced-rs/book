@@ -4,10 +4,10 @@
 > ```toml
 > [dependencies.iced]
 > git = "https://github.com/iced-rs/iced.git"
-> rev = "eb67aa5d71172569e3d404107a1a449998d98d42"
+> rev = "cdb18e610a72b4a025d7e1890140393adee5b087"
 > ```
 
-[a revision of iced]: https://github.com/iced-rs/iced/tree/eb67aa5d71172569e3d404107a1a449998d98d42
+[a revision of iced]: https://github.com/iced-rs/iced/tree/cdb18e610a72b4a025d7e1890140393adee5b087
 
 # The Runtime
 In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
