@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Architecture - iced — A Cross-Platform GUI Library for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Learning the Basics</li><li class="chapter-item expanded "><a href="architecture.html" class="active"><strong aria-hidden="true">1.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li class="chapter-item expanded "><a href="the-runtime.html"><strong aria-hidden="true">3.</strong> The Runtime</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> More to come!</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="additional-resources.html"><strong aria-hidden="true">5.</strong> Additional Resources</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">iced — A Cross-Platform GUI Library for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/iced-rs/book/tree/master" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/iced-rs/book/edit/master/src/architecture.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>Let's start from the basics! You are probably very familiar with graphical user interfaces already.
+You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
+most likely reading this book using one!</p>
+<p>At their essence, graphical user interfaces are applications that <strong>display</strong> some information graphically
+to a user. This user can then choose to <strong>interact</strong> with the application—normally using some kind of device;
+like a keyboard, mouse, or touchscreen.</p>
+<div align="center">
+  <img alt="Interface displays, user interacts" src="resources/gui-displays-user-interacts.svg">
+</div>
+<p>The user interactions may cause the application to update and display new information as a result, which in turn
+may cause further user interactions, which in turn cause further updates... And so on. This quick feedback loop
+is what causes the feeling of <em>interactivity</em>.</p>
+<blockquote>
+<p>Note: In this book, we will refer to graphical user interfaces as <strong>GUIs</strong>, <strong>UIs</strong>, <strong>user interfaces</strong>, or simply
+<strong>interfaces</strong>. Technically, not all interfaces are graphical nor user-oriented; but, given the context of this
+book, we will use all of these terms interchangeably.</p>
+</blockquote>
+<h2 id="dissecting-an-interface"><a class="header" href="#dissecting-an-interface">Dissecting an Interface</a></h2>
+<p>Since we are interested in creating user interfaces, let's take a closer look at them. We will start with a very
+simple one: the classical counter interface. What is it made of?</p>
+<div align="center">
+  <img alt="A classical counter interface" src="resources/counter-interface.svg">
+</div>
+<p>As we can clearly see, this interface has three visibly distinct elements: two buttons with a number in between.
+We refer to these visibly distinct elements of a user interface as <strong>widgets</strong> or <strong>elements</strong>.</p>
+<p>Some <strong>widgets</strong> may be interactive, like a button. In the counter interface, the buttons can be used to trigger
+certain <strong>interactions</strong>. Specifically, the button at the top can be used to increment the counter value, while the
+button at the bottom can be used to decrement it.</p>
+<p>We can also say that user interfaces are <em>stateful</em>—there is some <strong>state</strong> that persists between interactions.
+The counter interface displays a number representing the counter value. The number displayed will change depending on
+the amount of times we press the buttons. Pressing the increment button once will result in a different displayed value
+compared to pressing it twice.</p>
+<div align="center">
+  <img alt="A dissected counter interface" src="resources/counter-interface-annotated.svg">
+</div>
+<h2 id="the-gui-trinity"><a class="header" href="#the-gui-trinity">The GUI Trinity</a></h2>
+<p>Our quick dissection has successfully identified three foundational ideas in a user interface:</p>
+<ul>
+<li><strong>Widgets</strong> — the distinct visual elements of an interface.</li>
+<li><strong>Interactions</strong> — the actions that may be triggered by some widgets.</li>
+<li><strong>State</strong> — the underlying condition or information of an interface.</li>
+</ul>
+<p>These ideas are connected to each other, forming another feedback loop!</p>
+<p><strong>Widgets</strong> produce <strong>interactions</strong> when a user interacts with them. These <strong>interactions</strong> then change the <strong>state</strong>
+of the interface. The changed <strong>state</strong> propagates and dictates the new <strong>widgets</strong> that must be displayed. These new
+<strong>widgets</strong> may then produce new <strong>interactions</strong>, which can change the <strong>state</strong> again... And so on.</p>
+<div align="center">
+  <img alt="The GUI trinity" src="resources/the-gui-trinity.svg">
+</div>
+<p>These ideas and their connections make up the fundamental architecture of a user interface. Therefore, creating a user
+interface must inevitably consist in defining these <strong>widgets</strong>, <strong>interactions</strong>, and <strong>state</strong>; as well as the connections
+between them.</p>
+<h2 id="different-ideas-different-nature"><a class="header" href="#different-ideas-different-nature">Different Ideas, Different Nature</a></h2>
+<p>The three foundational ideas of an interface differ quite a bit when it comes to reusability.</p>
+<p>The state and the interactions of an interface are very specific to the application and its purpose. If I tell you that
+I have an interface with a numeric value and increment and decrement interactions, you will very easily
+guess I am talking about a counter interface.</p>
+<p>However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
+of interface I am talking about! It could be anything!</p>
+<p>This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
+familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they
+don't behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
+<p>While widgets are generally very reusable; the specific widget configuration dictated by the application state and its
+interactions is very application-specific. A button is generic; but a button that has a "+" label and causes a value
+increment when pressed is very specific.</p>
+<p>All of this means that, when we are creating a specific user interface, we don't want to focus on implementing every
+familiar widget and its behavior. Instead, we want to leverage widgets as reusable building blocks—independent of our
+application and provided by some library—while placing our focus on the application-specific parts of the fundamental
+architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.</p>
+<div align="center">
+  <img alt="The application-specific parts of a GUI" src="resources/the-gui-trinity-focused.svg">
+</div>
+<h2 id="the-elm-architecture"><a class="header" href="#the-elm-architecture">The Elm Architecture</a></h2>
+<p>It turns out that the four application-specific parts of the architecture of an interface are also the four foundational
+ideas of <a href="https://guide.elm-lang.org/architecture/">The Elm Architecture</a>.</p>
+<blockquote>
+<p>The Elm Architecture is a pattern for architecting interactive programs that emerges naturally in <a href="https://elm-lang.org/">Elm</a>, a delightful
+purely functional programming language for reliable web applications.</p>
+<p>Patterns and ideas that emerge in purely functional programming languages tend to work very well in Rust
+because they leverage immutability and <a href="https://en.wikipedia.org/wiki/Referential_transparency">referential transparency</a>—both very desirable properties that not only
+make code easy to reason about, but also play nicely with the borrow checker.</p>
+<p>Furthermore, The Elm Architecture not only emerges naturally in Elm, but also when simply dissecting user
+interfaces and formalizing their inner workings; like we just did in this chapter.</p>
+</blockquote>
+<p>The Elm Architecture uses a different—if not more precise—nomenclature for its fundamental parts:</p>
+<ul>
+<li><strong>Model</strong> — the state of the application.</li>
+<li><strong>Messages</strong> — the interactions of the application.</li>
+<li><strong>Update logic</strong> — how the messages change the state.</li>
+<li><strong>View logic</strong> — how the state dictates the widgets.</li>
+</ul>
+<p>These are different names, but they point to the same exact fundamental ideas we have already discovered and,
+therefore, can be used interchangeably.</p>
+<div align="center">
+  <img alt="The Elm Architecture" src="resources/the-elm-architecture.svg">
+</div>
+<blockquote>
+<p>Note: In iced, the names <strong>state</strong> and <strong>messages</strong> are used more often than <strong>model</strong> and
+<strong>interactions</strong>, respectively.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="first-steps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="first-steps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

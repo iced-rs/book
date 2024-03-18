@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161.674582 364.71764549099555" width="161.674582" height="364.71764549099555">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://excalidraw.com/Assistant-Regular.woff2");
+      }
+    </style>
+    
+  </defs>
+  <rect x="0" y="0" width="161.674582" height="364.71764549099555" fill="#161923"></rect><g stroke-linecap="round" transform="translate(10.000002300699748 14.859025097626045) rotate(0 70.83728984965012 39.10382185341945)"><path d="M0 0 L141.67 0 L141.67 78.21 L0 78.21" stroke="none" stroke-width="0" fill="#ffffff"></path><path d="M0 0 C30.36 0, 60.73 0, 141.67 0 M0 0 C31.26 0, 62.53 0, 141.67 0 M141.67 0 C141.67 21.15, 141.67 42.3, 141.67 78.21 M141.67 0 C141.67 28.3, 141.67 56.6, 141.67 78.21 M141.67 78.21 C108.89 78.21, 76.1 78.21, 0 78.21 M141.67 78.21 C107.98 78.21, 74.28 78.21, 0 78.21 M0 78.21 C0 48.41, 0 18.61, 0 0 M0 78.21 C0 49.97, 0 21.74, 0 0" stroke="transparent" stroke-width="2" fill="none"></path></g><g transform="translate(58.51241001239987 10) rotate(0 22.324883422045218 43.96284735418129)"><text x="0" y="70.34204906992905" font-family="Helvetica, Segoe UI Emoji" font-size="76.45712583335883px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">+</text></g><g stroke-linecap="round" transform="translate(10 276.429546244844) rotate(0 70.83728984965012 39.10382185341945)"><path d="M0 0 L141.67 0 L141.67 78.21 L0 78.21" stroke="none" stroke-width="0" fill="#ffffff"></path><path d="M0 0 C40.73 0, 81.45 0, 141.67 0 M0 0 C30.69 0, 61.37 0, 141.67 0 M141.67 0 C141.67 20.68, 141.67 41.36, 141.67 78.21 M141.67 0 C141.67 26.66, 141.67 53.31, 141.67 78.21 M141.67 78.21 C88.85 78.21, 36.02 78.21, 0 78.21 M141.67 78.21 C86.25 78.21, 30.83 78.21, 0 78.21 M0 78.21 C0 54.76, 0 31.32, 0 0 M0 78.21 C0 48.98, 0 19.76, 0 0" stroke="transparent" stroke-width="2" fill="none"></path></g><g transform="translate(68.10688341112484 266.79195078263297) rotate(0 12.730410111902017 43.96284735418129)"><text x="0" y="70.34204906992903" font-family="Helvetica, Segoe UI Emoji" font-size="76.45712583335882px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">-</text></g><g transform="translate(38.31548348401191 138.39597491741483) rotate(0 42.521809728611174 43.96284735418129)"><text x="0" y="70.34204906992905" font-family="Helvetica, Segoe UI Emoji" font-size="76.45712583335883px" fill="#ffffff" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">15</text></g></svg>

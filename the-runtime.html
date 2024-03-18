@@ -1,0 +1,458 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Runtime - iced — A Cross-Platform GUI Library for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Learning the Basics</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li class="chapter-item expanded "><a href="the-runtime.html" class="active"><strong aria-hidden="true">3.</strong> The Runtime</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> More to come!</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="additional-resources.html"><strong aria-hidden="true">5.</strong> Additional Resources</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">iced — A Cross-Platform GUI Library for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/iced-rs/book/tree/master" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/iced-rs/book/edit/master/src/the-runtime.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <blockquote>
+<p>This chapter documents <a href="https://github.com/iced-rs/iced/tree/eb67aa5d71172569e3d404107a1a449998d98d42">a revision of iced</a> not yet officially released. If you enjoy living on the edge,
+you can directly rely on this revision in your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies.iced]
+git = "https://github.com/iced-rs/iced.git"
+rev = "eb67aa5d71172569e3d404107a1a449998d98d42"
+</code></pre>
+</blockquote>
+<h1 id="the-runtime"><a class="header" href="#the-runtime">The Runtime</a></h1>
+<p>In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
+fundamental part—one at a time: <strong>state</strong>, <strong>messages</strong>, <strong>update logic</strong>, and <strong>view logic</strong>.</p>
+<p>But now what? Yes, we have all the fundamental parts of a user interface—as we learned during
+<a href="first-steps.html">our first steps</a>—but it is unclear how we are supposed to bring it to life.</p>
+<p>It seems we are missing <em>something</em> that can put all the parts together and <em>run</em> them in unison. <em>Something</em> that
+creates and runs the fundamental loop of a user interface—displaying widgets to a user and reacting to any interactions.</p>
+<p>This <em>something</em> is called the <strong>runtime</strong>. You can think of it as the environment where the feedback loop of a user
+interface takes place. The runtime is in charge of every part of the loop: initializing the <strong>state</strong>,
+producing <strong>messages</strong>, executing the <strong>update logic</strong>, and running our <strong>view logic</strong>.</p>
+<div align="center">
+  <img alt="The Runtime" src="resources/the-runtime.svg">
+</div>
+<blockquote>
+<p>Another way to picture the runtime is by imagining a huge engine with four fundamental parts missing. Our job is
+to fill in these parts—and then the engine can run!</p>
+</blockquote>
+<h2 id="a-magical-runtime"><a class="header" href="#a-magical-runtime">A Magical Runtime</a></h2>
+<p>Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
+<p>In fact, we have actually started writing a runtime already! When <a href="first-steps.html#update-logic">we implemented the update logic of our counter</a>,
+we wrote a very small test that simulated a user:</p>
+<pre><code class="language-rust">#[test]
+fn it_counts_properly() {
+    let mut counter = Counter { value: 0 };
+
+    counter.update(Message::Increment);
+    counter.update(Message::Increment);
+    counter.update(Message::Decrement);
+
+    assert_eq!(counter.value, 1);
+}</code></pre>
+<p>This is technically a very bare-bones runtime! It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
+and executes the <strong>update logic</strong>.</p>
+<p>Of course, the interactions are made up, it is very short-lived, and there is no <strong>view logic</strong>
+involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
+<h3 id="initializing-the-state"><a class="header" href="#initializing-the-state">Initializing the State</a></h3>
+<p>Our small runtime is already initializing the application state properly:</p>
+<pre><code class="language-rust">// Initialize the state
+let mut counter = Counter { value: 0 };</code></pre>
+<p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let's just derive it:</p>
+<pre><code class="language-rust">#[derive(Default)]
+struct Counter {
+    value: i64
+}</code></pre>
+<p>And then, we simply use <code>Counter::default</code> in our runtime:</p>
+<pre><code class="language-rust">// Initialize the state
+let mut counter = Counter::default();</code></pre>
+<p>The difference may be subtle, but we are separating concerns—we keep the initial state of our application close to
+the state definition and separated from the runtime. This way, we may eventually be able to make our runtime work with
+<em>any</em> application!</p>
+<h3 id="displaying-the-interface"><a class="header" href="#displaying-the-interface">Displaying the Interface</a></h3>
+<p>Alright! We have our <strong>state</strong> initialized. What's next? Well, before a user can <strong>interact</strong> with our interface, we
+need to <strong>display</strong> it to them.</p>
+<p>That's easy! We just need to open a window in whatever OS the user is running, initialize a proper graphics backend,
+and then render the widgets returned by our <strong>view logic</strong>—properly laid out, of course!</p>
+<p>What? You have no clue of how to do that? Don't worry, I have this magical function: <code>display</code>. It takes a reference to
+any interface and displays it to the user. It totally works!</p>
+<pre><code class="language-rust">use magic::display;
+
+<span class="boring">// Initialize the state
+</span><span class="boring">let mut counter = Counter::default();
+</span><span class="boring">
+</span>// Run our view logic to obtain our interface
+let interface = counter.view();
+
+// Display the interface to the user
+display(&amp;interface);</code></pre>
+<p>See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graphics programming; but for us
+to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!</p>
+<h3 id="gathering-the-interactions"><a class="header" href="#gathering-the-interactions">Gathering the Interactions</a></h3>
+<p>The user is seeing our interface and is now interacting with it! We need to pay very good attention to all
+the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
+<p>How? With some more magic, of course! I just found this <code>interact</code> function inside of my top hat—it takes an
+interface and produces the <strong>messages</strong> that correspond to the latest interactions of the user.</p>
+<pre><code class="language-rust">use magic::{display, interact};
+
+<span class="boring">// Initialize the state
+</span><span class="boring">let mut counter = Counter::default();
+</span><span class="boring">
+</span><span class="boring">// Run our view logic to obtain our interface
+</span><span class="boring">let interface = counter.view();
+</span><span class="boring">
+</span><span class="boring">// Display the interface to the user
+</span><span class="boring">display(&amp;interface);
+</span><span class="boring">
+</span>// Process the user interactions and obtain our messages
+let messages = interact(&amp;interface);</code></pre>
+<p>Great! <code>interact</code> returns a list of <strong>messages</strong> for us—ready to be iterated.</p>
+<h3 id="reacting-to-the-interactions"><a class="header" href="#reacting-to-the-interactions">Reacting to the Interactions</a></h3>
+<p>At this point, we have gathered the user interactions and we have turned them into a bunch of <strong>messages</strong>. In order to
+react properly to the user, we need to update our <strong>state</strong> accordingly for each message.</p>
+<p>Luckily, there are no more magic tricks involved in this step—we can just use our <strong>update logic</strong>:</p>
+<pre><code class="language-rust"><span class="boring">use magic::{display, interact};
+</span><span class="boring">
+</span><span class="boring">// Initialize the state
+</span><span class="boring">let mut counter = Counter::default();
+</span><span class="boring">
+</span><span class="boring">// Run our view logic to obtain our interface
+</span><span class="boring">let interface = counter.view();
+</span><span class="boring">
+</span><span class="boring">// Display the interface to the user
+</span><span class="boring">display(&amp;interface);
+</span><span class="boring">
+</span><span class="boring">// Process the user interactions and obtain our messages
+</span><span class="boring">let messages = interact(&amp;interface);
+</span><span class="boring">
+</span>// Update our state by processing each message
+for message in messages {
+    counter.update(message);
+}</code></pre>
+<p>That should keep our state completely up-to-date with the latest user interactions.</p>
+<h3 id="looping-around"><a class="header" href="#looping-around">Looping Around</a></h3>
+<p>Okay! Our state has been updated to reflect the user interactions. Now, we need to display the resulting interface again
+to the user. And after that, we must process any further interactions... And then, update our state once more.
+And then... Do it all over once again!</p>
+<p>This is a loop! And no, loops aren't very magical—not when we write Rust, at least:</p>
+<pre><code class="language-rust">use magic::{display, interact};
+
+// Initialize the state
+let mut counter = Counter::default();
+
+// Be interactive. All the time! 
+loop {
+    // Run our view logic to obtain our interface
+    let interface = counter.view();
+
+    // Display the interface to the user
+    display(&amp;interface);
+
+    // Process the user interactions and obtain our messages
+    let messages = interact(&amp;interface);
+
+    // Update our state by processing each message
+    for message in messages {
+        counter.update(message);
+    }
+}</code></pre>
+<p>Congratulations! We just wrote a perfectly functional runtime—magical properties aside. We can clearly understand here how
+each fundamental part of The Elm Architecture fits in the lifetime of an application.</p>
+<p>Specifically,</p>
+<ul>
+<li><strong>state</strong> is initialized once,</li>
+<li><strong>view logic</strong> runs once at startup and then after every batch of interactions,</li>
+<li>and <strong>update logic</strong> runs for every interaction that created a <strong>message</strong>.</li>
+</ul>
+<h2 id="the-ice-wizard"><a class="header" href="#the-ice-wizard">The Ice Wizard</a></h2>
+<p>"That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
+I have things to count!"</p>
+<p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
+its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don't need to worry about learning the dark arts yourself.</p>
+<p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
+<pre><code class="language-rust"><span class="boring">use iced::widget::{button, column, text, Column};
+</span><span class="boring">
+</span>pub fn main() -&gt; iced::Result {
+    iced::run("A cool counter", Counter::update, Counter::view)
+}
+<span class="boring">
+</span><span class="boring">#[derive(Default)]
+</span><span class="boring">struct Counter {
+</span><span class="boring">    value: i64,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[derive(Debug, Clone, Copy)]
+</span><span class="boring">enum Message {
+</span><span class="boring">    Increment,
+</span><span class="boring">    Decrement,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Counter {
+</span><span class="boring">    fn update(&amp;mut self, message: Message) {
+</span><span class="boring">        match message {
+</span><span class="boring">            Message::Increment =&gt; {
+</span><span class="boring">                self.value += 1;
+</span><span class="boring">            }
+</span><span class="boring">            Message::Decrement =&gt; {
+</span><span class="boring">                self.value -= 1;
+</span><span class="boring">            }
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn view(&amp;self) -&gt; Column&lt;Message&gt; {
+</span><span class="boring">        column![
+</span><span class="boring">            button("+").on_press(Message::Increment),
+</span><span class="boring">            text(self.value),
+</span><span class="boring">            button("-").on_press(Message::Decrement),
+</span><span class="boring">        ]
+</span><span class="boring">    }
+</span><span class="boring">}</span></code></pre>
+<p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
+the <strong>runtime</strong>—which then figures out the rest!</p>
+<p>The runtime is capable of inferring the types for the <strong>state</strong> and <strong>messages</strong> out of the type signatures of
+our <strong>update logic</strong> and <strong>view logic</strong>. The <strong>state</strong> is initialized leveraging <code>Default</code>, as we described earlier.</p>
+<p>Notice also that <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a> can fail and, therefore, it returns an <a href="https://docs.iced.rs/iced/type.Result.html"><code>iced::Result</code></a>. If all we are doing is run the
+application, we can return this result directly in <code>main</code>.</p>
+<p>And that should be it! Have fun counting things for 300 million years—at least!</p>
+<div class="footnote-definition" id="magic"><sup class="footnote-definition-label">1</sup>
+<p>Mainly <a href="https://github.com/rust-windowing/winit"><code>winit</code></a>, <a href="https://github.com/rust-windowing/softbuffer"><code>softbuffer</code></a>, <a href="https://github.com/gfx-rs/wgpu"><code>wgpu</code></a>, <a href="https://github.com/RazrFalcon/tiny-skia"><code>tiny-skia</code></a>, and <a href="https://github.com/pop-os/cosmic-text"><code>cosmic-text</code></a>.</p>
+</div>
+<blockquote>
+<h4 id="note-from-the-author"><a class="header" href="#note-from-the-author">Note From the Author</a></h4>
+<p>You reached the end of the book, for now!</p>
+<p>I think it should already serve as a quick introduction to the basics of the library.
+There is a lot more to unravel—but hopefully you are now at a point where you can start
+playing around, having fun, and experimenting further.</p>
+<p>The book is far from finished—there are a lot more topics I want to cover here, namely:</p>
+<ul>
+<li>Layout</li>
+<li>Styling</li>
+<li>Concurrency</li>
+<li>Scaling Applications</li>
+<li>Extending the Runtime</li>
+<li>And More!</li>
+</ul>
+<p>Until I get to write them, check out the <a href="additional-resources.html">Additional Resources</a>
+chapter if you want to explore and learn further.</p>
+<p>I hope that you enjoyed the read so far. Stay tuned!</p>
+<p>— Héctor</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="first-steps.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="additional-resources.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="first-steps.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="additional-resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
