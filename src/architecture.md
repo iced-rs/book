@@ -1,6 +1,6 @@
 # Architecture
 Let's start from the basics! You are probably very familiar with graphical user interfaces already.
-You can find them in your phone, computer, and most interactive electronic devices. In fact, you are
+You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
 most likely reading this book using one!
 
 At their essence, graphical user interfaces are applications that __display__ some information graphically
