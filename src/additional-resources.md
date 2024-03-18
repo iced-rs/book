@@ -10,7 +10,7 @@ Here are some further resources you can use to learn more about iced while I am 
 - The [official list of awesome iced projects](https://github.com/iced-rs/awesome-iced)
 - The [unofficial guides](https://github.com/iced-rs/awesome-iced#Resources)
 
-We also have a very welcoming and active community of users! Feel free to ask any questions in [our Discord server] or [our Discourse forum].
+We also have a very welcoming and active community! Feel free to ask any questions in [our Discord server] or [our Discourse forum].
 
 [![Discord Server](https://img.shields.io/discord/628993209984614400?label=&labelColor=6A7EC2&logo=discord&logoColor=ffffff&color=7389D8)](https://discord.gg/3xZJ65GAhd)
 [![Discourse](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscourse.iced.rs%2Fsite%2Fstatistics.json&query=%24.users_count&suffix=%20users&label=discourse&color=5e7ce2)](https://discourse.iced.rs/)
