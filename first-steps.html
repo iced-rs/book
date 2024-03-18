@@ -300,19 +300,19 @@ simply hardcode <code>15</code> for now.</p>
 <h3 id="the-layout"><a class="header" href="#the-layout">The Layout</a></h3>
 <p>Alright! We have our two buttons in <code>increment</code> and <code>decrement</code>, and our counter value in <code>counter</code>. That should be everything, right?</p>
 <p>Not so fast! The widgets in our counter interface are displayed in a specific <strong>order</strong>. Given our three widgets, there is a total of
-<strong>six</strong> different ways to order them! However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
+<strong>six</strong> different ways to order them. However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
 <p>A very simple way of describing this order is to create a list with our widgets:</p>
 <pre><code class="language-rust ignore">let interface = vec![increment, counter, decrement];</code></pre>
 <p>But we are still missing something! It's not only the order that is specific, our interface also has a specific visual <strong>layout</strong>.</p>
 <p>The widgets are positioned on top of each other, but they could very well be positioned from left to right instead. There is nothing
 in our description so far that talks about the <strong>layout</strong> of our widgets.</p>
 <p>In iced, layout is described using... well, more widgets! That's right. Not all widgets produce visual results directly; some may simply
-manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely!</p>
+manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely.</p>
 <p>The kind of vertical layout that we need for our counter can be achieved with the <code>column</code> widget:</p>
 <pre><code class="language-rust ignore">use iced::widget::column;
 
 let interface = column![increment, counter, decrement];</code></pre>
-<p>This is very similar to our previous snippet! iced provides a <code>column!</code> macro for creating a <code>column</code> out of some widgets in a particular
+<p>This is very similar to our previous snippet. iced provides a <code>column!</code> macro for creating a <code>column</code> out of some widgets in a particular
 <strong>order</strong>—analogous to <code>vec!</code>.</p>
 <h3 id="the-interactions"><a class="header" href="#the-interactions">The Interactions</a></h3>
 <p>At this point, we have in our <code>interface</code> variable a <code>column</code> representing our counter interface. But if we actually tried to run it,
@@ -327,7 +327,7 @@ helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/s
 
 let increment = button("+").on_press(Message::Increment);
 let decrement = button("-").on_press(Message::Decrement);</code></pre>
-<p>Awesome! Our interactions are wired up! But there is still a small detail left. A button can be pressed multiple times. Therefore,
+<p>Awesome! Our interactions are wired up. But there is still a small detail left. A button can be pressed multiple times. Therefore,
 the same button may need to produce multiple instances of the same <code>Message</code>. As a result, we need our <code>Message</code> type to be cloneable.</p>
 <p>We can easily <em>derive</em> the <code>Clone</code> trait—as well as <code>Debug</code> and <code>Copy</code> for good measure:</p>
 <pre><code class="language-rust">#[derive(Debug, Clone, Copy)]
@@ -427,7 +427,7 @@ impl Counter {
 <p>That's much more concise. It even resembles the actual interface! Since creating widgets just yields values with no
 side effects; we can move things around in our view logic without worrying about breaking other stuff. No spooky
 action at a distance!</p>
-<p>And that's all there is to our counter interface! I am sure you can't wait to <strong>run</strong> it. Shall we?</p>
+<p>And that's all there is to our counter interface. I am sure you can't wait to <strong>run</strong> it. Shall we?</p>
 
                     </main>
 

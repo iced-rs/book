@@ -217,7 +217,7 @@ fn it_counts_properly() {
 
     assert_eq!(counter.value, 1);
 }</code></pre>
-<p>This is technically a very bare-bones runtime! It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
+<p>This is technically a very bare-bones runtime. It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
 and executes the <strong>update logic</strong>.</p>
 <p>Of course, the interactions are made up, it is very short-lived, and there is no <strong>view logic</strong>
 involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
@@ -256,7 +256,7 @@ display(&amp;interface);</code></pre>
 <p>See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graphics programming; but for us
 to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!</p>
 <h3 id="gathering-the-interactions"><a class="header" href="#gathering-the-interactions">Gathering the Interactions</a></h3>
-<p>The user is seeing our interface and is now interacting with it! We need to pay very good attention to all
+<p>The user is seeing our interface and is now interacting with it. We need to pay very good attention to all
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
 <p>How? With some more magic, of course! I just found this <code>interact</code> function inside of my top hat—it takes an
 interface and produces the <strong>messages</strong> that correspond to the latest interactions of the user.</p>

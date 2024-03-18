@@ -249,7 +249,7 @@ between them.</p>
 I have an interface with a numeric value and increment and decrement interactions, you will very easily
 guess I am talking about a counter interface.</p>
 <p>However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
-of interface I am talking about! It could be anything!</p>
+of interface I am talking about. It could be anything!</p>
 <p>This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
 familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they
 don't behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
@@ -413,19 +413,19 @@ simply hardcode <code>15</code> for now.</p>
 <h3 id="the-layout"><a class="header" href="#the-layout">The Layout</a></h3>
 <p>Alright! We have our two buttons in <code>increment</code> and <code>decrement</code>, and our counter value in <code>counter</code>. That should be everything, right?</p>
 <p>Not so fast! The widgets in our counter interface are displayed in a specific <strong>order</strong>. Given our three widgets, there is a total of
-<strong>six</strong> different ways to order them! However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
+<strong>six</strong> different ways to order them. However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
 <p>A very simple way of describing this order is to create a list with our widgets:</p>
 <pre><code class="language-rust ignore">let interface = vec![increment, counter, decrement];</code></pre>
 <p>But we are still missing something! It's not only the order that is specific, our interface also has a specific visual <strong>layout</strong>.</p>
 <p>The widgets are positioned on top of each other, but they could very well be positioned from left to right instead. There is nothing
 in our description so far that talks about the <strong>layout</strong> of our widgets.</p>
 <p>In iced, layout is described using... well, more widgets! That's right. Not all widgets produce visual results directly; some may simply
-manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely!</p>
+manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely.</p>
 <p>The kind of vertical layout that we need for our counter can be achieved with the <code>column</code> widget:</p>
 <pre><code class="language-rust ignore">use iced::widget::column;
 
 let interface = column![increment, counter, decrement];</code></pre>
-<p>This is very similar to our previous snippet! iced provides a <code>column!</code> macro for creating a <code>column</code> out of some widgets in a particular
+<p>This is very similar to our previous snippet. iced provides a <code>column!</code> macro for creating a <code>column</code> out of some widgets in a particular
 <strong>order</strong>—analogous to <code>vec!</code>.</p>
 <h3 id="the-interactions"><a class="header" href="#the-interactions">The Interactions</a></h3>
 <p>At this point, we have in our <code>interface</code> variable a <code>column</code> representing our counter interface. But if we actually tried to run it,
@@ -440,7 +440,7 @@ helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/s
 
 let increment = button("+").on_press(Message::Increment);
 let decrement = button("-").on_press(Message::Decrement);</code></pre>
-<p>Awesome! Our interactions are wired up! But there is still a small detail left. A button can be pressed multiple times. Therefore,
+<p>Awesome! Our interactions are wired up. But there is still a small detail left. A button can be pressed multiple times. Therefore,
 the same button may need to produce multiple instances of the same <code>Message</code>. As a result, we need our <code>Message</code> type to be cloneable.</p>
 <p>We can easily <em>derive</em> the <code>Clone</code> trait—as well as <code>Debug</code> and <code>Copy</code> for good measure:</p>
 <pre><code class="language-rust">#[derive(Debug, Clone, Copy)]
@@ -540,7 +540,7 @@ impl Counter {
 <p>That's much more concise. It even resembles the actual interface! Since creating widgets just yields values with no
 side effects; we can move things around in our view logic without worrying about breaking other stuff. No spooky
 action at a distance!</p>
-<p>And that's all there is to our counter interface! I am sure you can't wait to <strong>run</strong> it. Shall we?</p>
+<p>And that's all there is to our counter interface. I am sure you can't wait to <strong>run</strong> it. Shall we?</p>
 <div style="break-before: page; page-break-before: always;"></div><blockquote>
 <p>This chapter documents <a href="https://github.com/iced-rs/iced/tree/eb67aa5d71172569e3d404107a1a449998d98d42">a revision of iced</a> not yet officially released. If you enjoy living on the edge,
 you can directly rely on this revision in your <code>Cargo.toml</code>:</p>
@@ -580,7 +580,7 @@ fn it_counts_properly() {
 
     assert_eq!(counter.value, 1);
 }</code></pre>
-<p>This is technically a very bare-bones runtime! It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
+<p>This is technically a very bare-bones runtime. It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
 and executes the <strong>update logic</strong>.</p>
 <p>Of course, the interactions are made up, it is very short-lived, and there is no <strong>view logic</strong>
 involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
@@ -619,7 +619,7 @@ display(&amp;interface);</code></pre>
 <p>See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graphics programming; but for us
 to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!</p>
 <h3 id="gathering-the-interactions"><a class="header" href="#gathering-the-interactions">Gathering the Interactions</a></h3>
-<p>The user is seeing our interface and is now interacting with it! We need to pay very good attention to all
+<p>The user is seeing our interface and is now interacting with it. We need to pay very good attention to all
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
 <p>How? With some more magic, of course! I just found this <code>interact</code> function inside of my top hat—it takes an
 interface and produces the <strong>messages</strong> that correspond to the latest interactions of the user.</p>
