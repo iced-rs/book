@@ -5,13 +5,14 @@
 - [Architecture](architecture.md)
 - [First Steps](first-steps.md)
 - [The Runtime](the-runtime.md)
-- [Concurrency](concurrency.md)
-- [Layout](layout.md)
-- [Styling](styling.md)
+- [Layout]()
+- [Styling]()
+- [Concurrency]()
 
-# Building Applications
+# Scaling Applications
 - [Structure]()
 - [State]()
+- [Laziness]()
 
 # Extending the Runtime
 - [Widgets]()
