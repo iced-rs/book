@@ -214,7 +214,7 @@ its own magic[^magic]—so you don't need to worry about learning the dark arts 
 
 If we want to run our `Counter`, all we have to do is call [`run`]:
 
-```rust,ignore
+```rust,ignore,iced(height=100px)
 # use iced::widget::{button, column, text, Column};
 # 
 pub fn main() -> iced::Result {
