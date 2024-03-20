@@ -179,7 +179,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
-<p>Let's start from the basics! You are probably very familiar with graphical user interfaces already.
+<p>Let’s start from the basics! You are probably very familiar with graphical user interfaces already.
 You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
 most likely reading this book using one!</p>
 <p>At their essence, graphical user interfaces are applications that <strong>display</strong> some information graphically
@@ -189,7 +189,7 @@ like a keyboard, mouse, or touchscreen.</p>
   <img alt="Interface displays, user interacts" src="resources/gui-displays-user-interacts.svg">
 </div>
 <p>The user interactions may cause the application to update and display new information as a result, which in turn
-may cause further user interactions, which in turn cause further updates... And so on. This quick feedback loop
+may cause further user interactions, which in turn cause further updates… And so on. This quick feedback loop
 is what causes the feeling of <em>interactivity</em>.</p>
 <blockquote>
 <p>Note: In this book, we will refer to graphical user interfaces as <strong>GUIs</strong>, <strong>UIs</strong>, <strong>user interfaces</strong>, or simply
@@ -197,7 +197,7 @@ is what causes the feeling of <em>interactivity</em>.</p>
 book, we will use all of these terms interchangeably.</p>
 </blockquote>
 <h2 id="dissecting-an-interface"><a class="header" href="#dissecting-an-interface">Dissecting an Interface</a></h2>
-<p>Since we are interested in creating user interfaces, let's take a closer look at them. We will start with a very
+<p>Since we are interested in creating user interfaces, let’s take a closer look at them. We will start with a very
 simple one: the classical counter interface. What is it made of?</p>
 <div align="center">
   <img alt="A classical counter interface" src="resources/counter-interface.svg">
@@ -224,7 +224,7 @@ compared to pressing it twice.</p>
 <p>These ideas are connected to each other, forming another feedback loop!</p>
 <p><strong>Widgets</strong> produce <strong>interactions</strong> when a user interacts with them. These <strong>interactions</strong> then change the <strong>state</strong>
 of the interface. The changed <strong>state</strong> propagates and dictates the new <strong>widgets</strong> that must be displayed. These new
-<strong>widgets</strong> may then produce new <strong>interactions</strong>, which can change the <strong>state</strong> again... And so on.</p>
+<strong>widgets</strong> may then produce new <strong>interactions</strong>, which can change the <strong>state</strong> again… And so on.</p>
 <div align="center">
   <img alt="The GUI trinity" src="resources/the-gui-trinity.svg">
 </div>
@@ -236,15 +236,15 @@ between them.</p>
 <p>The state and the interactions of an interface are very specific to the application and its purpose. If I tell you that
 I have an interface with a numeric value and increment and decrement interactions, you will very easily
 guess I am talking about a counter interface.</p>
-<p>However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
+<p>However, if I tell you I have an interface with two buttons and a number… It’s quite trickier for you to guess the kind
 of interface I am talking about. It could be anything!</p>
 <p>This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
 familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they
-don't behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
+don’t behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
 <p>While widgets are generally very reusable; the specific widget configuration dictated by the application state and its
-interactions is very application-specific. A button is generic; but a button that has a "+" label and causes a value
+interactions is very application-specific. A button is generic; but a button that has a “+” label and causes a value
 increment when pressed is very specific.</p>
-<p>All of this means that, when we are creating a specific user interface, we don't want to focus on implementing every
+<p>All of this means that, when we are creating a specific user interface, we don’t want to focus on implementing every
 familiar widget and its behavior. Instead, we want to leverage widgets as reusable building blocks—independent of our
 application and provided by some library—while placing our focus on the application-specific parts of the fundamental
 architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.</p>

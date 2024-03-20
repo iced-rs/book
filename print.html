@@ -191,7 +191,7 @@
 </ul>
 <p>Before proceeding, you should have some basic familiarity with Rust. If you are new to Rust or feel lost at some point, I recommend you to read <a href="https://doc.rust-lang.org/book/">the official Rust book</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
-<p>Let's start from the basics! You are probably very familiar with graphical user interfaces already.
+<p>Let’s start from the basics! You are probably very familiar with graphical user interfaces already.
 You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
 most likely reading this book using one!</p>
 <p>At their essence, graphical user interfaces are applications that <strong>display</strong> some information graphically
@@ -201,7 +201,7 @@ like a keyboard, mouse, or touchscreen.</p>
   <img alt="Interface displays, user interacts" src="resources/gui-displays-user-interacts.svg">
 </div>
 <p>The user interactions may cause the application to update and display new information as a result, which in turn
-may cause further user interactions, which in turn cause further updates... And so on. This quick feedback loop
+may cause further user interactions, which in turn cause further updates… And so on. This quick feedback loop
 is what causes the feeling of <em>interactivity</em>.</p>
 <blockquote>
 <p>Note: In this book, we will refer to graphical user interfaces as <strong>GUIs</strong>, <strong>UIs</strong>, <strong>user interfaces</strong>, or simply
@@ -209,7 +209,7 @@ is what causes the feeling of <em>interactivity</em>.</p>
 book, we will use all of these terms interchangeably.</p>
 </blockquote>
 <h2 id="dissecting-an-interface"><a class="header" href="#dissecting-an-interface">Dissecting an Interface</a></h2>
-<p>Since we are interested in creating user interfaces, let's take a closer look at them. We will start with a very
+<p>Since we are interested in creating user interfaces, let’s take a closer look at them. We will start with a very
 simple one: the classical counter interface. What is it made of?</p>
 <div align="center">
   <img alt="A classical counter interface" src="resources/counter-interface.svg">
@@ -236,7 +236,7 @@ compared to pressing it twice.</p>
 <p>These ideas are connected to each other, forming another feedback loop!</p>
 <p><strong>Widgets</strong> produce <strong>interactions</strong> when a user interacts with them. These <strong>interactions</strong> then change the <strong>state</strong>
 of the interface. The changed <strong>state</strong> propagates and dictates the new <strong>widgets</strong> that must be displayed. These new
-<strong>widgets</strong> may then produce new <strong>interactions</strong>, which can change the <strong>state</strong> again... And so on.</p>
+<strong>widgets</strong> may then produce new <strong>interactions</strong>, which can change the <strong>state</strong> again… And so on.</p>
 <div align="center">
   <img alt="The GUI trinity" src="resources/the-gui-trinity.svg">
 </div>
@@ -248,15 +248,15 @@ between them.</p>
 <p>The state and the interactions of an interface are very specific to the application and its purpose. If I tell you that
 I have an interface with a numeric value and increment and decrement interactions, you will very easily
 guess I am talking about a counter interface.</p>
-<p>However, if I tell you I have an interface with two buttons and a number... It's quite trickier for you to guess the kind
+<p>However, if I tell you I have an interface with two buttons and a number… It’s quite trickier for you to guess the kind
 of interface I am talking about. It could be anything!</p>
 <p>This is because widgets are generally very generic and, therefore, more reusable. Most interfaces display a combination of
 familiar widgets—like buttons and numbers. In fact, users expect familiar widgets to always behave a certain way. If they
-don't behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
+don’t behave properly, the interface will be unintuitive and have poor <a href="https://en.wikipedia.org/wiki/User_experience">user experience</a>.</p>
 <p>While widgets are generally very reusable; the specific widget configuration dictated by the application state and its
-interactions is very application-specific. A button is generic; but a button that has a "+" label and causes a value
+interactions is very application-specific. A button is generic; but a button that has a “+” label and causes a value
 increment when pressed is very specific.</p>
-<p>All of this means that, when we are creating a specific user interface, we don't want to focus on implementing every
+<p>All of this means that, when we are creating a specific user interface, we don’t want to focus on implementing every
 familiar widget and its behavior. Instead, we want to leverage widgets as reusable building blocks—independent of our
 application and provided by some library—while placing our focus on the application-specific parts of the fundamental
 architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.</p>
@@ -292,17 +292,17 @@ therefore, can be used interchangeably.</p>
 <strong>interactions</strong>, respectively.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="first-steps"><a class="header" href="#first-steps">First Steps</a></h1>
-<p>But enough with the theory. It's about time we start writing some code!</p>
+<p>But enough with the theory. It’s about time we start writing some code!</p>
 <p>iced embraces The Elm Architecture as the most natural approach for architecting interactive applications.
 Therefore, when using iced, we will be dealing with the four main ideas we introduced in the previous chapter:
 <strong>state</strong>, <strong>messages</strong>, <strong>update logic</strong>, and <strong>view logic</strong>.</p>
-<p>In the previous chapter, we dissected and studied the classical counter interface. Let's try to
+<p>In the previous chapter, we dissected and studied the classical counter interface. Let’s try to
 build it in Rust while leveraging The Elm Architecture.</p>
 <div align="center">
   <img alt="A classical counter interface" src="resources/counter-interface-annotated.svg">
 </div>
 <h2 id="state"><a class="header" href="#state">State</a></h2>
-<p>Let's start with the <strong>state</strong>—the underlying data of the application.</p>
+<p>Let’s start with the <strong>state</strong>—the underlying data of the application.</p>
 <p>In Rust, given the ownership and borrowing rules, it is extremely important to think carefully about the data model
 of your application.</p>
 <blockquote>
@@ -312,17 +312,17 @@ the type system as much as you can to <em><a href="https://www.youtube.com/watch
 </blockquote>
 <p>For our counter interface, all we need is a counter value. Since we have both increment and decrement interactions,
 the number could potentially be negative. This means we need a signed integer.</p>
-<p>Also, we know some users are crazy and they may want to count a lot of things. Let's give them 64 bits to play with:</p>
+<p>Also, we know some users are crazy and they may want to count a lot of things. Let’s give them 64 bits to play with:</p>
 <pre><code class="language-rust">struct Counter {
     value: i64,
 }</code></pre>
 <p>If a crazy user counted 1000 things every second, it would take them ~300 million years to run out of numbers.
-Let's hope that's enough.</p>
+Let’s hope that’s enough.</p>
 <h2 id="messages"><a class="header" href="#messages">Messages</a></h2>
 <p>Next, we need to define our <strong>messages</strong>—the interactions of the application.</p>
 <p>Our counter interface has two interactions: <strong>increment</strong> and <strong>decrement</strong>. Technically, we could use a simple boolean to
 encode these interactions: <code>true</code> for increment and <code>false</code> for decrement, for instance.</p>
-<p>But... we can do better in Rust! Interactions are mutually exclusive—when we have an interaction, what we really have is one
+<p>But… we can do better in Rust! Interactions are mutually exclusive—when we have an interaction, what we really have is one
 value of a possible set of values. It turns out that Rust has the perfect data type for modeling this kind of idea: the <em>enum</em>.</p>
 <p>Thus, we can define our messages like this:</p>
 <pre><code class="language-rust">enum Message {
@@ -332,7 +332,7 @@ value of a possible set of values. It turns out that Rust has the perfect data t
 <p>Simple enough! This also sets us up for the long-term. If we ever wanted to add additional interactions to our application—like a
 <code>Reset</code> interaction, for instance—we could just introduce additional variants to this type. Enums are very powerful and convenient.</p>
 <h2 id="update-logic"><a class="header" href="#update-logic">Update Logic</a></h2>
-<p>Now, it's time for our <strong>update logic</strong>—how messages change the state of the application.</p>
+<p>Now, it’s time for our <strong>update logic</strong>—how messages change the state of the application.</p>
 <p>Basically, we need to write some logic that given any message can update any state of the application accordingly. The simplest
 and most idiomatic way to express this logic in Rust is by defining a method named <code>update</code> in our application state.</p>
 <p>For our counter interface, we only need to properly increment or decrement the <code>value</code> of our <code>Counter</code> struct based on the <code>Message</code>
@@ -351,7 +351,7 @@ we just defined:</p>
 }</code></pre>
 <p>Great! Now we are ready to process user interactions. For instance, imagine we initialized our counter like this:</p>
 <pre><code class="language-rust ignore">let mut counter = Counter { value: 0 };</code></pre>
-<p>And let's say we wanted to simulate a user playing with our interface for a bit—pressing the increment button twice
+<p>And let’s say we wanted to simulate a user playing with our interface for a bit—pressing the increment button twice
 and then the decrement button once. We could easily compute the final state of our counter with our <strong>update logic</strong>:</p>
 <pre><code class="language-rust ignore">counter.update(Message::Increment);
 counter.update(Message::Increment);
@@ -370,7 +370,7 @@ fn it_counts_properly() {
     assert_eq!(counter.value, 1);
 }</code></pre>
 <p>Notice how easy this was to write! So far, we are just leveraging very simple Rust concepts. No dependencies in sight!
-You may even be wondering... "Where is the GUI code?!"</p>
+You may even be wondering… “Where is the GUI code?!”</p>
 <p>This is one of the main advantages of The Elm Architecture. As we discovered in the previous chapter, widgets are the
 only fundamental idea of an interface that is reusable in nature. All the parts we have defined so far are application-specific
 and, therefore, do not need to know about the UI library at all!</p>
@@ -389,7 +389,7 @@ normally called <em>widget toolkits</em>, <em>GUI frameworks</em>, or simply <em
 <p>And this is where <strong>iced</strong> comes in—finally! iced is a cross-platform GUI library for Rust. It packages a fair collection of
 ready-to-use widgets; buttons and numbers included. Exactly what we need for our counter.</p>
 <h3 id="the-buttons"><a class="header" href="#the-buttons">The Buttons</a></h3>
-<p>Our counter interface has two <strong>buttons</strong>. Let's see how we can define them using iced.</p>
+<p>Our counter interface has two <strong>buttons</strong>. Let’s see how we can define them using iced.</p>
 <p>In iced, widgets are independent values. The same way you can have an integer in a variable, you can have a widget as well.
 These values are normally created using a <em>helper function</em> from the <code>widget</code> module.</p>
 <p>For our buttons, we can use the <code>button</code> helper:</p>
@@ -397,7 +397,7 @@ These values are normally created using a <em>helper function</em> from the <cod
 
 let increment = button("+");
 let decrement = button("-");</code></pre>
-<p>That's quite simple, isn't it? For now, we have just defined a couple of variables for our buttons.</p>
+<p>That’s quite simple, isn’t it? For now, we have just defined a couple of variables for our buttons.</p>
 <p>As we can see, widget helpers may take arguments for configuring parts of the widgets to our liking.
 In this case, the <code>button</code> function takes a single argument used to describe the contents of the button.</p>
 <h3 id="the-number"><a class="header" href="#the-number">The Number</a></h3>
@@ -408,7 +408,7 @@ to display any kind of text—numbers included:</p>
 <pre><code class="language-rust ignore">use iced::widget::text;
 
 let counter = text(15);</code></pre>
-<p>Sweet! Like <code>button</code>, <code>text</code> also takes an argument used to describe its contents. Since we are just getting started, let's
+<p>Sweet! Like <code>button</code>, <code>text</code> also takes an argument used to describe its contents. Since we are just getting started, let’s
 simply hardcode <code>15</code> for now.</p>
 <h3 id="the-layout"><a class="header" href="#the-layout">The Layout</a></h3>
 <p>Alright! We have our two buttons in <code>increment</code> and <code>decrement</code>, and our counter value in <code>counter</code>. That should be everything, right?</p>
@@ -416,10 +416,10 @@ simply hardcode <code>15</code> for now.</p>
 <strong>six</strong> different ways to order them. However, the order we want is: <code>increment</code>, <code>counter</code>, and <code>decrement</code>.</p>
 <p>A very simple way of describing this order is to create a list with our widgets:</p>
 <pre><code class="language-rust ignore">let interface = vec![increment, counter, decrement];</code></pre>
-<p>But we are still missing something! It's not only the order that is specific, our interface also has a specific visual <strong>layout</strong>.</p>
+<p>But we are still missing something! It’s not only the order that is specific, our interface also has a specific visual <strong>layout</strong>.</p>
 <p>The widgets are positioned on top of each other, but they could very well be positioned from left to right instead. There is nothing
 in our description so far that talks about the <strong>layout</strong> of our widgets.</p>
-<p>In iced, layout is described using... well, more widgets! That's right. Not all widgets produce visual results directly; some may simply
+<p>In iced, layout is described using… well, more widgets! That’s right. Not all widgets produce visual results directly; some may simply
 manage the position of existing widgets. And since widgets are just values, they can be nested and composed nicely.</p>
 <p>The kind of vertical layout that we need for our counter can be achieved with the <code>column</code> widget:</p>
 <pre><code class="language-rust ignore">use iced::widget::column;
@@ -431,8 +431,8 @@ let interface = column![increment, counter, decrement];</code></pre>
 <p>At this point, we have in our <code>interface</code> variable a <code>column</code> representing our counter interface. But if we actually tried to run it,
 we would quickly find out that something is wrong.</p>
 <p>Our buttons would be completely disabled. Of course! We have not defined any <strong>interactions</strong> for them. Notice that we have yet
-to use our <code>Message</code> enum in our view logic. How is our user interface supposed to produce <strong>messages</strong> if we don't specify
-them? Let's do that now.</p>
+to use our <code>Message</code> enum in our view logic. How is our user interface supposed to produce <strong>messages</strong> if we don’t specify
+them? Let’s do that now.</p>
 <p>In iced, every widget has a specific type that enables further configuration using simple builder methods. The <code>button</code>
 helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
 <strong>produce</strong> when a user presses the button:</p>
@@ -452,7 +452,7 @@ enum Message {
 to derive <code>Debug</code> and <code>Clone</code> for our <code>Message</code> type.</p>
 <h3 id="the-view"><a class="header" href="#the-view">The View</a></h3>
 <p>We are almost there! There is only one thing left to do: connecting our application <strong>state</strong> to the view logic.</p>
-<p>Let's bring together all the view logic we have written so far:</p>
+<p>Let’s bring together all the view logic we have written so far:</p>
 <pre><code class="language-rust ignore">use iced::widget::{button, column, text};
 
 // The buttons
@@ -487,9 +487,9 @@ impl Counter {
 }</code></pre>
 <p>Our <code>counter</code> variable now will always have a <code>text</code> widget with the current <code>value</code> of our <code>Counter</code>. Great!</p>
 <p>However, and as you may have noticed, this <code>view</code> method is completely useless—it constructs an
-<code>interface</code>, but then... It does nothing with it and throws it away!</p>
+<code>interface</code>, but then… It does nothing with it and throws it away!</p>
 <blockquote>
-<p>In iced, constructing and configuring widgets has no side effects. There is no "global context" you need to
+<p>In iced, constructing and configuring widgets has no side effects. There is no “global context” you need to
 worry about in your view code.</p>
 </blockquote>
 <p>Instead of throwing the <code>interface</code> away, we need to return it. Remember, the purpose of our <strong>view logic</strong> is
@@ -521,8 +521,8 @@ the column produce messages of this type.</p>
 <p>iced has a strong focus on type safety—leveraging the type system and compile-time guarantees to minimize runtime errors
 as much as possible.</p>
 </blockquote>
-<p>And well... That's it! Our view logic is done! But wait... It's a bit verbose right now. Since it's such a simple interface,
-let's just inline everything:</p>
+<p>And well… That’s it! Our view logic is done! But wait… It’s a bit verbose right now. Since it’s such a simple interface,
+let’s just inline everything:</p>
 <div align="center" class="right">
   <img alt="A classical counter interface" src="resources/counter-interface.svg" width="50%">
 </div>
@@ -537,10 +537,10 @@ impl Counter {
         ]
     }
 }</code></pre>
-<p>That's much more concise. It even resembles the actual interface! Since creating widgets just yields values with no
+<p>That’s much more concise. It even resembles the actual interface! Since creating widgets just yields values with no
 side effects; we can move things around in our view logic without worrying about breaking other stuff. No spooky
 action at a distance!</p>
-<p>And that's all there is to our counter interface. I am sure you can't wait to <strong>run</strong> it. Shall we?</p>
+<p>And that’s all there is to our counter interface. I am sure you can’t wait to <strong>run</strong> it. Shall we?</p>
 <div style="break-before: page; page-break-before: always;"></div><blockquote>
 <p>This chapter documents <a href="https://github.com/iced-rs/iced/tree/cdb18e610a72b4a025d7e1890140393adee5b087">a revision of iced</a> not yet officially released. If you enjoy living on the edge,
 you can directly rely on this revision in your <code>Cargo.toml</code>:</p>
@@ -567,7 +567,7 @@ producing <strong>messages</strong>, executing the <strong>update logic</strong>
 to fill in these parts—and then the engine can run!</p>
 </blockquote>
 <h2 id="a-magical-runtime"><a class="header" href="#a-magical-runtime">A Magical Runtime</a></h2>
-<p>Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
+<p>Let’s try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
 <p>In fact, we have actually started writing a runtime already! When <a href="first-steps.html#update-logic">we implemented the update logic of our counter</a>,
 we wrote a very small test that simulated a user:</p>
 <pre><code class="language-rust ignore">#[test]
@@ -583,12 +583,12 @@ fn it_counts_properly() {
 <p>This is technically a very bare-bones runtime. It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
 and executes the <strong>update logic</strong>.</p>
 <p>Of course, the interactions are made up, it is very short-lived, and there is no <strong>view logic</strong>
-involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
+involved—far from what we actually want. Still, it’s a great start! Let’s try to extend it, step by step.</p>
 <h3 id="initializing-the-state"><a class="header" href="#initializing-the-state">Initializing the State</a></h3>
 <p>Our small runtime is already initializing the application state properly:</p>
 <pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter { value: 0 };</code></pre>
-<p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let's just derive it:</p>
+<p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let’s just derive it:</p>
 <pre><code class="language-rust">#[derive(Default)]
 struct Counter {
     value: i64
@@ -600,11 +600,11 @@ let mut counter = Counter::default();</code></pre>
 the state definition and separated from the runtime. This way, we may eventually be able to make our runtime work with
 <em>any</em> application!</p>
 <h3 id="displaying-the-interface"><a class="header" href="#displaying-the-interface">Displaying the Interface</a></h3>
-<p>Alright! We have our <strong>state</strong> initialized. What's next? Well, before a user can <strong>interact</strong> with our interface, we
+<p>Alright! We have our <strong>state</strong> initialized. What’s next? Well, before a user can <strong>interact</strong> with our interface, we
 need to <strong>display</strong> it to them.</p>
-<p>That's easy! We just need to open a window in whatever OS the user is running, initialize a proper graphics backend,
+<p>That’s easy! We just need to open a window in whatever OS the user is running, initialize a proper graphics backend,
 and then render the widgets returned by our <strong>view logic</strong>—properly laid out, of course!</p>
-<p>What? You have no clue of how to do that? Don't worry, I have this magical function: <code>display</code>. It takes a reference to
+<p>What? You have no clue of how to do that? Don’t worry, I have this magical function: <code>display</code>. It takes a reference to
 any interface and displays it to the user. It totally works!</p>
 <pre><code class="language-rust ignore">use magic::display;
 
@@ -617,7 +617,7 @@ let interface = counter.view();
 // Display the interface to the user
 display(&amp;interface);</code></pre>
 <p>See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graphics programming; but for us
-to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!</p>
+to get a better understanding of how a runtime works. A little bit of magic doesn’t hurt!</p>
 <h3 id="gathering-the-interactions"><a class="header" href="#gathering-the-interactions">Gathering the Interactions</a></h3>
 <p>The user is seeing our interface and is now interacting with it. We need to pay very good attention to all
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
@@ -662,9 +662,9 @@ for message in messages {
 <p>That should keep our state completely up-to-date with the latest user interactions.</p>
 <h3 id="looping-around"><a class="header" href="#looping-around">Looping Around</a></h3>
 <p>Okay! Our state has been updated to reflect the user interactions. Now, we need to display the resulting interface again
-to the user. And after that, we must process any further interactions... And then, update our state once more.
-And then... Do it all over once again!</p>
-<p>This is a loop! And no, loops aren't very magical—not when we write Rust, at least:</p>
+to the user. And after that, we must process any further interactions… And then, update our state once more.
+And then… Do it all over once again!</p>
+<p>This is a loop! And no, loops aren’t very magical—not when we write Rust, at least:</p>
 <pre><code class="language-rust ignore">use magic::{display, interact};
 
 // Initialize the state
@@ -695,12 +695,12 @@ each fundamental part of The Elm Architecture fits in the lifetime of an applica
 <li>and <strong>update logic</strong> runs for every interaction that created a <strong>message</strong>.</li>
 </ul>
 <h2 id="the-ice-wizard"><a class="header" href="#the-ice-wizard">The Ice Wizard</a></h2>
-<p>"That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
-I have things to count!"</p>
+<p>“That’s cool and all”, you say, “but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
+I have things to count!”</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
-its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don't need to worry about learning the dark arts yourself.</p>
+its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust ignore"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore iced(height=100px)"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
     iced::run("A cool counter", Counter::update, Counter::view)
@@ -737,6 +737,48 @@ its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so y
 </span><span class="boring">        ]
 </span><span class="boring">    }
 </span><span class="boring">}</span></code></pre>
+<script>
+function embed(script, hash, height) {
+  var code = script.previousSibling;
+
+  while(code && code.tagName != "PRE") {
+    code = code.previousSibling;
+  }
+
+  let buttons = code.querySelector('.buttons');
+  let play = document.createElement('button');
+
+  async function run() {
+    play.remove();
+
+    let example = document.createElement('div');
+    example.style.height = height;
+    example.style.padding = "1rem";
+    example.classList.add('hljs');
+
+    let iced = document.createElement('div');
+    iced.id = 'iced';
+    iced.append(document.createTextNode('Loading...'));
+
+    example.append(iced);
+    code.append(example);
+
+    let iceberg = await import(`./.icebergs/${hash}/iceberg.js`);
+    await iceberg.default();
+  }
+
+  play.title = 'Run example';
+  play.onclick = run;
+
+  play.classList.add('fa');
+  play.classList.add('fa-play');
+
+  buttons.prepend(play);
+}
+</script>
+<script type="module" id="iceberg-0">
+  embed(document.getElementById("iceberg-0"), "761678e14228fb8b6d98a681e949f3dc60608ccd581fa2fa1dc97a8bbe908fdd", "100px");
+</script>
 <p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
 the <strong>runtime</strong>—which then figures out the rest!</p>
 <p>The runtime is capable of inferring the types for the <strong>state</strong> and <strong>messages</strong> out of the type signatures of

@@ -204,7 +204,7 @@ producing <strong>messages</strong>, executing the <strong>update logic</strong>
 to fill in these parts—and then the engine can run!</p>
 </blockquote>
 <h2 id="a-magical-runtime"><a class="header" href="#a-magical-runtime">A Magical Runtime</a></h2>
-<p>Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
+<p>Let’s try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.</p>
 <p>In fact, we have actually started writing a runtime already! When <a href="first-steps.html#update-logic">we implemented the update logic of our counter</a>,
 we wrote a very small test that simulated a user:</p>
 <pre><code class="language-rust ignore">#[test]
@@ -220,12 +220,12 @@ fn it_counts_properly() {
 <p>This is technically a very bare-bones runtime. It initializes the <strong>state</strong>, produces some <strong>interactions</strong>,
 and executes the <strong>update logic</strong>.</p>
 <p>Of course, the interactions are made up, it is very short-lived, and there is no <strong>view logic</strong>
-involved—far from what we actually want. Still, it's a great start! Let's try to extend it, step by step.</p>
+involved—far from what we actually want. Still, it’s a great start! Let’s try to extend it, step by step.</p>
 <h3 id="initializing-the-state"><a class="header" href="#initializing-the-state">Initializing the State</a></h3>
 <p>Our small runtime is already initializing the application state properly:</p>
 <pre><code class="language-rust ignore">// Initialize the state
 let mut counter = Counter { value: 0 };</code></pre>
-<p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let's just derive it:</p>
+<p>However, we can avoid hardcoding the initial state by leveraging the <code>Default</code> trait. Let’s just derive it:</p>
 <pre><code class="language-rust">#[derive(Default)]
 struct Counter {
     value: i64
@@ -237,11 +237,11 @@ let mut counter = Counter::default();</code></pre>
 the state definition and separated from the runtime. This way, we may eventually be able to make our runtime work with
 <em>any</em> application!</p>
 <h3 id="displaying-the-interface"><a class="header" href="#displaying-the-interface">Displaying the Interface</a></h3>
-<p>Alright! We have our <strong>state</strong> initialized. What's next? Well, before a user can <strong>interact</strong> with our interface, we
+<p>Alright! We have our <strong>state</strong> initialized. What’s next? Well, before a user can <strong>interact</strong> with our interface, we
 need to <strong>display</strong> it to them.</p>
-<p>That's easy! We just need to open a window in whatever OS the user is running, initialize a proper graphics backend,
+<p>That’s easy! We just need to open a window in whatever OS the user is running, initialize a proper graphics backend,
 and then render the widgets returned by our <strong>view logic</strong>—properly laid out, of course!</p>
-<p>What? You have no clue of how to do that? Don't worry, I have this magical function: <code>display</code>. It takes a reference to
+<p>What? You have no clue of how to do that? Don’t worry, I have this magical function: <code>display</code>. It takes a reference to
 any interface and displays it to the user. It totally works!</p>
 <pre><code class="language-rust ignore">use magic::display;
 
@@ -254,7 +254,7 @@ let interface = counter.view();
 // Display the interface to the user
 display(&amp;interface);</code></pre>
 <p>See? Easy! Jokes aside, the purpose of this chapter is not for us to learn graphics programming; but for us
-to get a better understanding of how a runtime works. A little bit of magic doesn't hurt!</p>
+to get a better understanding of how a runtime works. A little bit of magic doesn’t hurt!</p>
 <h3 id="gathering-the-interactions"><a class="header" href="#gathering-the-interactions">Gathering the Interactions</a></h3>
 <p>The user is seeing our interface and is now interacting with it. We need to pay very good attention to all
 the interactions and produce all the relevant <strong>messages</strong> that our widgets specify.</p>
@@ -299,9 +299,9 @@ for message in messages {
 <p>That should keep our state completely up-to-date with the latest user interactions.</p>
 <h3 id="looping-around"><a class="header" href="#looping-around">Looping Around</a></h3>
 <p>Okay! Our state has been updated to reflect the user interactions. Now, we need to display the resulting interface again
-to the user. And after that, we must process any further interactions... And then, update our state once more.
-And then... Do it all over once again!</p>
-<p>This is a loop! And no, loops aren't very magical—not when we write Rust, at least:</p>
+to the user. And after that, we must process any further interactions… And then, update our state once more.
+And then… Do it all over once again!</p>
+<p>This is a loop! And no, loops aren’t very magical—not when we write Rust, at least:</p>
 <pre><code class="language-rust ignore">use magic::{display, interact};
 
 // Initialize the state
@@ -332,12 +332,12 @@ each fundamental part of The Elm Architecture fits in the lifetime of an applica
 <li>and <strong>update logic</strong> runs for every interaction that created a <strong>message</strong>.</li>
 </ul>
 <h2 id="the-ice-wizard"><a class="header" href="#the-ice-wizard">The Ice Wizard</a></h2>
-<p>"That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
-I have things to count!"</p>
+<p>“That’s cool and all”, you say, “but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
+I have things to count!”</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
-its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don't need to worry about learning the dark arts yourself.</p>
+its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust ignore"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore iced(height=100px)"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
     iced::run("A cool counter", Counter::update, Counter::view)
@@ -374,6 +374,48 @@ its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so y
 </span><span class="boring">        ]
 </span><span class="boring">    }
 </span><span class="boring">}</span></code></pre>
+<script>
+function embed(script, hash, height) {
+  var code = script.previousSibling;
+
+  while(code && code.tagName != "PRE") {
+    code = code.previousSibling;
+  }
+
+  let buttons = code.querySelector('.buttons');
+  let play = document.createElement('button');
+
+  async function run() {
+    play.remove();
+
+    let example = document.createElement('div');
+    example.style.height = height;
+    example.style.padding = "1rem";
+    example.classList.add('hljs');
+
+    let iced = document.createElement('div');
+    iced.id = 'iced';
+    iced.append(document.createTextNode('Loading...'));
+
+    example.append(iced);
+    code.append(example);
+
+    let iceberg = await import(`./.icebergs/${hash}/iceberg.js`);
+    await iceberg.default();
+  }
+
+  play.title = 'Run example';
+  play.onclick = run;
+
+  play.classList.add('fa');
+  play.classList.add('fa-play');
+
+  buttons.prepend(play);
+}
+</script>
+<script type="module" id="iceberg-0">
+  embed(document.getElementById("iceberg-0"), "761678e14228fb8b6d98a681e949f3dc60608ccd581fa2fa1dc97a8bbe908fdd", "100px");
+</script>
 <p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
 the <strong>runtime</strong>—which then figures out the rest!</p>
 <p>The runtime is capable of inferring the types for the <strong>state</strong> and <strong>messages</strong> out of the type signatures of
