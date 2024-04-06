@@ -6,8 +6,13 @@
 > git = "https://github.com/iced-rs/iced.git"
 > rev = "cdb18e610a72b4a025d7e1890140393adee5b087"
 > ```
+>
+> If, on the other hand, you only want to quickly run the counter we just wrote using the latest release
+> (boring!), check out [the `counter` example in the repository] and the API reference of [the `Sandbox` trait].
 
 [a revision of iced]: https://github.com/iced-rs/iced/tree/cdb18e610a72b4a025d7e1890140393adee5b087
+[the `Sandbox` trait]: https://docs.rs/iced/latest/iced/trait.Sandbox.html
+[the `counter` example in the repository]: https://github.com/iced-rs/iced/blob/0.12/examples/counter/src/main.rs
 
 # The Runtime
 In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
@@ -203,7 +208,6 @@ Specifically,
 - __state__ is initialized once,
 - __view logic__ runs once at startup and then after every batch of interactions,
 - and __update logic__ runs for every interaction that created a __message__.
-
 
 ## The Ice Wizard
 "That's cool and all", you say, "but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
