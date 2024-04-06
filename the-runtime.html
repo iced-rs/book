@@ -185,6 +185,8 @@ you can directly rely on this revision in your <code>Cargo.toml</code>:</p>
 git = "https://github.com/iced-rs/iced.git"
 rev = "cdb18e610a72b4a025d7e1890140393adee5b087"
 </code></pre>
+<p>If, on the other hand, you only want to quickly run the counter we just wrote using the latest release
+(boring!), check out <a href="https://github.com/iced-rs/iced/blob/0.12/examples/counter/src/main.rs">the <code>counter</code> example in the repository</a> and the API reference of <a href="https://docs.rs/iced/latest/iced/trait.Sandbox.html">the <code>Sandbox</code> trait</a>.</p>
 </blockquote>
 <h1 id="the-runtime"><a class="header" href="#the-runtime">The Runtime</a></h1>
 <p>In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
@@ -414,7 +416,7 @@ function embed(script, hash, height) {
 }
 </script>
 <script type="module" id="iceberg-0">
-  embed(document.getElementById("iceberg-0"), "761678e14228fb8b6d98a681e949f3dc60608ccd581fa2fa1dc97a8bbe908fdd", "100px");
+  embed(document.getElementById("iceberg-0"), "8137a8b36aae39626a537113196ad6774ed5cccedc7dd95c1b3d010a16126", "100px");
 </script>
 <p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
 the <strong>runtime</strong>—which then figures out the rest!</p>
