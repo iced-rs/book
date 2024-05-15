@@ -402,7 +402,7 @@ function embed(script, hash, height) {
     example.append(iced);
     code.append(example);
 
-    let iceberg = await import(`./.icebergs/${hash}/iceberg.js`);
+    let iceberg = await import(`/.icebergs/${hash}/iceberg.js`);
     await iceberg.default();
   }
 
@@ -416,7 +416,7 @@ function embed(script, hash, height) {
 }
 </script>
 <script type="module" id="iceberg-0">
-  embed(document.getElementById("iceberg-0"), "8137a8b36aae39626a537113196ad6774ed5cccedc7dd95c1b3d010a16126", "100px");
+  embed(document.getElementById("iceberg-0"), "3215bc704965eaeb1e80449d6fc8acdaf9e9a7197964a66780ab1d58dbddaa61", "100px");
 </script>
 <p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
 the <strong>runtime</strong>—which then figures out the rest!</p>
