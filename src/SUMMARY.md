@@ -28,3 +28,4 @@
 
 # Appendix
 - [Additional Resources](additional-resources.md)
+- [How To Use Examples](examples.md)
