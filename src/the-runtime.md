@@ -1,19 +1,3 @@
-> This chapter documents [a revision of iced] not yet officially released. If you enjoy living on the edge,
-> you can directly rely on this revision in your `Cargo.toml`:
->
-> ```toml
-> [dependencies.iced]
-> git = "https://github.com/iced-rs/iced.git"
-> rev = "cdb18e610a72b4a025d7e1890140393adee5b087"
-> ```
->
-> If, on the other hand, you only want to quickly run the counter we just wrote using the latest release
-> (boring!), check out [the `counter` example in the repository] and the API reference of [the `Sandbox` trait].
-
-[a revision of iced]: https://github.com/iced-rs/iced/tree/cdb18e610a72b4a025d7e1890140393adee5b087
-[the `Sandbox` trait]: https://docs.rs/iced/latest/iced/trait.Sandbox.html
-[the `counter` example in the repository]: https://github.com/iced-rs/iced/blob/0.12/examples/counter/src/main.rs
-
 # The Runtime
 In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
 fundamental part—one at a time: __state__, __messages__, __update logic__, and __view logic__.
