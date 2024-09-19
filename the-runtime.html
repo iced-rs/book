@@ -178,17 +178,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <blockquote>
-<p>This chapter documents <a href="https://github.com/iced-rs/iced/tree/cdb18e610a72b4a025d7e1890140393adee5b087">a revision of iced</a> not yet officially released. If you enjoy living on the edge,
-you can directly rely on this revision in your <code>Cargo.toml</code>:</p>
-<pre><code class="language-toml">[dependencies.iced]
-git = "https://github.com/iced-rs/iced.git"
-rev = "cdb18e610a72b4a025d7e1890140393adee5b087"
-</code></pre>
-<p>If, on the other hand, you only want to quickly run the counter we just wrote using the latest release
-(boring!), check out <a href="https://github.com/iced-rs/iced/blob/0.12/examples/counter/src/main.rs">the <code>counter</code> example in the repository</a> and the API reference of <a href="https://docs.rs/iced/latest/iced/trait.Sandbox.html">the <code>Sandbox</code> trait</a>.</p>
-</blockquote>
-<h1 id="the-runtime"><a class="header" href="#the-runtime">The Runtime</a></h1>
+                        <h1 id="the-runtime"><a class="header" href="#the-runtime">The Runtime</a></h1>
 <p>In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
 fundamental part—one at a time: <strong>state</strong>, <strong>messages</strong>, <strong>update logic</strong>, and <strong>view logic</strong>.</p>
 <p>But now what? Yes, we have all the fundamental parts of a user interface—as we learned during
@@ -416,7 +406,7 @@ function embed(script, hash, height) {
 }
 </script>
 <script type="module" id="iceberg-0">
-  embed(document.getElementById("iceberg-0"), "3215bc704965eaeb1e80449d6fc8acdaf9e9a7197964a66780ab1d58dbddaa61", "100px");
+  embed(document.getElementById("iceberg-0"), "55288b479ffed7c5afc0902c91faa1812555df2c747f4c091f1e2dca985faa", "100px");
 </script>
 <p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
 the <strong>runtime</strong>—which then figures out the rest!</p>
