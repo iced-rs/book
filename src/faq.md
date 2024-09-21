@@ -49,7 +49,7 @@ this is rarely an issue for most use cases!
 ## I Am Getting A Panic Saying There Is No Reactor Running. What Is Going On?
 You are probably using `Task` to execute a `Future` that needs the `tokio` executor:
 
-```
+```text
 there is no reactor running, must be called from the context of a Tokio 1.x runtime
 ```
 
