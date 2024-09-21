@@ -843,7 +843,7 @@ been a priority so far.</p>
 this is rarely an issue for most use cases!</p>
 <h2 id="i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on"><a class="header" href="#i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on">I Am Getting A Panic Saying There Is No Reactor Running. What Is Going On?</a></h2>
 <p>You are probably using <code>Task</code> to execute a <code>Future</code> that needs the <code>tokio</code> executor:</p>
-<pre><code>there is no reactor running, must be called from the context of a Tokio 1.x runtime
+<pre><code class="language-text">there is no reactor running, must be called from the context of a Tokio 1.x runtime
 </code></pre>
 <p>You should be able to fix this issue by enabling <a href="https://docs.rs/crate/iced/latest/features#tokio">the <code>tokio</code> feature flag</a> in the <code>iced</code> crate:</p>
 <pre><code class="language-toml">iced = { version = "0.13", features = ["tokio"] }
