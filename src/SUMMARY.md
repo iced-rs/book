@@ -28,3 +28,4 @@
 
 # Appendix
 - [Additional Resources](additional-resources.md)
+- [Frequently Asked Questions](faq.md)
