@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - iced — A Cross-Platform GUI Library for Rust</title>
+        <title>Frequently Asked Questions - iced — A Cross-Platform GUI Library for Rust</title>
 
 
         <!-- Custom HTML head -->
@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Learning the Basics</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li class="chapter-item expanded "><a href="the-runtime.html"><strong aria-hidden="true">3.</strong> The Runtime</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> More to come!</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="additional-resources.html"><strong aria-hidden="true">5.</strong> Additional Resources</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Learning the Basics</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li class="chapter-item expanded "><a href="the-runtime.html"><strong aria-hidden="true">3.</strong> The Runtime</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> More to come!</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="additional-resources.html"><strong aria-hidden="true">5.</strong> Additional Resources</a></li><li class="chapter-item expanded "><a href="faq.html" class="active"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -149,7 +149,7 @@
                         <a href="https://github.com/iced-rs/book/tree/master" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/iced-rs/book/edit/master/src/README.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/iced-rs/book/edit/master/src/faq.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -178,29 +178,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        <div align="center">
-  <img alt="The iced logo" src="resources/logo.svg" width="140">
-</div>
-<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p><a href="https://iced.rs">iced</a> is a cross-platform GUI library for <a href="https://rust-lang.org">Rust</a>. It is inspired by <a href="https://elm-lang.org">Elm</a>, a delightful functional language for building web applications.</p>
-<p>As a GUI library, iced helps you build <em><a href="https://en.wikipedia.org/wiki/Graphical_user_interface">graphical user interfaces</a></em> for your Rust applications.</p>
-<p>iced is strongly focused on <strong>simplicity</strong> and <strong>type-safety</strong>. As a result, iced tries to provide simple building blocks that can be put together with strong typing to reduce the chance of <strong>runtime errors</strong>.</p>
-<p>This book will:</p>
-<ul>
-<li>Introduce you to the fundamental ideas of iced.</li>
-<li>Teach you how to build interactive applications with iced.</li>
-<li>Emphasize principles to scale and grow iced applications.</li>
-</ul>
-<p>Before proceeding, you should have some basic familiarity with Rust. If you are new to Rust or feel lost at some point, I recommend you to read <a href="https://doc.rust-lang.org/book/">the official Rust book</a>.</p>
+                        <h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
+<h2 id="when-will-the-book-be-finished"><a class="header" href="#when-will-the-book-be-finished">When Will the Book Be Finished?</a></h2>
+<p>Soon™. Open source is a gift; so whenever I feel like it.</p>
+<h2 id="how-do-i-scale-a-large-application"><a class="header" href="#how-do-i-scale-a-large-application">How Do I Scale a Large Application?</a></h2>
+<p>You split your application into multiple screens, and then use simple composition.</p>
+<p><a href="https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/0.13.1/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
+<h2 id="how-can-my-application-receive-updates-from-a-channel"><a class="header" href="#how-can-my-application-receive-updates-from-a-channel">How Can My Application Receive Updates From a Channel?</a></h2>
+<p>You can use <a href="https://docs.rs/iced/0.13.1/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
+<p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
+<h2 id="does-iced-support-right-to-left-text-andor-cjk-scripts"><a class="header" href="#does-iced-support-right-to-left-text-andor-cjk-scripts">Does Iced Support Right-To-Left Text and/or CJK scripts?</a></h2>
+<p>Not very well yet!</p>
+<p>You may be able to render some scripts using <a href="https://docs.rs/iced/0.13.1/iced/widget/text/type.Text.html#method.shaping"><code>Text::shaping</code></a> with <a href="https://docs.rs/iced/0.13.1/iced/widget/text/enum.Shaping.html#variant.Advanced"><code>Shaping::Advanced</code></a>,
+but text editing for these scripts is not yet supported; and neither are <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editors</a>.</p>
+<p>These features are in the <a href="https://whimsical.com/roadmap-iced-7vhq6R35Lp3TmYH4WeYwLM"><code>ROADMAP</code></a>, however!</p>
+<h2 id="when-are-the-view-and-subscription-functions-called"><a class="header" href="#when-are-the-view-and-subscription-functions-called">When Are the <code>view</code> and <code>subscription</code> Functions Called?</a></h2>
+<p>After every batch of messages and <code>update</code> calls. But this is an implementation detail;
+and should never rely on this.</p>
+<p>Try to treat these functions as declarative, stateless functions.</p>
+<h2 id="does-iced-redraw-all-the-time"><a class="header" href="#does-iced-redraw-all-the-time">Does Iced Redraw All the Time?!</a></h2>
+<p>Yes! iced currently redraws after every runtime event; including tiny mouse movements.</p>
+<p>There are plans to redraw less frequently by detecting widget state changes, but performance has not
+been a priority so far.</p>
+<p>The renderers do perform quite a lot of caching; so redrawing is quite cheap. As a result,
+this is rarely an issue for most use cases!</p>
+<h2 id="i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on"><a class="header" href="#i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on">I Am Getting A Panic Saying There Is No Reactor Running. What Is Going On?</a></h2>
+<p>You are probably using <code>Task</code> to execute a <code>Future</code> that needs the <code>tokio</code> executor:</p>
+<pre><code>there is no reactor running, must be called from the context of a Tokio 1.x runtime
+</code></pre>
+<p>You should be able to fix this issue by enabling <a href="https://docs.rs/crate/iced/latest/features#tokio">the <code>tokio</code> feature flag</a> in the <code>iced</code> crate:</p>
+<pre><code class="language-toml">iced = { version = "0.13", features = ["tokio"] }
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-                            <a rel="next prefetch" href="architecture.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="additional-resources.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -208,10 +225,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next prefetch" href="architecture.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="additional-resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>
