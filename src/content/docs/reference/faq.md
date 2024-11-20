@@ -1,4 +1,8 @@
-# Frequently Asked Questions
+---
+title: Frequently Asked Questions
+sidebar:
+  order: 1
+---
 
 ## When Will the Book Be Finished?
 Soon™. Open source is a gift; so whenever I feel like it.

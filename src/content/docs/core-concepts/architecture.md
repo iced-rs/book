@@ -1,4 +1,9 @@
-# Architecture
+---
+title: Architecture
+sidebar:
+  order: 1
+---
+
 Let's start from the basics! You are probably very familiar with graphical user interfaces already.
 You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
 most likely reading this book using one!
@@ -8,7 +13,7 @@ to a user. This user can then choose to __interact__ with the application—norm
 like a keyboard, mouse, or touchscreen.
 
 <div align="center">
-  <img alt="Interface displays, user interacts" src="resources/gui-displays-user-interacts.svg">
+  <img alt="Interface displays, user interacts" src="/iced-docs/resources/gui-displays-user-interacts.svg">
 </div>
 
 The user interactions may cause the application to update and display new information as a result, which in turn
@@ -24,7 +29,7 @@ Since we are interested in creating user interfaces, let's take a closer look at
 simple one: the classical counter interface. What is it made of?
 
 <div align="center">
-  <img alt="A classical counter interface" src="resources/counter-interface.svg">
+  <img alt="A classical counter interface" src="/iced-docs/resources/counter-interface.svg">
 </div>
 
 As we can clearly see, this interface has three visibly distinct elements: two buttons with a number in between.
@@ -40,7 +45,7 @@ the amount of times we press the buttons. Pressing the increment button once wil
 compared to pressing it twice.
 
 <div align="center">
-  <img alt="A dissected counter interface" src="resources/counter-interface-annotated.svg">
+  <img alt="A dissected counter interface" src="/iced-docs/resources/counter-interface-annotated.svg">
 </div>
 
 ## The GUI Trinity
@@ -57,7 +62,7 @@ of the interface. The changed __state__ propagates and dictates the new __widget
 __widgets__ may then produce new __interactions__, which can change the __state__ again... And so on.
 
 <div align="center">
-  <img alt="The GUI trinity" src="resources/the-gui-trinity.svg">
+  <img alt="The GUI trinity" src="/iced-docs/resources/the-gui-trinity.svg">
 </div>
 
 These ideas and their connections make up the fundamental architecture of a user interface. Therefore, creating a user
@@ -88,7 +93,7 @@ application and provided by some library—while placing our focus on the applic
 architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.
 
 <div align="center">
-  <img alt="The application-specific parts of a GUI" src="resources/the-gui-trinity-focused.svg">
+  <img alt="The application-specific parts of a GUI" src="/iced-docs/resources/the-gui-trinity-focused.svg">
 </div>
 
 [user experience]: https://en.wikipedia.org/wiki/User_experience
@@ -118,7 +123,7 @@ These are different names, but they point to the same exact fundamental ideas we
 therefore, can be used interchangeably.
 
 <div align="center">
-  <img alt="The Elm Architecture" src="resources/the-elm-architecture.svg">
+  <img alt="The Elm Architecture" src="/iced-docs/resources/the-elm-architecture.svg">
 </div>
 
 

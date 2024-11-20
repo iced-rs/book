@@ -1,9 +1,13 @@
-# The Runtime
+---
+title: The Runtime
+sidebar:
+  order: 1
+---
 In the previous chapter we built the classical counter interface using iced and The Elm Architecture. We focused on each
 fundamental part—one at a time: __state__, __messages__, __update logic__, and __view logic__.
 
 But now what? Yes, we have all the fundamental parts of a user interface—as we learned during
-[our dissection](architecture.md)—but it is unclear how we are supposed to bring it to life.
+[our dissection](core-concepts/architecture)—but it is unclear how we are supposed to bring it to life.
 
 It seems we are missing _something_ that can put all the parts together and _run_ them in unison. _Something_ that
 creates and runs the fundamental loop of a user interface—displaying widgets to a user and reacting to any interactions.
@@ -13,7 +17,7 @@ interface takes place. The runtime is in charge of every part of the loop: initi
 producing __messages__, executing the __update logic__, and running our __view logic__.
 
 <div align="center">
-  <img alt="The Runtime" src="resources/the-runtime.svg">
+  <img alt="The Runtime" src="/iced-docs/resources/the-runtime.svg">
 </div>
 
 > Another way to picture the runtime is by imagining a huge engine with four fundamental parts missing. Our job is
@@ -22,10 +26,10 @@ producing __messages__, executing the __update logic__, and running our __view l
 ## A Magical Runtime
 Let's try to get a better understanding of the lifetime of an interface by exploring the internals of a basic (although very magical!) runtime.
 
-In fact, we have actually started writing a runtime already! When [we implemented the update logic of our counter](first-steps.md#update-logic),
+In fact, we have actually started writing a runtime already! When [we implemented the update logic of our counter](getting-started/first-steps#update-logic),
 we wrote a very small test that simulated a user:
 
-```rust,ignore
+```rs
 #[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
@@ -47,7 +51,7 @@ involved—far from what we actually want. Still, it's a great start! Let's try 
 ### Initializing the State
 Our small runtime is already initializing the application state properly:
 
-```rust,ignore
+```rs
 // Initialize the state
 let mut counter = Counter { value: 0 };
 ```
@@ -63,7 +67,7 @@ struct Counter {
 
 And then, we simply use `Counter::default` in our runtime:
 
-```rust,ignore
+```rs
 // Initialize the state
 let mut counter = Counter::default();
 ```
@@ -82,7 +86,7 @@ and then render the widgets returned by our __view logic__—properly laid out, 
 What? You have no clue of how to do that? Don't worry, I have this magical function: `display`. It takes a reference to
 any interface and displays it to the user. It totally works!
 
-```rust,ignore
+```rs
 use magic::display;
 
 # // Initialize the state
@@ -105,7 +109,7 @@ the interactions and produce all the relevant __messages__ that our widgets spec
 How? With some more magic, of course! I just found this `interact` function inside of my top hat—it takes an
 interface and produces the __messages__ that correspond to the latest interactions of the user.
 
-```rust,ignore
+```rs
 use magic::{display, interact};
 
 # // Initialize the state
@@ -130,7 +134,7 @@ react properly to the user, we need to update our __state__ accordingly for each
 
 Luckily, there are no more magic tricks involved in this step—we can just use our __update logic__:
 
-```rust,ignore
+```rs
 # use magic::{display, interact};
 #
 # // Initialize the state
@@ -160,7 +164,7 @@ And then... Do it all over once again!
 
 This is a loop! And no, loops aren't very magical—not when we write Rust, at least:
 
-```rust,ignore
+```rs
 use magic::{display, interact};
 
 // Initialize the state
@@ -202,7 +206,7 @@ its own magic[^magic]—so you don't need to worry about learning the dark arts 
 
 If we want to run our `Counter`, all we have to do is call [`run`]:
 
-```rust,ignore,iced(height=100px)
+```rs
 # use iced::widget::{button, column, text, Column};
 # 
 pub fn main() -> iced::Result {

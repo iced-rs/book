@@ -1,7 +1,13 @@
-# First Steps
-But enough with the theory. It's about time we start writing some code!
-
-iced embraces The Elm Architecture as the most natural approach for architecting interactive applications.
+---
+title: First Steps
+link: /getting-started/first-steps/
+sidebar:
+  badge: 
+    text: 'WIP'
+    variant: 'caution'
+  order: 1
+---
+Iced embraces The Elm Architecture as the most natural approach for architecting interactive applications.
 Therefore, when using iced, we will be dealing with the four main ideas we introduced in the previous chapter:
 __state__, __messages__, __update logic__, and __view logic__.
 
@@ -9,7 +15,7 @@ In the previous chapter, we dissected and studied the classical counter interfac
 build it in Rust while leveraging The Elm Architecture.
 
 <div align="center">
-  <img alt="A classical counter interface" src="resources/counter-interface-annotated.svg">
+  <img alt="A classical counter interface" src="/iced-docs/resources/counter-interface-annotated.svg">
 </div>
 
 ## State
@@ -68,7 +74,7 @@ and most idiomatic way to express this logic in Rust is by defining a method nam
 For our counter interface, we only need to properly increment or decrement the `value` of our `Counter` struct based on the `Message`
 we just defined:
 
-```rust,ignore
+```rs
 impl Counter {
     fn update(&mut self, message: Message) {
         match message {
@@ -85,14 +91,14 @@ impl Counter {
 
 Great! Now we are ready to process user interactions. For instance, imagine we initialized our counter like this:
 
-```rust,ignore
+```rs
 let mut counter = Counter { value: 0 };
 ```
 
 And let's say we wanted to simulate a user playing with our interface for a bit—pressing the increment button twice
 and then the decrement button once. We could easily compute the final state of our counter with our __update logic__:
 
-```rust,ignore
+```rs
 counter.update(Message::Increment);
 counter.update(Message::Increment);
 counter.update(Message::Decrement);
@@ -100,13 +106,13 @@ counter.update(Message::Decrement);
 
 This would cause our `Counter` to end up with a `value` of `1`:
 
-```rust,ignore
+```rs
 assert_eq!(counter.value, 1);
 ```
 
 In fact, we have just written a simple test for our application logic:
 
-```rust,ignore
+```rs
 #[test]
 fn it_counts_properly() {
     let mut counter = Counter { value: 0 };
@@ -136,7 +142,7 @@ Here is where the magic happens! In view logic, we bring together the state of t
 to produce a visual representation of the user interface that must be displayed to the user.
 
 <div align="center" class="right">
-  <img alt="A classical counter interface" src="resources/counter-interface.svg" width="50%">
+  <img alt="A classical counter interface" src="/iced-docs/resources/counter-interface.svg" width="50%">
 </div>
 
 As we have already learned, this visual representation is made of widgets—the visibly distinct units of an interface. Most
@@ -154,7 +160,7 @@ These values are normally created using a _helper function_ from the `widget` mo
 
 For our buttons, we can use the `button` helper:
 
-```rust,ignore
+```rs
 use iced::widget::button;
 
 let increment = button("+");
@@ -174,7 +180,7 @@ for our counter value?
 While iced does not really have a `number` widget, it does have a more generic `text` widget that can be used
 to display any kind of text—numbers included:
 
-```rust,ignore
+```rs
 use iced::widget::text;
 
 let counter = text(15);
@@ -191,7 +197,7 @@ __six__ different ways to order them. However, the order we want is: `increment`
 
 A very simple way of describing this order is to create a list with our widgets:
 
-```rust,ignore
+```rs
 let interface = vec![increment, counter, decrement];
 ```
 
@@ -205,7 +211,7 @@ manage the position of existing widgets. And since widgets are just values, they
 
 The kind of vertical layout that we need for our counter can be achieved with the `column` widget:
 
-```rust,ignore
+```rs
 use iced::widget::column;
 
 let interface = column![increment, counter, decrement];
@@ -226,7 +232,7 @@ In iced, every widget has a specific type that enables further configuration usi
 helper returns an instance of [the `Button` type], which has an `on_press` method we can use to define the message it must
 __produce__ when a user presses the button:
 
-```rust,ignore
+```rs
 use iced::widget::button;
 
 let increment = button("+").on_press(Message::Increment);
@@ -257,7 +263,7 @@ We are almost there! There is only one thing left to do: connecting our applicat
 
 Let's bring together all the view logic we have written so far:
 
-```rust,ignore
+```rs
 use iced::widget::{button, column, text};
 
 // The buttons
@@ -280,7 +286,7 @@ our update logic is triggered, the text widget will display the new `value`.
 
 We can easily do this by running our view logic in a method of our `Counter`—just like we did with our update logic:
 
-```rust,ignore
+```rs
 use iced::widget::{button, column, text};
 
 impl Counter {
@@ -310,7 +316,7 @@ Instead of throwing the `interface` away, we need to return it. Remember, the pu
 to dictate the widgets of our user interface; and the content of the `interface` variable is precisely the
 description of the interface we want:
 
-```rust,ignore
+```rs
 use iced::widget::{button, column, text, Column};
 
 impl Counter {
@@ -344,10 +350,10 @@ And well... That's it! Our view logic is done! But wait... It's a bit verbose ri
 let's just inline everything:
 
 <div align="center" class="right">
-  <img alt="A classical counter interface" src="resources/counter-interface.svg" width="50%">
+  <img alt="A classical counter interface" src="/iced-docs/resources/counter-interface.svg" width="50%">
 </div>
 
-```rust,ignore
+```rs
 use iced::widget::{button, column, text, Column};
 
 impl Counter {
