@@ -36,6 +36,10 @@ export default defineConfig({
 					autogenerate: { directory: 'core-concepts' }
 				},
 				{
+					label: 'Learn',
+					autogenerate: { directory: 'learn' }
+				},
+				{
 					label: 'Reference',
 					autogenerate: { directory: 'reference' },
 				},
