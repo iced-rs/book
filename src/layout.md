@@ -13,10 +13,15 @@ The most common way to build layouts in iced is by combining three fundamental l
 Let's see how we can use these building blocks together:
 
 ```rust,ignore,iced(height=140px)
-# use iced::widget::{column, container, row};
-# use iced::{Length, Element};
-# use iced::alignment::Horizontal;
-# use iced::alignment::Vertical;
+# use iced::{
+#     widget::{
+#         column,
+#         container,
+#         row,
+#     },
+#     Length,
+#     Element,
+# };
 #
 # #[derive(Default)]
 # struct Example;
@@ -24,9 +29,7 @@ Let's see how we can use these building blocks together:
 # #[derive(Debug, Clone, Copy)]
 # enum Message { }
 # impl Example {
-# fn update(&mut self, _message: Message) {
-#     
-# }
+# fn update(&mut self, _message: Message) {}
 #
 fn view(&self) -> Element<Message> {
     // Create container
