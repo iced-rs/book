@@ -5,6 +5,7 @@
 - [Architecture](architecture.md)
 - [First Steps](first-steps.md)
 - [The Runtime](the-runtime.md)
+- [Layout](layout.md)
 
 - [More to come!]()
 

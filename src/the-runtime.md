@@ -262,26 +262,3 @@ And that should be it! Have fun counting things for 300 million years—at least
 [`wgpu`]: https://github.com/gfx-rs/wgpu
 [`tiny-skia`]: https://github.com/RazrFalcon/tiny-skia
 [`cosmic-text`]: https://github.com/pop-os/cosmic-text
-
-> #### Note From the Author
-> You reached the end of the book, for now!
->
-> I think it should already serve as a quick introduction to the basics of the library.
-> There is a lot more to unravel—but hopefully you are now at a point where you can start
-> playing around, having fun, and experimenting further.
->
-> The book is far from finished—there are a lot more topics I want to cover here, namely:
->
->   - Layout
->   - Styling
->   - Concurrency
->   - Scaling Applications
->   - Extending the Runtime
->   - And More!
->
-> Until I get to write them, check out the [Additional Resources](additional-resources.md)
-> chapter if you want to explore and learn further.
->
-> I hope that you enjoyed the read so far. Stay tuned!
->
-> — Héctor
