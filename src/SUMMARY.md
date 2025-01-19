@@ -6,12 +6,11 @@
 - [First Steps](first-steps.md)
 - [The Runtime](the-runtime.md)
 - [Layout](layout.md)
+- [Styling](styling.md)
 
 - [More to come!]()
 
 <!--
-- [Layout]()
-- [Styling]()
 - [Concurrency]()
 
 # Scaling Applications

@@ -119,25 +119,3 @@ This modular approach means each widget can implement the layout behavior that m
 [`container`]: https://docs.iced.rs/iced/widget/container/index.html
 [`.spacing()`]: https://docs.iced.rs/iced/widget/struct.Column.html#method.spacing
 [`.padding()`]: https://docs.iced.rs/iced/widget/container/struct.Container.html#method.padding
-
-> #### Note From the Author
-> You reached the end of the book, for now!
->
-> I think it should already serve as a quick introduction to the basics of the library.
-> There is a lot more to unravel—but hopefully you are now at a point where you can start
-> playing around, having fun, and experimenting further.
->
-> The book is far from finished—there are a lot more topics I want to cover here, namely:
->
->   - Styling
->   - Concurrency
->   - Scaling Applications
->   - Extending the Runtime
->   - And More!
->
-> Until I get to write them, check out the [Additional Resources](additional-resources.md)
-> chapter if you want to explore and learn further.
->
-> I hope that you enjoyed the read so far. Stay tuned!
->
-> — Héctor
