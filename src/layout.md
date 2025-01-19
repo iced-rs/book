@@ -37,7 +37,7 @@ fn view(&self) -> Element<Message> {
         // Create column
         column![
             "Top",
-            // Create row withh spacing "10"
+            // Create row with spacing "10"
             row![
                 "Left",
                 // Create column without spacing
