@@ -95,7 +95,7 @@ Containers are particularly useful for alignment. They can position their conten
 
 - [`.center_x()`] - Center horizontally
 - [`.center_y()`] - Center vertically 
-- [`.align_x()]` - Align horizontally (left, center, right)
+- [`.align_x()`] - Align horizontally (left, center, right)
 - [`.align_y()`] - Align vertically (top, center, bottom)
 
 First two methods accept a parameter of type [`Length`]. This allows us to specify how much of the available space we want to use.
