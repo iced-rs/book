@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,41 @@
         <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,70 +72,51 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Learning the Basics</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="first-steps.html"><strong aria-hidden="true">2.</strong> First Steps</a></li><li class="chapter-item expanded "><a href="the-runtime.html"><strong aria-hidden="true">3.</strong> The Runtime</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> More to come!</div></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="additional-resources.html"><strong aria-hidden="true">5.</strong> Additional Resources</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">6.</strong> Frequently Asked Questions</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,13 +126,14 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -156,7 +153,12 @@
 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -690,7 +692,7 @@ each fundamental part of The Elm Architecture fits in the lifetime of an applica
 <p>“That’s cool and all”, you say, “but I am not a wizard and I still have no clue of how to run the counter interface I wrote.
 I have things to count!”</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
-its own magic<sup class="footnote-reference"><a href="#magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
+its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
 <pre><code class="language-rust ignore iced(height=100px)"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
@@ -778,9 +780,6 @@ our <strong>update logic</strong> and <strong>view logic</strong>. The <strong>s
 <p>Notice also that <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a> can fail and, therefore, it returns an <a href="https://docs.iced.rs/iced/type.Result.html"><code>iced::Result</code></a>. If all we are doing is run the
 application, we can return this result directly in <code>main</code>.</p>
 <p>And that should be it! Have fun counting things for 300 million years—at least!</p>
-<div class="footnote-definition" id="magic"><sup class="footnote-definition-label">1</sup>
-<p>Mainly <a href="https://github.com/rust-windowing/winit"><code>winit</code></a>, <a href="https://github.com/rust-windowing/softbuffer"><code>softbuffer</code></a>, <a href="https://github.com/gfx-rs/wgpu"><code>wgpu</code></a>, <a href="https://github.com/RazrFalcon/tiny-skia"><code>tiny-skia</code></a>, and <a href="https://github.com/pop-os/cosmic-text"><code>cosmic-text</code></a>.</p>
-</div>
 <blockquote>
 <h4 id="note-from-the-author"><a class="header" href="#note-from-the-author">Note From the Author</a></h4>
 <p>You reached the end of the book, for now!</p>
@@ -801,7 +800,11 @@ chapter if you want to explore and learn further.</p>
 <p>I hope that you enjoyed the read so far. Stay tuned!</p>
 <p>— Héctor</p>
 </blockquote>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="additional-resources"><a class="header" href="#additional-resources">Additional Resources</a></h1>
+<hr>
+<ol class="footnote-definition"><li id="footnote-magic">
+<p>Mainly <a href="https://github.com/rust-windowing/winit"><code>winit</code></a>, <a href="https://github.com/rust-windowing/softbuffer"><code>softbuffer</code></a>, <a href="https://github.com/gfx-rs/wgpu"><code>wgpu</code></a>, <a href="https://github.com/RazrFalcon/tiny-skia"><code>tiny-skia</code></a>, and <a href="https://github.com/pop-os/cosmic-text"><code>cosmic-text</code></a>. <a href="#fr-magic-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="additional-resources"><a class="header" href="#additional-resources">Additional Resources</a></h1>
 <p>Here are some further resources you can use to learn more about iced while I am still working on this book:</p>
 <blockquote>
 <p>Keep in mind that some of these resources may be using an older version of iced. However, while the specifics
@@ -818,30 +821,60 @@ of the APIs used may change, the fundamental ideas of iced tend to be quite stab
 <p><a href="https://discord.gg/3xZJ65GAhd"><img src="https://img.shields.io/discord/628993209984614400?label=&amp;labelColor=6A7EC2&amp;logo=discord&amp;logoColor=ffffff&amp;color=7389D8" alt="Discord Server" /></a>
 <a href="https://discourse.iced.rs/"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscourse.iced.rs%2Fsite%2Fstatistics.json&amp;query=%24.users_count&amp;suffix=%20users&amp;label=discourse&amp;color=5e7ce2" alt="Discourse" /></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
-<h2 id="when-will-the-book-be-finished"><a class="header" href="#when-will-the-book-be-finished">When Will the Book Be Finished?</a></h2>
-<p>Soon™. Open source is a gift; so whenever I feel like it.</p>
-<h2 id="how-do-i-scale-a-large-application"><a class="header" href="#how-do-i-scale-a-large-application">How Do I Scale a Large Application?</a></h2>
+<h2 id="why-is-the-documentation-so-bad"><a class="header" href="#why-is-the-documentation-so-bad">Why is the documentation so bad?</a></h2>
+<p>The documentation is bad because, unlike most other open-source projects, <code>iced</code> unapologetically does not cater to <em>you</em>.</p>
+<p><code>iced</code> is not owned by a corporation. It is not a brand. It is not a business. It is not even a community effort. It’s a love project built by a single person and given away for free. This is deliberate.</p>
+<p>As a result, I have no external incentives to make the library more appealing to newcomers and beginners. I do not care whether you will like the library and I have no reasons to try to convince you to use it.</p>
+<p>The gist of it is that</p>
+<ul>
+<li>I enjoy coding more than I enjoy writing documentation,</li>
+<li>I don’t like spoonfeeding people as if they are stupid, and</li>
+<li>I ultimately don’t care about wide adoption.</li>
+</ul>
+<p>When I do write documentation, I don’t do it with a promotional intent. Instead, I do it mainly to test whether I can explain the library in simple terms—starting from the problem. This book being a clear attempt at it!</p>
+<p>Thus, the existing documentation is not there to cater to a wide audience and convince you to use the library in its current state. It’s mainly there for me to cement design choices and have fun. The output is a side effect.</p>
+<p>I believe that this approach will eventually lead to a fully fleshed out set of learning materials for everyone, with the least amount of wasted effort on my end. It’ll just take a bunch of time!</p>
+<h2 id="why-do-none-of-the-examples-compile"><a class="header" href="#why-do-none-of-the-examples-compile">Why do none of the examples compile?</a></h2>
+<p>All of the examples are compiled in <a href="https://github.com/iced-rs/iced/actions/workflows/test.yml?query=branch%3Amaster+event%3Apush">a GitHub CI workflow</a> for every single commit pushed to the official repository. They <em>very</em> rarely break and, if they do, I fix them quickly. So, you are likely wrong. The examples do compile.</p>
+<p>Many newcomers make the rookie mistake of assuming that they can copy code from the <code>master</code> branch and then expect it to work with a <a href="https://crates.io/crates/iced">crates.io release</a> from a year ago. Some even choose to blame the project for their own ignorance and incompetence. I’m always quite baffled by this.</p>
+<p><a href="https://github.com/iced-rs/iced/tags">Release tags</a> exist for a reason.</p>
+<h2 id="why-do-you-change-the-entire-api-on-every-release"><a class="header" href="#why-do-you-change-the-entire-api-on-every-release">Why do you change the entire API on every release?</a></h2>
+<p>Because I am a terrible engineer and I want you all to suffer with me.</p>
+<p>Jokes aside, I am always trying to come up with the best way to build GUIs in Rust. Why would I not change the API? I certainly owe absolutely nothing to the users that benefit from my work for free.</p>
+<p>If you are not happy with it, feel free to ask for a refund, then fork the project and maintain it yourself.</p>
+<h2 id="is-iced-even-used-seriously-anywhere"><a class="header" href="#is-iced-even-used-seriously-anywhere">Is <code>iced</code> even used seriously anywhere?</a></h2>
+<p>Yes, here and there.</p>
+<ul>
+<li><a href="https://www.kraken.com">Kraken</a> has been shipping <a href="https://www.kraken.com/en-es/desktop">a desktop application</a> to thousands of users for years.</li>
+<li><a href="https://system76.com">System76</a> maintains <a href="https://github.com/pop-os/iced">a soft fork</a> that powers their new <a href="https://system76.com/cosmic">COSMIC</a> desktop environment.</li>
+<li>Plenty of popular open-source projects use it—like <a href="https://github.com/squidowl/halloy">Halloy</a> and <a href="https://sniffnet.net/">Sniffnet</a>.</li>
+</ul>
+<p>Check out the <a href="https://iced.rs/#showcase">project showcase</a> if you want to find out more.</p>
+<h2 id="when-will-insert-feature-be-developed"><a class="header" href="#when-will-insert-feature-be-developed">When will <code>&lt;insert feature&gt;</code> be developed?</a></h2>
+<p><code>iced</code> is a one man project. Every single line of code is either written or reviewed directly by me.</p>
+<p>And I am just a dude that enjoys coding and building stuff. I give away some of my work for free. I do this with no timelines. No promises. No expectations. No delegation. I like it this way.</p>
+<p>That said, there is <a href="https://whimsical.com/roadmap-iced-7vhq6R35Lp3TmYH4WeYwLM">a visual roadmap</a> that can give you a certain idea of my current mental model of the future of the library. My mind changes often, though; and so may the roadmap!</p>
+<h2 id="when-will-my-pr-get-reviewed"><a class="header" href="#when-will-my-pr-get-reviewed">When will my PR get reviewed?</a></h2>
+<p>I tend to review contributions right before a release. Releases happen rarely; so it may be months until I get to take a look at your code.</p>
+<p>I also may choose to prioritize some people, like my friends. I don’t care about being fair to everyone.</p>
+<p>In any case, if your contribution comes with the expectation that I must eagerly review it, then I kindly ask you to stay away from any of my open-source projects.</p>
+<h2 id="how-do-i-structure-a-large-application"><a class="header" href="#how-do-i-structure-a-large-application">How do I structure a large application?</a></h2>
 <p>You split your application into multiple screens, and then use simple composition.</p>
 <p><a href="https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/0.13.1/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
-<h2 id="how-can-my-application-receive-updates-from-a-channel"><a class="header" href="#how-can-my-application-receive-updates-from-a-channel">How Can My Application Receive Updates From a Channel?</a></h2>
+<h2 id="how-can-my-application-receive-updates-from-a-channel"><a class="header" href="#how-can-my-application-receive-updates-from-a-channel">How can my application receive updates from a channel?</a></h2>
 <p>You can use <a href="https://docs.rs/iced/0.13.1/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
 <p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
-<h2 id="does-iced-support-right-to-left-text-andor-cjk-scripts"><a class="header" href="#does-iced-support-right-to-left-text-andor-cjk-scripts">Does Iced Support Right-To-Left Text and/or CJK scripts?</a></h2>
-<p>Not very well yet!</p>
-<p>You may be able to render some scripts using <a href="https://docs.rs/iced/0.13.1/iced/widget/text/type.Text.html#method.shaping"><code>Text::shaping</code></a> with <a href="https://docs.rs/iced/0.13.1/iced/widget/text/enum.Shaping.html#variant.Advanced"><code>Shaping::Advanced</code></a>,
-but text editing for these scripts is not yet supported; and neither are <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editors</a>.</p>
-<p>These features are in the <a href="https://whimsical.com/roadmap-iced-7vhq6R35Lp3TmYH4WeYwLM"><code>ROADMAP</code></a>, however!</p>
-<h2 id="when-are-the-view-and-subscription-functions-called"><a class="header" href="#when-are-the-view-and-subscription-functions-called">When Are the <code>view</code> and <code>subscription</code> Functions Called?</a></h2>
-<p>After every batch of messages and <code>update</code> calls. But this is an implementation detail;
-and should never rely on this.</p>
-<p>Try to treat these functions as declarative, stateless functions.</p>
-<h2 id="does-iced-redraw-all-the-time"><a class="header" href="#does-iced-redraw-all-the-time">Does Iced Redraw All the Time?!</a></h2>
-<p>Yes! iced currently redraws after every runtime event; including tiny mouse movements.</p>
-<p>There are plans to redraw less frequently by detecting widget state changes, but performance has not
-been a priority so far.</p>
-<p>The renderers do perform quite a lot of caching; so redrawing is quite cheap. As a result,
-this is rarely an issue for most use cases!</p>
-<h2 id="i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on"><a class="header" href="#i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on">I Am Getting A Panic Saying There Is No Reactor Running. What Is Going On?</a></h2>
+<h2 id="does-iced-support-right-to-left-text-andor-cjk-scripts"><a class="header" href="#does-iced-support-right-to-left-text-andor-cjk-scripts">Does <code>iced</code> support Right-To-Left text and/or CJK scripts?</a></h2>
+<p>The seeds are planted, but the edge cases may not be fully handled yet.</p>
+<p>Specifically, text editing likely has a bunch of issues still. However, <a href="https://github.com/iced-rs/iced/pull/2777">Input Method Editors</a> are a new feature in the upcoming <code>0.14</code> release.</p>
+<p>In any case, proper support is in the <a href="https://whimsical.com/roadmap-iced-7vhq6R35Lp3TmYH4WeYwLM">roadmap</a>.</p>
+<h2 id="when-are-the-view-and-subscription-functions-called"><a class="header" href="#when-are-the-view-and-subscription-functions-called">When are the <code>view</code> and <code>subscription</code> functions called?</a></h2>
+<p>After every batch of messages and <code>update</code> calls.</p>
+<p>But this is an implementation detail. You should <em>never</em> rely on this. Try to treat these functions as declarative, stateless functions.</p>
+<h2 id="does-iced-redraw-all-the-time"><a class="header" href="#does-iced-redraw-all-the-time">Does <code>iced</code> redraw all the time?!</a></h2>
+<p>No. Not anymore!</p>
+<p>It used to be the case that <code>iced</code> would redraw the entire window on every tiny mouse movement but, since <code>0.14</code>, it supports and enables <a href="https://github.com/iced-rs/iced/pull/2662">reactive rendering</a> by default.</p>
+<h2 id="i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on"><a class="header" href="#i-am-getting-a-panic-saying-there-is-no-reactor-running-what-is-going-on">I am getting a panic saying there is no reactor running. What is going on?</a></h2>
 <p>You are probably using <code>Task</code> to execute a <code>Future</code> that needs the <code>tokio</code> executor:</p>
 <pre><code class="language-text">there is no reactor running, must be called from the context of a Tokio 1.x runtime
 </code></pre>
@@ -889,6 +922,7 @@ this is rarely an issue for most use cases!</p>
             window.setTimeout(window.print, 100);
         });
         </script>
+
 
     </div>
     </body>
