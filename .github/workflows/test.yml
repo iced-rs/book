@@ -9,10 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install mdBook
-        uses: peaceiris/actions-mdbook@v1
-        with:
-          mdbook-version: 'latest'
+      - uses: hecrj/setup-rust-action@v2
+      - name: Install `mdbook` and `wasm-bindgen-cli`
+        run: cargo install mdbook wasm-bindgen-cli
+      - name: Install `mdbook-iced`
+        run: cargo install --locked --git https://github.com/iced-rs/mdbook-iced.git
+      - name: Add `wasm32-unknown-unknown` target to Rust toolchain
+        run: rustup target add wasm32-unknown-unknown
       - name: Build book
         run: mdbook build
       - name: Test book

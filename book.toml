@@ -14,4 +14,4 @@ edit-url-template = "https://github.com/iced-rs/book/edit/master/{path}"
 runnable = false
 
 [preprocessor.iced]
-tag = "0.13.0"
+rev = "fc80f697b1e7ce9c1bd50ae6a76bf4899d88d1cb"

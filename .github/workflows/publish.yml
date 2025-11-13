@@ -11,8 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: hecrj/setup-rust-action@v2
-      - name: Install `mdbook`, `mdbook-iced`, and `wasm-bindgen-cli`
-        run: cargo install mdbook mdbook-iced wasm-bindgen-cli
+      - name: Install `mdbook` and `wasm-bindgen-cli`
+        run: cargo install mdbook wasm-bindgen-cli
+      - name: Install `mdbook-iced`
+        run: cargo install --locked --git https://github.com/iced-rs/mdbook-iced.git
       - name: Add `wasm32-unknown-unknown` target to Rust toolchain
         run: rustup target add wasm32-unknown-unknown
       - name: Build book

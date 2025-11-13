@@ -202,11 +202,11 @@ its own magic[^magic]—so you don't need to worry about learning the dark arts 
 
 If we want to run our `Counter`, all we have to do is call [`run`]:
 
-```rust,ignore,iced(height=100px)
+```rust,ignore,iced,height=100
 # use iced::widget::{button, column, text, Column};
 # 
 pub fn main() -> iced::Result {
-    iced::run("A cool counter", Counter::update, Counter::view)
+    iced::run(Counter::update, Counter::view)
 }
 # 
 # #[derive(Default)]
@@ -232,7 +232,7 @@ pub fn main() -> iced::Result {
 #         }
 #     }
 # 
-#     fn view(&self) -> Column<Message> {
+#     fn view(&self) -> Column<'_, Message> {
 #         column![
 #             button("+").on_press(Message::Increment),
 #             text(self.value),
@@ -242,8 +242,7 @@ pub fn main() -> iced::Result {
 # }
 ```
 
-We just give our application a _cool_ title and then provide the __update logic__ and __view logic__ to
-the __runtime__—which then figures out the rest!
+We just provide the __update logic__ and __view logic__ to the __runtime__—which then figures out the rest!
 
 The runtime is capable of inferring the types for the __state__ and __messages__ out of the type signatures of
 our __update logic__ and __view logic__. The __state__ is initialized leveraging `Default`, as we described earlier.
