@@ -1,7 +1,7 @@
 # Architecture
 Let's start from the basics! You are probably very familiar with graphical user interfaces already.
 You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
-most likely reading this book using one!
+most likely reading this book using one.
 
 At their essence, graphical user interfaces are applications that __display__ some information graphically
 to a user. This user can then choose to __interact__ with the application—normally using some kind of device;

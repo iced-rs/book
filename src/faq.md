@@ -4,7 +4,9 @@
 
 The documentation is bad because, unlike most other open-source projects, `iced` unapologetically does not cater to _you_.
 
-`iced` is not owned by a corporation. It is not a brand. It is not a business. It is not even a community effort. It's a love project built by a single person and given away for free. This is deliberate.
+> iced is not your run-of-the-mill popular open source project. It is not owned by a corporation. It is not a brand. It is not a business. And most importantly, it is not a community effort.
+>
+> iced is just my personal project. I work on it on my own terms, on my time, and give it all away for free as open source.
 
 As a result, I have no external incentives to make the library more appealing to newcomers and beginners. I do not care whether you will like the library and I have no reasons to try to convince you to use it.
 
@@ -41,6 +43,7 @@ Yes, here and there.
 - [Kraken] has been shipping [a desktop application](https://www.kraken.com/en-es/desktop) to thousands of users for years.
 - [System76] maintains [a soft fork] that powers their new [COSMIC] desktop environment.
 - Plenty of popular open-source projects use it—like [Halloy] and [Sniffnet].
+- Many users build and share cool stuff every day in [our Discord server].
 
 Check out the [project showcase] if you want to find out more.
 
@@ -51,6 +54,7 @@ Check out the [project showcase] if you want to find out more.
 [Halloy]: https://github.com/squidowl/halloy
 [Sniffnet]: https://sniffnet.net/
 [project showcase]: https://iced.rs/#showcase
+[our Discord server]: https://discord.gg/3xZJ65GAhd
 
 ## When will `<insert feature>` be developed?
 `iced` is a one man project. Every single line of code is either written or reviewed directly by me.
@@ -67,6 +71,14 @@ I tend to review contributions right before a release. Releases happen rarely; s
 I also may choose to prioritize some people, like my friends. I don't care about being fair to everyone.
 
 In any case, if your contribution comes with the expectation that I must eagerly review it, then I kindly ask you to stay away from any of my open-source projects.
+
+## Why are you so unprofessional, emotional, and sarcastic?
+Why am I having fun, you ask? This is my personal project. I intend to express myself fully.
+
+I don't have the time, the energy, nor the interest to water down my writing in order to make it palatable for everyone.
+
+## Did you use any AI or LLM to write this book?
+No. I proudly own every ~~terrible~~ piece of writing in here—em dashes included. Beep, boop.
 
 ## How do I structure a large application?
 You split your application into multiple screens, and then use simple composition.
