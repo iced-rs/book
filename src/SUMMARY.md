@@ -1,5 +1,6 @@
 # Summary
 [Introduction](README.md)
+[Philosophy](philosophy.md)
 
 # Learning the Basics
 - [Architecture](architecture.md)
@@ -29,3 +30,4 @@
 # Appendix
 - [Additional Resources](additional-resources.md)
 - [Frequently Asked Questions](faq.md)
+- [Alternatives]()
