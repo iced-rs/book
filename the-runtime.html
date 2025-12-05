@@ -331,10 +331,10 @@ I have things to count!”</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
 its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust ignore iced(height=100px)"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore iced height=100"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
-    iced::run("A cool counter", Counter::update, Counter::view)
+    iced::run(Counter::update, Counter::view)
 }
 <span class="boring">
 </span><span class="boring">#[derive(Default)]
@@ -360,7 +360,7 @@ its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-
 </span><span class="boring">        }
 </span><span class="boring">    }
 </span><span class="boring">
-</span><span class="boring">    fn view(&amp;self) -&gt; Column&lt;Message&gt; {
+</span><span class="boring">    fn view(&amp;self) -&gt; Column&lt;'_, Message&gt; {
 </span><span class="boring">        column![
 </span><span class="boring">            button("+").on_press(Message::Increment),
 </span><span class="boring">            text(self.value),
@@ -369,49 +369,87 @@ its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-
 </span><span class="boring">    }
 </span><span class="boring">}</span></code></pre>
 <script>
-function embed(script, hash, height) {
+function embed(script, hash, height, is_static) {
   var code = script.previousSibling;
 
   while(code && code.tagName != "PRE") {
     code = code.previousSibling;
   }
 
-  let buttons = code.querySelector('.buttons');
+  let example = document.createElement('div');
+  example.style.position = "relative";
+  example.style.height = height;
+  example.style.padding = "1rem";
+  example.style.overflow = "hidden";
+  example.classList.add('hljs');
+
+  let picture = document.createElement('picture');
+
+  let dark = document.createElement('source');
+  dark.srcset = `/.icebergs/${hash}/dark.png`;
+  dark.media = "(prefers-color-scheme: dark)";
+
+  let light = document.createElement('img');
+  light.src = `/.icebergs/${hash}/light.png`;
+
+  picture.append(dark);
+  picture.append(light);
+  example.append(picture);
+  code.append(example);
+
+  if(is_static) {
+    return;
+  }
+
+  light.style.height = `${height}`;
+  light.style.objectFit = "cover";
+  light.style.objectPosition = "left";
+
   let play = document.createElement('button');
 
   async function run() {
-    play.remove();
-
-    let example = document.createElement('div');
-    example.style.height = height;
-    example.style.padding = "1rem";
-    example.classList.add('hljs');
+    picture.remove();
+    play.onclick = function(){};
+    play.innerHTML = "Loading...";
 
     let iced = document.createElement('div');
     iced.id = 'iced';
-    iced.append(document.createTextNode('Loading...'));
-
     example.append(iced);
-    code.append(example);
 
     let iceberg = await import(`/.icebergs/${hash}/iceberg.js`);
     await iceberg.default();
+
+    play.remove();
   }
 
   play.title = 'Run example';
   play.onclick = run;
+  play.style.position = "absolute";
+  play.style.top = "1rem";
+  play.style.left = "1rem";
+  play.style.right = "1rem";
+  play.style.bottom = "1rem";
+  play.style.cursor = "pointer";
+  play.style.background = "rgba(0, 0, 0, 0.5)";
+  play.style.color = "white";
+  play.style.fontFamily = "monospace";
+  play.style.border = "none";
+  play.style.padding = "1rem";
 
-  play.classList.add('fa');
-  play.classList.add('fa-play');
+  let icon = document.createElement('span');
+  icon.classList.add('fa');
+  icon.classList.add('fa-play');
+  icon.style.marginRight = "1rem";
+  play.append(icon);
+  play.append("Click to play");
 
-  buttons.prepend(play);
+  example.append(play);
 }
 </script>
 <script type="module" id="iceberg-0">
-  embed(document.getElementById("iceberg-0"), "55288b479ffed7c5afc0902c91faa1812555df2c747f4c091f1e2dca985faa", "100px");
+  embed(document.getElementById("iceberg-0"), "e73b78ec7de5c058f71157289aeb636249cc2589ef3186f5886c3874bbaf87", "100px", false);
 </script>
-<p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
-the <strong>runtime</strong>—which then figures out the rest!</p>
+<p>We just provide the <strong>update logic</strong> and <strong>view logic</strong> to the <strong>runtime</strong>—which then figures out the rest!</p>
 <p>The runtime is capable of inferring the types for the <strong>state</strong> and <strong>messages</strong> out of the type signatures of
 our <strong>update logic</strong> and <strong>view logic</strong>. The <strong>state</strong> is initialized leveraging <code>Default</code>, as we described earlier.</p>
 <p>Notice also that <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a> can fail and, therefore, it returns an <a href="https://docs.iced.rs/iced/type.Result.html"><code>iced::Result</code></a>. If all we are doing is run the

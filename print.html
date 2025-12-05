@@ -192,10 +192,95 @@
 <li>Emphasize principles to scale and grow iced applications.</li>
 </ul>
 <p>Before proceeding, you should have some basic familiarity with Rust. If you are new to Rust or feel lost at some point, I recommend you to read <a href="https://doc.rust-lang.org/book/">the official Rust book</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="philosophy"><a class="header" href="#philosophy">Philosophy</a></h1>
+<p>iced is a <em>very</em> opinionated piece of software. It represents the culmination of almost 20 years of my personal battle against the eternal enemy: complexity<sup class="footnote-reference" id="fr-the eternal enemy-1"><a href="#footnote-the eternal enemy">1</a></sup>.</p>
+<p>Complexity is bad. It creeps in. Silently. Unnoticed. And then it kills everything. Slowly. I have seen it happen time and time again. Many of my codebases have died a slow and painful death in its hands.</p>
+<p>Amidst rotten code, I learned to unlearn<sup class="footnote-reference" id="fr-learned to unlearn-1"><a href="#footnote-learned to unlearn">2</a></sup>. Each time, a little piece of a bigger puzzle was revealed. And one day, thanks to <a href="https://elm-lang.org">Elm</a>, it all seemed to click into place.</p>
+<p>I don’t claim I have all the answers, but I rarely struggle with complexity nowadays. I have developed a certain intuition—a coding philosophy—that I follow instinctively. When I design libraries, I imbue as much of this learned philosophy into them.</p>
+<p>iced is an attempt at creating a GUI toolkit that embodies my coding philosophy to the utmost extent. If these principles do not resonate with you, I recommend you to use a different library; otherwise, frustration will certainly ensue.</p>
+<p>In this chapter I describe the most important (and controversial!) design principles that apply to iced, both technically and ideologically.</p>
+<!-- TODO
+If you are not convinced, the "Alternatives" chapter in the appendix lists great alternative crates you can use to build user interfaces in Rust.
+-->
+<h2 id="open-source-is-not-about-you"><a class="header" href="#open-source-is-not-about-you">Open Source is Not About You</a></h2>
+<blockquote>
+<p>Open source is a licensing and delivery mechanism, period. It means you get the source for software and the right to use and modify it. All social impositions associated with it, including the idea of ‘community-driven-development’ are part of a recently-invented mythology with little basis in how things actually work. A mythology that embodies, cult-like, both a lack of support for diversity in the ways things can work and a pervasive sense of communal entitlement.</p>
+<p>— Rich Hickey, <a href="https://gist.github.com/richhickey/1563cddea1002958f96e7ba9519972d9">Open Source is Not About You</a></p>
+</blockquote>
+<p>iced is not your run-of-the-mill popular open source project. It is not owned by a corporation. It is not a brand. It is not a business. And most importantly, it is not a community effort.</p>
+<p>iced is just my personal project. I work on it on my own terms, on my time, and give it all away for free as open source.</p>
+<p>I do it because I enjoy building useful things <strong>on my own</strong>. I don’t do it to meet new people. I don’t do it to collaborate with others. I don’t do it to make friends. It’s great if any of that happens; but it’s not the main reason I share my work.</p>
+<p>This is fairly uncommon, so certain expectations that may be taken for granted in other open source projects do not make sense here. For instance:</p>
+<ul>
+<li>I do not try to be specially welcoming to new contributors.</li>
+<li>I do not care about promoting the library for widespread adoption.</li>
+<li>I do not keep a “professional” image at all times.</li>
+<li>I do not delegate work to land new features quickly.</li>
+<li>I do not hesitate to introduce breaking changes.</li>
+</ul>
+<p>“My lord! Is that legal?”<sup class="footnote-reference" id="fr-is that legal-1"><a href="#footnote-is that legal">3</a></sup> You bet! So if you are coming here expecting a stable, professional, politically correct, and contributor-friendly open source project… You will likely be very disappointed.</p>
+<p>But before you leave all flustered, give me a chance to tell you about the upsides of this philosophy of work. Yes, there are some:</p>
+<ul>
+<li>Instead of handholding new contributors, I have more time to spend doing what I do best: <strong>coding</strong>.</li>
+<li>Instead of trying to promote the library, I use a completely honest and direct approach of communication. <strong>What you see is what you get.</strong></li>
+<li>Instead of being “professional”, I can be approachable, emotional, blunt, honest, controversial, and—most importantly—fun. I am a <strong>human</strong>, not a cold machine trying to keep appearances.</li>
+<li>Instead of delegating work, I build and review every single feature myself; potentially enabling a <strong>high degree of cohesion</strong> not possible in many other projects.</li>
+<li>Instead of maintaining a stable API, I can redesign freely and let the codebase <strong>grow organically</strong> as new solutions are discovered.</li>
+</ul>
+<p>Pretty cool, huh? Everything has tradeoffs, and these are the ones that work for me and my projects.</p>
+<p>With all that said, it would be reasonable for you to infer that iced must not have a great community of users. After all, I don’t actively promote the library nor welcome contributors. Why would anyone stick around? And yet… Plenty of people do!<sup class="footnote-reference" id="fr-discord-1"><a href="#footnote-discord">4</a></sup></p>
+<p>In my experience, and quite ironically, this unusual approach to open source leads to the best kind of community. The extreme level of opinionation, honesty, and transparency lets users make a quick judgement, reduces frustration, and those that stay tend to share similar values.</p>
+<h2 id="rust-is-all-you-need"><a class="header" href="#rust-is-all-you-need">Rust is All You Need</a></h2>
+<p>iced embraces Rust to its full extent. You will write <em>everything</em> in plain Rust.</p>
+<p>There is no <strong>D</strong>omain-<strong>S</strong>pecific <strong>L</strong>anguage for defining view logic. No crazy procedural macro magic to make view code easier to write.</p>
+<p>Macros, while a part of Rust, are a escape hatch. Creating a macro to meaningfully extend the language is equivalent to admitting that Rust by itself is not powerful enough. It’s the same as giving up. The language has failed.</p>
+<p>I believe Rust itself is powerful and elegant enough to express user interface code in a beautiful way, and I am not willing to give up on it without putting up a fight first. If I wanted to code using a different language, then I would have chosen a different language.</p>
+<p>Small declarative macros are fine, but only as long as they are very limited in scope and there is an analogous, widespread counterpart that can be considered a core part of the language. For instance, iced defines <code>row!</code> and <code>column!</code> macros with the same semantics as the ubiquitous <code>vec!</code> macro—they all build a collection of items in a certain order.</p>
+<p>Long story short, iced expects you to write all your GUI code in Rust, leveraging variables, match statements, nested scopes, iterators, functions, and generics.</p>
+<h2 id="the-web-is-madness"><a class="header" href="#the-web-is-madness">The Web is Madness</a></h2>
+<p>What once started as a simple invention for sharing hyper-text documents around the world has now evolved into an amalgamation of incohesive patches and standards; most shoe-horned in for the sake of velocity and backwards compatibility.</p>
+<p>At the core of it all: a terrible crux. A seemingly benign separation of structure, style, and logic into three different languages: HTML, CSS, and JavaScript.</p>
+<p>Except, it doesn’t work. Never did, and never will. Concerns constantly leak from one layer to the other with no consistent ethos. The three different parts need to know about each other <em>all the time</em>. And so, the job of a web developer consists in creating abstractions to cope and juggle these three different layers while trying to create an illusion of cohesion; like a magician in a circus.</p>
+<p>This crux of separation is the main issue fueling most of the web frameworks ever made. Solutions for a made up problem introduced a long time ago. An opiate for a self-inflicted illness. The Web is built on top of a bunch of awful legacy.</p>
+<p>I don’t know about you, but I have had enough of this circus.</p>
+<p>iced completely and utterly rejects this separation—as it is simply non-sensical and insanity-inducing. Furthermore, it actively tries to stay away from anything that remotely resembles HTML, CSS, or JavaScript; for they are all incomplete solutions on their own.</p>
+<p>When using iced, all of layout, styling, and logic are written directly in Rust as a cohesive whole—leveraging type safety and compiler guarantees as much as possible.</p>
+<h2 id="code-must-be-discovered"><a class="header" href="#code-must-be-discovered">Code Must be Discovered</a></h2>
+<p>Coding is ultimately a process of <strong>discovery</strong>.</p>
+<p>The problem is your starting point, the language is your map, the compiler is your compass, and the solution is your target.</p>
+<p>Your job as a programmer is to figure out your starting point as accurately as possible, and then let the compass guide you.</p>
+<p>Stating and defining the problem in your language is paramount. Any mistakes here will set you down the incorrect path—likely leading you to the wrong place after smashing into walls for a while.</p>
+<p>In order to formalize the problem, it is important to distill it to its very essence. You must avoid mixing into it any pre-conceived notion of a potential solution you may have in your mind. Failing to do so will trump your chances of achieving simplicity—which can only ever emerge organically.</p>
+<p>iced is a specific set of solutions for problems that involve presenting interactive information to a user. As a consequence, the library tries to stay out of the way during the first stages of the discovery process—only chiming in once a solution has started to form—by decoupling itself from your types, data structures, and business logic as much as possible.</p>
+<blockquote>
+<h4 id="note-from-the-author"><a class="header" href="#note-from-the-author">Note From the Author</a></h4>
+<p>This chapter is not finished yet.</p>
+<p>There are still some principles I would like to write about:</p>
+<ul>
+<li>Plumbing Code is Foundational</li>
+<li>Generic Problems are Illusions</li>
+<li>Purity Protects Sanity</li>
+<li>Be Competent or be Better</li>
+</ul>
+<p>It takes inspiration to turn intuition into words, so I don’t know when I will get to it. Stay tuned!</p>
+</blockquote>
+<hr>
+<ol class="footnote-definition"><li id="footnote-the eternal enemy">
+<p><a href="https://grugbrain.dev/#grug-on-complexity">The Grug Brained Developer</a> <a href="#fr-the eternal enemy-1">↩</a></p>
+</li>
+<li id="footnote-learned to unlearn">
+<p><a href="https://www.youtube.com/watch?v=wrwxC9taL8w">Learning to Unlearn</a> <a href="#fr-learned to unlearn-1">↩</a></p>
+</li>
+<li id="footnote-is that legal">
+<p><a href="https://youtu.be/nz20lu2AM2k">I will make it legal</a> <a href="#fr-is that legal-1">↩</a></p>
+</li>
+<li id="footnote-discord">
+<p>Join us in <a href="https://discord.gg/3xZJ65GAhd">the Discord server</a>! <a href="#fr-discord-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
 <p>Let’s start from the basics! You are probably very familiar with graphical user interfaces already.
 You can find them on your phone, computer, and most interactive electronic devices. In fact, you are
-most likely reading this book using one!</p>
+most likely reading this book using one.</p>
 <p>At their essence, graphical user interfaces are applications that <strong>display</strong> some information graphically
 to a user. This user can then choose to <strong>interact</strong> with the application—normally using some kind of device;
 like a keyboard, mouse, or touchscreen.</p>
@@ -694,10 +779,10 @@ I have things to count!”</p>
 <p>Fair enough! iced implements a very similar runtime to the one we just built. It comes bundled with
 its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-magic">1</a></sup>—so you don’t need to worry about learning the dark arts yourself.</p>
 <p>If we want to run our <code>Counter</code>, all we have to do is call <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a>:</p>
-<pre><code class="language-rust ignore iced(height=100px)"><span class="boring">use iced::widget::{button, column, text, Column};
+<pre><code class="language-rust ignore iced height=100"><span class="boring">use iced::widget::{button, column, text, Column};
 </span><span class="boring">
 </span>pub fn main() -&gt; iced::Result {
-    iced::run("A cool counter", Counter::update, Counter::view)
+    iced::run(Counter::update, Counter::view)
 }
 <span class="boring">
 </span><span class="boring">#[derive(Default)]
@@ -723,7 +808,7 @@ its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-
 </span><span class="boring">        }
 </span><span class="boring">    }
 </span><span class="boring">
-</span><span class="boring">    fn view(&amp;self) -&gt; Column&lt;Message&gt; {
+</span><span class="boring">    fn view(&amp;self) -&gt; Column&lt;'_, Message&gt; {
 </span><span class="boring">        column![
 </span><span class="boring">            button("+").on_press(Message::Increment),
 </span><span class="boring">            text(self.value),
@@ -732,56 +817,94 @@ its own magic<sup class="footnote-reference" id="fr-magic-1"><a href="#footnote-
 </span><span class="boring">    }
 </span><span class="boring">}</span></code></pre>
 <script>
-function embed(script, hash, height) {
+function embed(script, hash, height, is_static) {
   var code = script.previousSibling;
 
   while(code && code.tagName != "PRE") {
     code = code.previousSibling;
   }
 
-  let buttons = code.querySelector('.buttons');
+  let example = document.createElement('div');
+  example.style.position = "relative";
+  example.style.height = height;
+  example.style.padding = "1rem";
+  example.style.overflow = "hidden";
+  example.classList.add('hljs');
+
+  let picture = document.createElement('picture');
+
+  let dark = document.createElement('source');
+  dark.srcset = `/.icebergs/${hash}/dark.png`;
+  dark.media = "(prefers-color-scheme: dark)";
+
+  let light = document.createElement('img');
+  light.src = `/.icebergs/${hash}/light.png`;
+
+  picture.append(dark);
+  picture.append(light);
+  example.append(picture);
+  code.append(example);
+
+  if(is_static) {
+    return;
+  }
+
+  light.style.height = `${height}`;
+  light.style.objectFit = "cover";
+  light.style.objectPosition = "left";
+
   let play = document.createElement('button');
 
   async function run() {
-    play.remove();
-
-    let example = document.createElement('div');
-    example.style.height = height;
-    example.style.padding = "1rem";
-    example.classList.add('hljs');
+    picture.remove();
+    play.onclick = function(){};
+    play.innerHTML = "Loading...";
 
     let iced = document.createElement('div');
     iced.id = 'iced';
-    iced.append(document.createTextNode('Loading...'));
-
     example.append(iced);
-    code.append(example);
 
     let iceberg = await import(`/.icebergs/${hash}/iceberg.js`);
     await iceberg.default();
+
+    play.remove();
   }
 
   play.title = 'Run example';
   play.onclick = run;
+  play.style.position = "absolute";
+  play.style.top = "1rem";
+  play.style.left = "1rem";
+  play.style.right = "1rem";
+  play.style.bottom = "1rem";
+  play.style.cursor = "pointer";
+  play.style.background = "rgba(0, 0, 0, 0.5)";
+  play.style.color = "white";
+  play.style.fontFamily = "monospace";
+  play.style.border = "none";
+  play.style.padding = "1rem";
 
-  play.classList.add('fa');
-  play.classList.add('fa-play');
+  let icon = document.createElement('span');
+  icon.classList.add('fa');
+  icon.classList.add('fa-play');
+  icon.style.marginRight = "1rem";
+  play.append(icon);
+  play.append("Click to play");
 
-  buttons.prepend(play);
+  example.append(play);
 }
 </script>
 <script type="module" id="iceberg-0">
-  embed(document.getElementById("iceberg-0"), "55288b479ffed7c5afc0902c91faa1812555df2c747f4c091f1e2dca985faa", "100px");
+  embed(document.getElementById("iceberg-0"), "e73b78ec7de5c058f71157289aeb636249cc2589ef3186f5886c3874bbaf87", "100px", false);
 </script>
-<p>We just give our application a <em>cool</em> title and then provide the <strong>update logic</strong> and <strong>view logic</strong> to
-the <strong>runtime</strong>—which then figures out the rest!</p>
+<p>We just provide the <strong>update logic</strong> and <strong>view logic</strong> to the <strong>runtime</strong>—which then figures out the rest!</p>
 <p>The runtime is capable of inferring the types for the <strong>state</strong> and <strong>messages</strong> out of the type signatures of
 our <strong>update logic</strong> and <strong>view logic</strong>. The <strong>state</strong> is initialized leveraging <code>Default</code>, as we described earlier.</p>
 <p>Notice also that <a href="https://docs.iced.rs/iced/fn.run.html"><code>run</code></a> can fail and, therefore, it returns an <a href="https://docs.iced.rs/iced/type.Result.html"><code>iced::Result</code></a>. If all we are doing is run the
 application, we can return this result directly in <code>main</code>.</p>
 <p>And that should be it! Have fun counting things for 300 million years—at least!</p>
 <blockquote>
-<h4 id="note-from-the-author"><a class="header" href="#note-from-the-author">Note From the Author</a></h4>
+<h4 id="note-from-the-author-1"><a class="header" href="#note-from-the-author-1">Note From the Author</a></h4>
 <p>You reached the end of the book, for now!</p>
 <p>I think it should already serve as a quick introduction to the basics of the library.
 There is a lot more to unravel—but hopefully you are now at a point where you can start
@@ -823,7 +946,10 @@ of the APIs used may change, the fundamental ideas of iced tend to be quite stab
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
 <h2 id="why-is-the-documentation-so-bad"><a class="header" href="#why-is-the-documentation-so-bad">Why is the documentation so bad?</a></h2>
 <p>The documentation is bad because, unlike most other open-source projects, <code>iced</code> unapologetically does not cater to <em>you</em>.</p>
-<p><code>iced</code> is not owned by a corporation. It is not a brand. It is not a business. It is not even a community effort. It’s a love project built by a single person and given away for free. This is deliberate.</p>
+<blockquote>
+<p>iced is not your run-of-the-mill popular open source project. It is not owned by a corporation. It is not a brand. It is not a business. And most importantly, it is not a community effort.</p>
+<p>iced is just my personal project. I work on it on my own terms, on my time, and give it all away for free as open source.</p>
+</blockquote>
 <p>As a result, I have no external incentives to make the library more appealing to newcomers and beginners. I do not care whether you will like the library and I have no reasons to try to convince you to use it.</p>
 <p>The gist of it is that</p>
 <ul>
@@ -848,6 +974,7 @@ of the APIs used may change, the fundamental ideas of iced tend to be quite stab
 <li><a href="https://www.kraken.com">Kraken</a> has been shipping <a href="https://www.kraken.com/en-es/desktop">a desktop application</a> to thousands of users for years.</li>
 <li><a href="https://system76.com">System76</a> maintains <a href="https://github.com/pop-os/iced">a soft fork</a> that powers their new <a href="https://system76.com/cosmic">COSMIC</a> desktop environment.</li>
 <li>Plenty of popular open-source projects use it—like <a href="https://github.com/squidowl/halloy">Halloy</a> and <a href="https://sniffnet.net/">Sniffnet</a>.</li>
+<li>Many users build and share cool stuff every day in <a href="https://discord.gg/3xZJ65GAhd">our Discord server</a>.</li>
 </ul>
 <p>Check out the <a href="https://iced.rs/#showcase">project showcase</a> if you want to find out more.</p>
 <h2 id="when-will-insert-feature-be-developed"><a class="header" href="#when-will-insert-feature-be-developed">When will <code>&lt;insert feature&gt;</code> be developed?</a></h2>
@@ -858,6 +985,11 @@ of the APIs used may change, the fundamental ideas of iced tend to be quite stab
 <p>I tend to review contributions right before a release. Releases happen rarely; so it may be months until I get to take a look at your code.</p>
 <p>I also may choose to prioritize some people, like my friends. I don’t care about being fair to everyone.</p>
 <p>In any case, if your contribution comes with the expectation that I must eagerly review it, then I kindly ask you to stay away from any of my open-source projects.</p>
+<h2 id="why-are-you-so-unprofessional-emotional-and-sarcastic"><a class="header" href="#why-are-you-so-unprofessional-emotional-and-sarcastic">Why are you so unprofessional, emotional, and sarcastic?</a></h2>
+<p>Why am I having fun, you ask? This is my personal project. I intend to express myself fully.</p>
+<p>I don’t have the time, the energy, nor the interest to water down my writing in order to make it palatable for everyone.</p>
+<h2 id="did-you-use-any-ai-or-llm-to-write-this-book"><a class="header" href="#did-you-use-any-ai-or-llm-to-write-this-book">Did you use any AI or LLM to write this book?</a></h2>
+<p>No. I proudly own every <del>terrible</del> piece of writing in here—em dashes included. Beep, boop.</p>
 <h2 id="how-do-i-structure-a-large-application"><a class="header" href="#how-do-i-structure-a-large-application">How do I structure a large application?</a></h2>
 <p>You split your application into multiple screens, and then use simple composition.</p>
 <p><a href="https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/0.13.1/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
