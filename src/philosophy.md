@@ -92,7 +92,7 @@ Your job as a programmer is to figure out your starting point as accurately as p
 
 Stating and defining the problem in your language is paramount. Any mistakes here will set you down the incorrect path—likely leading you to the wrong place after smashing into walls for a while.
 
-In order to formalize the problem, it is important to distill it to its very essence. You must avoid mixing into it any pre-conceived notion of a potential solution you may have in your mind. Failing to do so will trump your chances of achieving simplicity—which can only ever emerge organically.
+In order to formalize the problem, it is important to distill it to its very essence. You must avoid mixing into it any pre-conceived notion of a potential solution you may have in your mind. Failing to do so will ruin your chances of achieving simplicity—which can only ever emerge organically.
 
 iced is a specific set of solutions for problems that involve presenting interactive information to a user. As a consequence, the library tries to stay out of the way during the first stages of the discovery process—only chiming in once a solution has started to form—by decoupling itself from your types, data structures, and business logic.
 
