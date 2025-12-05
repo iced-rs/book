@@ -286,20 +286,20 @@ if (!('encodeInto' in cachedTextEncoder)) {
 
 let WASM_VECTOR_LEN = 0;
 
-function wasm_bindgen__convert__closures_____invoke__h96e0a7b150a7597b(arg0, arg1, arg2, arg3) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h96e0a7b150a7597b(arg0, arg1, arg2, arg3);
-}
-
-function wasm_bindgen__convert__closures_____invoke__h77c2c3a3998ba2a3(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h77c2c3a3998ba2a3(arg0, arg1);
-}
-
 function wasm_bindgen__convert__closures_____invoke__h0b60bc2d0035b392(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures_____invoke__h0b60bc2d0035b392(arg0, arg1, arg2);
 }
 
 function wasm_bindgen__convert__closures_____invoke__hb8b6941fceac7069(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures_____invoke__hb8b6941fceac7069(arg0, arg1, arg2);
+}
+
+function wasm_bindgen__convert__closures_____invoke__h77c2c3a3998ba2a3(arg0, arg1) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h77c2c3a3998ba2a3(arg0, arg1);
+}
+
+function wasm_bindgen__convert__closures_____invoke__h96e0a7b150a7597b(arg0, arg1, arg2, arg3) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h96e0a7b150a7597b(arg0, arg1, arg2, arg3);
 }
 
 const __wbindgen_enum_GpuAddressMode = ["clamp-to-edge", "repeat", "mirror-repeat"];
