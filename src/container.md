@@ -27,7 +27,7 @@ container("This is a bordered box!")
 ```
 
 ## Padding
-You can leverage the `padding` method of a `Container` to apply some padding its bounds.
+You can leverage the `padding` method of a `Container` to apply some padding inside its bounds.
 
 Each side can be configured independently. The `padding` module has a bunch of convenient helpers that make this easy.
 
