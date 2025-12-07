@@ -126,7 +126,7 @@ there is no reactor running, must be called from the context of a Tokio 1.x runt
 You should be able to fix this issue by enabling [the `tokio` feature flag] in the `iced` crate:
 
 ```toml
-iced = { version = "0.13", features = ["tokio"] }
+iced = { version = "0.14", features = ["tokio"] }
 ```
 
 [the `tokio` feature flag]: https://docs.rs/crate/iced/latest/features#tokio
