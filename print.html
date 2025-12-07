@@ -1173,6 +1173,177 @@ text!("Hello, {name}!")
 </script>
 <p>If you import <code>iced::widget::text</code>, you do not need to import the macro separately. Rust will bring you the <code>text</code> function helper, the <code>text</code> module, and the <code>text!</code> macro—all in a single import.</p>
 <p>Quite nifty!</p>
+<h2 id="string-slices"><a class="header" href="#string-slices">String Slices</a></h2>
+<p>The <code>Text</code> widget provides a <code>From&lt;&amp;str&gt;</code> implementation for <a href="https://docs.rs/iced/latest/iced/type.Element.html"><code>Element</code></a>.</p>
+<p>Since most function helpers for building widgets take an <code>Into&lt;Element&gt;</code>, this implementation allows you to skip calling <code>text()</code> completely if you have a string slice.</p>
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Container;
+</span><span class="boring">use iced::Never;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; iced::Result {
+</span><span class="boring">    iced::run((), view)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn view(_: &amp;()) -&gt; Container&lt;'_, Never&gt; {
+</span>use iced::widget::container;
+
+// We could just return:
+// container(text("Redundant"))
+//
+// But the following is equivalent:
+container("Short and nice!")
+<span class="boring">}</span></code></pre>
+<script type="module" id="iceberg-10">
+  embed(document.getElementById("iceberg-10"), "b36a3a6149e656c6ee932d5366c52c5149646f8190b0b82ed7a2dd1240dd9390", "30px", true);
+</script>
+<p>This will only work if you want to use the default text appearance. If you need to customize it, you will have to use the <code>text</code> helper.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="container"><a class="header" href="#container">Container</a></h1>
+<p><a href="https://docs.rs/iced/latest/iced/widget/struct.Container.html">The <code>Container</code> widget</a> can apply padding, alignment, and styling to its contents.</p>
+<p>Since it allows you to easily position and decorate existing widgets, it is considered one of the main building blocks in iced. You will need to use it often!</p>
+<p>As usual, you can build one with the <a href="https://docs.rs/iced/latest/iced/widget/fn.container.html"><code>container</code></a> helper found in the <a href="https://docs.rs/iced/latest/iced/widget/index.html"><code>widget</code></a> module.</p>
+<pre><code class="language-rust ignore iced static height=60"><span class="boring">use iced::widget::Container;
+</span><span class="boring">use iced::Never;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; iced::Result {
+</span><span class="boring">    iced::run((), view)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn view(_: &amp;()) -&gt; Container&lt;'_, Never&gt; {
+</span>use iced::widget::container;
+
+container("This is a bordered box!")
+    .padding(10)
+    .style(container::bordered_box)
+<span class="boring">}</span></code></pre>
+<script>
+function embed(script, hash, height, is_static) {
+  var code = script.previousSibling;
+
+  while(code && code.tagName != "PRE") {
+    code = code.previousSibling;
+  }
+
+  let example = document.createElement('div');
+  example.style.position = "relative";
+  example.style.height = height;
+  example.style.padding = "1rem";
+  example.style.overflow = "hidden";
+  example.classList.add('hljs');
+
+  let picture = document.createElement('picture');
+
+  let dark = document.createElement('source');
+  dark.srcset = `/.icebergs/${hash}/dark.png`;
+  dark.media = "(prefers-color-scheme: dark)";
+
+  let light = document.createElement('img');
+  light.src = `/.icebergs/${hash}/light.png`;
+
+  picture.append(dark);
+  picture.append(light);
+  example.append(picture);
+  code.append(example);
+
+  if(is_static) {
+    return;
+  }
+
+  light.style.height = `${height}`;
+  light.style.objectFit = "cover";
+  light.style.objectPosition = "left";
+
+  let play = document.createElement('button');
+
+  async function run() {
+    picture.remove();
+    play.onclick = function(){};
+    play.innerHTML = "Loading...";
+
+    let iced = document.createElement('div');
+    iced.id = 'iced';
+    example.append(iced);
+
+    let iceberg = await import(`/.icebergs/${hash}/iceberg.js`);
+    await iceberg.default();
+
+    play.remove();
+  }
+
+  play.title = 'Run example';
+  play.onclick = run;
+  play.style.position = "absolute";
+  play.style.top = "1rem";
+  play.style.left = "1rem";
+  play.style.right = "1rem";
+  play.style.bottom = "1rem";
+  play.style.cursor = "pointer";
+  play.style.background = "rgba(0, 0, 0, 0.5)";
+  play.style.color = "white";
+  play.style.fontFamily = "monospace";
+  play.style.border = "none";
+  play.style.padding = "1rem";
+
+  let icon = document.createElement('span');
+  icon.classList.add('fa');
+  icon.classList.add('fa-play');
+  icon.style.marginRight = "1rem";
+  play.append(icon);
+  play.append("Click to play");
+
+  example.append(play);
+}
+</script>
+<script type="module" id="iceberg-11">
+  embed(document.getElementById("iceberg-11"), "1a2577d9f067f29077a6f256b518a1e7ca1ba9d4e1332f66ecc3a9c4f64543cc", "60px", true);
+</script>
+<h2 id="padding"><a class="header" href="#padding">Padding</a></h2>
+<p>You can leverage the <code>padding</code> method of a <code>Container</code> to apply some padding its bounds.</p>
+<p>Each side can be configured independently. The <code>padding</code> module has a bunch of convenient helpers that make this easy.</p>
+<pre><code class="language-rust ignore iced static height=100"><span class="boring">use iced::widget::Container;
+</span><span class="boring">use iced::Never;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; iced::Result {
+</span><span class="boring">    iced::run((), view)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn view(_: &amp;()) -&gt; Container&lt;'_, Never&gt; {
+</span>use iced::padding;
+use iced::widget::container;
+
+container("Independent padding!")
+    .padding(padding::vertical(30).left(20).right(80))
+    .style(container::bordered_box)
+<span class="boring">}</span></code></pre>
+<script type="module" id="iceberg-12">
+  embed(document.getElementById("iceberg-12"), "d1f74a3b6178e49774cca9fcbc96fa2955d922cccf4edda14feb955d1208e", "100px", true);
+</script>
+<h2 id="alignment-1"><a class="header" href="#alignment-1">Alignment</a></h2>
+<p>Analogously to the <code>Text</code> widget, a <code>Container</code> will align its contents inside of its bounds.</p>
+<p>By default, a <code>Container</code> inherits the sizing strategy of its contents. Therefore, all of the alignment methods ask for a new <code>Length</code> that will be used to determine the final bounds.</p>
+<p>You can think of a <code>Container</code> as a framed picture. The frame itself is the <code>Container</code> and the picture is the content, which can be aligned inside in different ways.</p>
+<pre><code class="language-rust ignore iced static height=100"><span class="boring">use iced::widget::Container;
+</span><span class="boring">use iced::Never;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; iced::Result {
+</span><span class="boring">    iced::run((), view)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn view(_: &amp;()) -&gt; Container&lt;'_, Never&gt; {
+</span>use iced::widget::container;
+use iced::Fill;
+
+let my_box = container("Bottom right!")
+    .padding(10)
+    .style(container::primary);
+
+container(my_box)
+    .padding(10)
+    .align_bottom(Fill)
+    .align_right(Fill)
+    .style(container::bordered_box)
+<span class="boring">}</span></code></pre>
+<script type="module" id="iceberg-13">
+  embed(document.getElementById("iceberg-13"), "34f068dec450c56cc9c31c42cb26317c3169e84c5ff54f6792b263a4a7c89", "100px", true);
+</script>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="additional-resources"><a class="header" href="#additional-resources">Additional Resources</a></h1>
 <p>Here are some further resources you can use to learn more about iced while I am still working on this book:</p>
 <blockquote>

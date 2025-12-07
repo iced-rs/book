@@ -426,6 +426,29 @@ text!("Hello, {name}!")
 </script>
 <p>If you import <code>iced::widget::text</code>, you do not need to import the macro separately. Rust will bring you the <code>text</code> function helper, the <code>text</code> module, and the <code>text!</code> macro—all in a single import.</p>
 <p>Quite nifty!</p>
+<h2 id="string-slices"><a class="header" href="#string-slices">String Slices</a></h2>
+<p>The <code>Text</code> widget provides a <code>From&lt;&amp;str&gt;</code> implementation for <a href="https://docs.rs/iced/latest/iced/type.Element.html"><code>Element</code></a>.</p>
+<p>Since most function helpers for building widgets take an <code>Into&lt;Element&gt;</code>, this implementation allows you to skip calling <code>text()</code> completely if you have a string slice.</p>
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Container;
+</span><span class="boring">use iced::Never;
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; iced::Result {
+</span><span class="boring">    iced::run((), view)
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn view(_: &amp;()) -&gt; Container&lt;'_, Never&gt; {
+</span>use iced::widget::container;
+
+// We could just return:
+// container(text("Redundant"))
+//
+// But the following is equivalent:
+container("Short and nice!")
+<span class="boring">}</span></code></pre>
+<script type="module" id="iceberg-10">
+  embed(document.getElementById("iceberg-10"), "b36a3a6149e656c6ee932d5366c52c5149646f8190b0b82ed7a2dd1240dd9390", "30px", true);
+</script>
+<p>This will only work if you want to use the default text appearance. If you need to customize it, you will have to use the <code>text</code> helper.</p>
 
                     </main>
 
@@ -435,7 +458,7 @@ text!("Hello, {name}!")
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="additional-resources.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="container.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -449,7 +472,7 @@ text!("Hello, {name}!")
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="additional-resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="container.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
