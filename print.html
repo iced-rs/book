@@ -930,7 +930,7 @@ chapter if you want to explore and learn further.</p>
 </ol><div style="break-before: page; page-break-before: always;"></div><h1 id="text"><a class="header" href="#text">Text</a></h1>
 <p>Text is likely the most essential widget of a graphical user interface.</p>
 <p>There are multiple ways to display text in iced, but the most common approach is to use the <a href="https://docs.rs/iced/latest/iced/widget/fn.text.html"><code>text</code></a> helper of the <a href="https://docs.rs/iced/latest/iced/widget/index.html"><code>widget</code></a> module to build an instance of <a href="https://docs.rs/iced/latest/iced/widget/type.Text.html">the <code>Text</code> widget</a>.</p>
-<pre><code class="language-rust iced static"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1032,7 +1032,7 @@ function embed(script, hash, height, is_static) {
 <h2 id="alignment"><a class="header" href="#alignment">Alignment</a></h2>
 <p>A <code>Text</code> widget aligns its contents inside of its own bounds.</p>
 <p>Since, by default, the <code>Text</code> widget uses an intrinsic sizing strategy, its bounds will match the content dimensions. Effectively, this means that trying to align text without altering the default sizing strategy will result in a no-op.</p>
-<pre><code class="language-rust iced static height=40"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=40"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1046,7 +1046,7 @@ function embed(script, hash, height, is_static) {
   embed(document.getElementById("iceberg-2"), "fd82f9994cfd23f244e1f1ff5218c5f5576b9c73399e149e562b9402abc5e0", "40px", true);
 </script>
 <p>If we explicitly set the <code>width</code> to <code>Fill</code>, we will get the horizontal alignment we expect:</p>
-<pre><code class="language-rust iced static height=40"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=40"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1064,7 +1064,7 @@ text("This text will be centered horizontally")
   embed(document.getElementById("iceberg-3"), "898889e79c36ce696662bae9d0e2a19f9faa5367b78c80d196b965612ca91f8d", "40px", true);
 </script>
 <p>If we do the same for the <code>height</code>, we will then align in both axes:</p>
-<pre><code class="language-rust iced static height=40"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=40"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1083,7 +1083,7 @@ text("This text will be centered")
   embed(document.getElementById("iceberg-4"), "6e8c474064e99ec2824b43a4cafabb74f28c49db5875c1324733714c2bced3", "40px", true);
 </script>
 <p>Of course, we can also align inside fixed dimensions:</p>
-<pre><code class="language-rust iced static"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1102,7 +1102,7 @@ text("This text will be centered")
 <h2 id="styling"><a class="header" href="#styling">Styling</a></h2>
 <p>The different methods of the <code>Text</code> widget can be used to change its appearance—from the <code>font</code> used and its size to the <code>color</code> of the text.</p>
 <p>The <code>style</code> method, however, lets you leverage the current <code>Theme</code> of the application to choose the color of the text:</p>
-<pre><code class="language-rust iced static height=30"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1121,7 +1121,7 @@ text("This is the primary color of the current theme!")
   embed(document.getElementById("iceberg-6"), "1b3f5f92f2a9dd88928ea49eba712a84f55b927b1a26cd4c2da9f65c96f9b", "30px", true);
 </script>
 <p>For your convenience, the <code>widget::text</code> module has some built-in helpers you can directly provide to <code>style</code>:</p>
-<pre><code class="language-rust iced static height=30"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1140,7 +1140,7 @@ text("And this is the warning color!")
 <p>All of the built-in widgets follow this pattern. Keep it in mind!</p>
 <h2 id="the-text-macro"><a class="header" href="#the-text-macro">The <code>text!</code> macro</a></h2>
 <p>Often, you will find yourself using <code>format!</code> to combine a dynamic value with some static text. For instance:</p>
-<pre><code class="language-rust iced static height=30"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
@@ -1156,7 +1156,7 @@ text(format!("Hello, {name}!"))
   embed(document.getElementById("iceberg-8"), "ed728f49b5db8f34717ec96453a832798983528994d81df9f2380e988eb222", "30px", true);
 </script>
 <p>The <code>text!</code> macro streamlines this use case. It behaves exactly the same as <code>format!</code>, but it just returns a <code>Text</code> widget instead of a <code>String</code>.</p>
-<pre><code class="language-rust iced static height=30"><span class="boring">use iced::widget::Text;
+<pre><code class="language-rust ignore iced static height=30"><span class="boring">use iced::widget::Text;
 </span><span class="boring">
 </span><span class="boring">fn main() -&gt; iced::Result {
 </span><span class="boring">    iced::run((), view)
