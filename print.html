@@ -521,7 +521,7 @@ we would quickly find out that something is wrong.</p>
 to use our <code>Message</code> enum in our view logic. How is our user interface supposed to produce <strong>messages</strong> if we don’t specify
 them? Let’s do that now.</p>
 <p>In iced, every widget has a specific type that enables further configuration using simple builder methods. The <code>button</code>
-helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
+helper returns an instance of <a href="https://docs.rs/iced/latest/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
 <strong>produce</strong> when a user presses the button:</p>
 <pre><code class="language-rust ignore">use iced::widget::button;
 
@@ -1349,11 +1349,11 @@ container(my_box)
 of the APIs used may change, the fundamental ideas of iced tend to be quite stable.</p>
 </blockquote>
 <ul>
-<li>A <a href="https://www.youtube.com/watch?v=gcBJ7cPSALo">step-by-step video guide to building a simple text editor</a></li>
-<li>The <a href="https://github.com/iced-rs/iced/tree/master/examples">official examples</a></li>
-<li>The <a href="https://docs.iced.rs/iced/">API Reference</a></li>
-<li>The <a href="https://github.com/iced-rs/awesome-iced">official list of awesome iced projects</a></li>
+<li>The <a href="https://docs.rs/iced/latest/iced/#the-pocket-guide">Pocket Guide</a></li>
+<li>The <a href="https://github.com/iced-rs/iced/tree/latest/examples">official examples</a></li>
+<li>The <a href="https://docs.rs/iced">API Reference</a></li>
 <li>The <a href="https://github.com/iced-rs/awesome-iced#Resources">unofficial guides</a></li>
+<li>A <a href="https://www.youtube.com/watch?v=gcBJ7cPSALo">step-by-step video guide to building a simple text editor</a></li>
 </ul>
 <p>We also have a very welcoming and active community! Feel free to ask any questions in <a href="https://discord.gg/3xZJ65GAhd">our Discord server</a> or <a href="https://discourse.iced.rs/">our Discourse forum</a>.</p>
 <p><a href="https://discord.gg/3xZJ65GAhd"><img src="https://img.shields.io/discord/628993209984614400?label=&amp;labelColor=6A7EC2&amp;logo=discord&amp;logoColor=ffffff&amp;color=7389D8" alt="Discord Server" /></a>
@@ -1407,10 +1407,10 @@ of the APIs used may change, the fundamental ideas of iced tend to be quite stab
 <p>No. I proudly own every <del>terrible</del> piece of writing in here—em dashes included. Beep, boop.</p>
 <h2 id="how-do-i-structure-a-large-application"><a class="header" href="#how-do-i-structure-a-large-application">How do I structure a large application?</a></h2>
 <p>You split your application into multiple screens, and then use simple composition.</p>
-<p><a href="https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/0.13.1/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
+<p><a href="https://docs.rs/iced/latest/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/latest/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
 <h2 id="how-can-my-application-receive-updates-from-a-channel"><a class="header" href="#how-can-my-application-receive-updates-from-a-channel">How can my application receive updates from a channel?</a></h2>
-<p>You can use <a href="https://docs.rs/iced/0.13.1/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
-<p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
+<p>You can use <a href="https://docs.rs/iced/latest/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
+<p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/latest/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
 <h2 id="does-iced-support-right-to-left-text-andor-cjk-scripts"><a class="header" href="#does-iced-support-right-to-left-text-andor-cjk-scripts">Does <code>iced</code> support Right-To-Left text and/or CJK scripts?</a></h2>
 <p>The seeds are planted, but the edge cases may not be fully handled yet.</p>
 <p>Specifically, text editing likely has a bunch of issues still. However, <a href="https://github.com/iced-rs/iced/pull/2777">Input Method Editors</a> are a new feature in the upcoming <code>0.14</code> release.</p>

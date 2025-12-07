@@ -229,10 +229,10 @@
 <p>No. I proudly own every <del>terrible</del> piece of writing in here—em dashes included. Beep, boop.</p>
 <h2 id="how-do-i-structure-a-large-application"><a class="header" href="#how-do-i-structure-a-large-application">How do I structure a large application?</a></h2>
 <p>You split your application into multiple screens, and then use simple composition.</p>
-<p><a href="https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/0.13.1/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
+<p><a href="https://docs.rs/iced/latest/iced/index.html#the-pocket-guide">The Pocket Guide</a> has <a href="https://docs.rs/iced/latest/iced/#scaling-applications">a specific section that showcases this approach</a>.</p>
 <h2 id="how-can-my-application-receive-updates-from-a-channel"><a class="header" href="#how-can-my-application-receive-updates-from-a-channel">How can my application receive updates from a channel?</a></h2>
-<p>You can use <a href="https://docs.rs/iced/0.13.1/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
-<p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
+<p>You can use <a href="https://docs.rs/iced/latest/iced/task/struct.Task.html#method.run"><code>Task::run</code></a> to generate messages from an asynchronous <a href="https://docs.rs/futures/latest/futures/stream/trait.Stream.html"><code>Stream</code></a>.</p>
+<p>Alternatively, if you control the creation of the channel; you can use <a href="https://docs.rs/iced/latest/iced/struct.Subscription.html#method.run"><code>Subscription::run</code></a>.</p>
 <h2 id="does-iced-support-right-to-left-text-andor-cjk-scripts"><a class="header" href="#does-iced-support-right-to-left-text-andor-cjk-scripts">Does <code>iced</code> support Right-To-Left text and/or CJK scripts?</a></h2>
 <p>The seeds are planted, but the edge cases may not be fully handled yet.</p>
 <p>Specifically, text editing likely has a bunch of issues still. However, <a href="https://github.com/iced-rs/iced/pull/2777">Input Method Editors</a> are a new feature in the upcoming <code>0.14</code> release.</p>

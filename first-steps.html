@@ -323,7 +323,7 @@ we would quickly find out that something is wrong.</p>
 to use our <code>Message</code> enum in our view logic. How is our user interface supposed to produce <strong>messages</strong> if we don’t specify
 them? Let’s do that now.</p>
 <p>In iced, every widget has a specific type that enables further configuration using simple builder methods. The <code>button</code>
-helper returns an instance of <a href="https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
+helper returns an instance of <a href="https://docs.rs/iced/latest/iced/widget/struct.Button.html">the <code>Button</code> type</a>, which has an <code>on_press</code> method we can use to define the message it must
 <strong>produce</strong> when a user presses the button:</p>
 <pre><code class="language-rust ignore">use iced::widget::button;
 
