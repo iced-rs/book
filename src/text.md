@@ -21,7 +21,7 @@ use iced::{Fill, Font};
 text("- Hello there!\n- General Kenobi!")
     .font(Font::MONOSPACE)
     .size(30) // in logical pixels
-    .line_height(1.5) // relative to the size (=15px)
+    .line_height(1.5) // relative to the size (=45px)
     .width(Fill)
     .height(Fill)
     .center()
