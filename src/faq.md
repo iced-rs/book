@@ -98,7 +98,7 @@ Alternatively, if you control the creation of the channel; you can use [`Subscri
 ## Does `iced` support Right-To-Left text and/or CJK scripts?
 The seeds are planted, but the edge cases may not be fully handled yet.
 
-Specifically, text editing likely has a bunch of issues still. However, [Input Method Editors] are a new feature in the upcoming `0.14` release.
+Specifically, text editing likely has a bunch of issues still. However, [Input Method Editors] are supported since the `0.14` release.
 
 In any case, proper support is in the [roadmap].
 
