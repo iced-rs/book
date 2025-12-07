@@ -29,6 +29,8 @@
 
 # Mastering the Widgets
 - [Text](text.md)
+- [Container](container.md)
+- [More to come!]()
 
 # Appendix
 - [Additional Resources](additional-resources.md)

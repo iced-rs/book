@@ -183,3 +183,31 @@ text!("Hello, {name}!")
 If you import `iced::widget::text`, you do not need to import the macro separately. Rust will bring you the `text` function helper, the `text` module, and the `text!` macro—all in a single import.
 
 Quite nifty! 
+
+## String Slices
+The `Text` widget provides a `From<&str>` implementation for [`Element`].
+
+Since most function helpers for building widgets take an `Into<Element>`, this implementation allows you to skip calling `text()` completely if you have a string slice.
+
+[`Element`]: https://docs.rs/iced/latest/iced/type.Element.html
+
+```rust,ignore,iced,static,height=30
+# use iced::widget::Container;
+# use iced::Never;
+# 
+# fn main() -> iced::Result {
+#     iced::run((), view)
+# }
+# 
+# fn view(_: &()) -> Container<'_, Never> {
+use iced::widget::container;
+
+// We could just return:
+// container(text("Redundant"))
+//
+// But the following is equivalent:
+container("Short and nice!")
+# }
+```
+
+This will only work if you want to use the default text appearance. If you need to customize it, you will have to use the `text` helper.
