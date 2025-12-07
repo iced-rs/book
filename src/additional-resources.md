@@ -4,11 +4,11 @@ Here are some further resources you can use to learn more about iced while I am 
 > Keep in mind that some of these resources may be using an older version of iced. However, while the specifics
 > of the APIs used may change, the fundamental ideas of iced tend to be quite stable.
 
-- A [step-by-step video guide to building a simple text editor](https://www.youtube.com/watch?v=gcBJ7cPSALo)
-- The [official examples](https://github.com/iced-rs/iced/tree/master/examples)
-- The [API Reference](https://docs.iced.rs/iced/)
-- The [official list of awesome iced projects](https://github.com/iced-rs/awesome-iced)
+- The [Pocket Guide](https://docs.rs/iced/latest/iced/#the-pocket-guide)
+- The [official examples](https://github.com/iced-rs/iced/tree/latest/examples)
+- The [API Reference](https://docs.rs/iced)
 - The [unofficial guides](https://github.com/iced-rs/awesome-iced#Resources)
+- A [step-by-step video guide to building a simple text editor](https://www.youtube.com/watch?v=gcBJ7cPSALo)
 
 We also have a very welcoming and active community! Feel free to ask any questions in [our Discord server] or [our Discourse forum].
 

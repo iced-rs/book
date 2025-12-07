@@ -250,7 +250,7 @@ In The Elm Architecture, messages represent __events__ that have occurred—made
 to derive `Debug` and `Clone` for our `Message` type.
 
 
-[the `Button` type]: https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html
+[the `Button` type]: https://docs.rs/iced/latest/iced/widget/struct.Button.html
 
 ### The View
 We are almost there! There is only one thing left to do: connecting our application __state__ to the view logic.

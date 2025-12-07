@@ -83,16 +83,16 @@ No. I proudly own every ~~terrible~~ piece of writing in here—em dashes includ
 ## How do I structure a large application?
 You split your application into multiple screens, and then use simple composition.
 
-[The Pocket Guide] has [a specific section that showcases this approach](https://docs.rs/iced/0.13.1/iced/#scaling-applications).
+[The Pocket Guide] has [a specific section that showcases this approach](https://docs.rs/iced/latest/iced/#scaling-applications).
 
 ## How can my application receive updates from a channel? 
 You can use [`Task::run`] to generate messages from an asynchronous [`Stream`].
 
 Alternatively, if you control the creation of the channel; you can use [`Subscription::run`].
 
-[The Pocket Guide]: https://docs.rs/iced/0.13.1/iced/index.html#the-pocket-guide
-[`Task::run`]: https://docs.rs/iced/0.13.1/iced/task/struct.Task.html#method.run
-[`Subscription::run`]: https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.run
+[The Pocket Guide]: https://docs.rs/iced/latest/iced/index.html#the-pocket-guide
+[`Task::run`]: https://docs.rs/iced/latest/iced/task/struct.Task.html#method.run
+[`Subscription::run`]: https://docs.rs/iced/latest/iced/struct.Subscription.html#method.run
 [`Stream`]: https://docs.rs/futures/latest/futures/stream/trait.Stream.html
 
 ## Does `iced` support Right-To-Left text and/or CJK scripts?
