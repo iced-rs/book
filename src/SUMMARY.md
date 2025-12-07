@@ -27,6 +27,9 @@
 - [Renderers]()
 -->
 
+# Mastering the Widgets
+- [Text](text.md)
+
 # Appendix
 - [Additional Resources](additional-resources.md)
 - [Frequently Asked Questions](faq.md)
