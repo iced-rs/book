@@ -136,8 +136,6 @@ For your convenience, the `widget::text` module has some built-in helpers you ca
 # 
 # fn view(_: &()) -> Text<'_> {
 # use iced::widget::text;
-use iced::Theme;
-
 text("And this is the warning color!")
     .style(text::warning)
 # }
