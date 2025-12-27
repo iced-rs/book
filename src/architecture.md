@@ -85,7 +85,12 @@ increment when pressed is very specific.
 All of this means that, when we are creating a specific user interface, we don't want to focus on implementing every
 familiar widget and its behavior. Instead, we want to leverage widgets as reusable building blocks—independent of our
 application and provided by some library—while placing our focus on the application-specific parts of the fundamental
-architecture: state, interactions, how the interactions change the state, and how the state dictates the widgets.
+architecture: 
+
+- __State__
+- __Interactions__
+- __How the interactions change the state__
+- __How the state dictates the widgets__
 
 <div align="center">
   <img alt="The application-specific parts of a GUI" src="resources/the-gui-trinity-focused.svg">
