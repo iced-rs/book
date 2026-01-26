@@ -130,3 +130,20 @@ iced = { version = "0.14", features = ["tokio"] }
 ```
 
 [the `tokio` feature flag]: https://docs.rs/crate/iced/latest/features#tokio
+
+## I am getting a compiler error about the `column!` macro
+If you are seeing errors such as:
+
+```
+column! takes no arguments
+```
+
+or
+
+```
+expected Element<'_, Message, Theme, Renderer<Renderer, Renderer>>, found u32
+```
+
+you might be missing a `use iced::widgets::column`.
+
+The standard library prelude includes a [_different_ `column!` macro](https://doc.rust-lang.org/std/macro.column.html).
